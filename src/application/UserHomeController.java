@@ -172,7 +172,6 @@ public class UserHomeController extends Controller {
 		for (Product p : products) {
 
 			ProductPaneController.setInitProduct(p);
-			System.out.println("[✓] Inizializzato product");
 			AnchorPane productPane=null;
 			
 			try {
@@ -182,10 +181,8 @@ public class UserHomeController extends Controller {
 			} catch (Exception e) {
 				System.out.println("[x] Fxml non pervenuto :(" + e);
 			}
-			
-			
 			flowProdotti.getChildren().add(productPane);
-
+			System.out.println("[✓] Mostrato: " + p);
 			scroller.setFitToWidth(true);
 			
 			
