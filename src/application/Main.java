@@ -39,8 +39,6 @@ public class Main extends Application {
 		String workingDir = System.getProperty("user.dir");
 	    System.out.println("Current working directory : " + workingDir);
 	    
-	     
-		
 	    
         
         

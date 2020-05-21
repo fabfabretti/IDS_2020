@@ -3,16 +3,20 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="380.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordina per:" />
-      <ChoiceBox layoutX="460.0" layoutY="14.0" prefWidth="150.0" stylesheets="@application.css" />
-      <Text layoutX="24.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stai visualizzando il reparto FRUTTA E VERDURA" />
-      <Text layoutX="451.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagina 10/10" />
-      <JFXButton layoutX="598.0" layoutY="79.0" text="&gt;" />
-      <JFXButton layoutX="565.0" layoutY="79.0" text="&lt;" />
-      <JFXButton layoutX="36.0" layoutY="70.0" stylesheets="@application.css" text="Aggiungi Filtri" />
+      <Text layoutX="378.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordina per:">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Text>
+      <ChoiceBox layoutX="460.0" layoutY="37.0" prefWidth="150.0" stylesheets="@application.css" />
+      <Text layoutX="178.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stai visualizzando il reparto FRUTTA E VERDURA">
+         <font>
+            <Font name="HP Simplified Light" size="15.0" />
+         </font></Text>
+      <JFXButton layoutX="24.0" layoutY="48.0" stylesheets="@application.css" text="Aggiungi Filtri" />
    </children>
 </AnchorPane>

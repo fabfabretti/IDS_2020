@@ -2,8 +2,10 @@ package application;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashSet;
 
 import data.Product;
+import data.User;
 import json.Json;
 import json.JsonArray;
 import json.JsonValue;
@@ -88,6 +90,55 @@ public class JsonLoader {
 
 	}
 
+	
+	static HashSet<User> loadUsers() {
+		
+		System.out.println("[...] Loading users...");
+		HashSet<User> users = new HashSet<User>();
+		//(try/catch è necessario causa operazione input output)
+
+				//		 uso try/catch *with resource* (cioè con il reader dentro la parentesi)
+				//		 perché è più bello (cit. Spoto)
+
+				try(Reader reader= new FileReader("./data/users.json")){
+
+					JsonArray fileUtenti = Json.parse(reader).asObject().get("users").asArray();
+
+					for(JsonValue user : fileUtenti) {
+						//System.out.println(user); 	
+						String email = user.asObject().getString("email", "NoEmail");
+						//System.out.println("[?]" + email);
+						String password = user.asObject().getString("password", "NoPassword");
+						//System.out.println("[?]" + password);
+						String name = user.asObject().getString("name", "NoName");
+						//System.out.println("[?]" + name);
+						String familyname = user.asObject().getString("familyname", "NoFamName");
+						//System.out.println("[?]" + familyname);
+						String address = user.asObject().getString("address", "NoAddress");
+						//System.out.println("[?]" + address);
+						String city = user.asObject().getString("city", "noCity");
+						//System.out.println("[?]" + city);
+						int cap = user.asObject().getInt("CAP", -1);
+						//System.out.println("[?]" + cap);
+						String mobilenumber = user.asObject().getString("mobilenumber","errore");
+						//System.out.println("[?]" + mobilenumber);
+						int userid = user.asObject().getInt("userid", -1);
+						//System.out.println("[?]" + userid);
+						User u = new User(email,password,name,familyname,address,city,cap,mobilenumber,userid);
+						users.add(u);
+
+						System.out.println("[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
+					}
+
+			
+
+				}catch(IOException e){
+					System.out.println("[x] Errore I/O nel caricamento utenti");
+				}
+				
+				return users;
+	}
+	
 }
 
 

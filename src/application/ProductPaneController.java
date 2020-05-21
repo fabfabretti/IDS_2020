@@ -3,6 +3,7 @@ package application;
 import com.jfoenix.controls.JFXButton;
 
 import data.Product;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -14,11 +15,13 @@ import javafx.scene.text.Text;
 
 public class ProductPaneController extends Controller{
 
+	static Product  productInit = null;
 	private Product  product = null;
 
 
 	@FXML
 	private ImageView imagePath;
+	
 	@FXML
 	private Text txtFinished;
 
@@ -41,25 +44,27 @@ public class ProductPaneController extends Controller{
 	private JFXButton btnAdd;
 
 
-	Image flags[]= {new Image("file:images/UI_organic.png"),new Image("file:images/UI_glutenfree.png"),
+	private static Image flags[]= {new Image("file:images/UI_organic.png"),new Image("file:images/UI_glutenfree.png"),
 			new Image("file:images/UI_vegan.png"),new Image("file:images/UI_diaryfree.png")};
 
 	public void initialize() {
+		product = productInit;
+		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight());
+		price.setText("€ "+product.getPrice());
+		weightPrice.setText(product.getWeightPrice());
 		
-		if(product.getAvailable()!=0)
+		
+		
+		//spinner q.tà
+		if(product.getAvailable()!=0) {
+			txtFinished.setVisible(false);
 			spinnerQuantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getAvailable(), 1));
-		else {
+		}else {
 			spinnerQuantity.setVisible(false);
 			btnAdd.setDisable(true);
 			txtFinished.setVisible(true);
 		}
 		
-		
-
-		productName.setText(product.getName() +  " " + product.getWeight());
-		price.setText(product.getPrice()+"€");
-		weightPrice.setText(product.getWeightPrice());
-
 
 		//image prodotto
 		Image image;
@@ -70,24 +75,29 @@ public class ProductPaneController extends Controller{
 			image = new Image("file:images/Product_placeholder.png");    
 		}
 		imagePath.setImage(image);
-
+		
+		
 		//Lista caratteristiche
 		boolean characteristics[] = product.getCharacteristics();
-
+		ImageView a=null;
 		for(int i=0;i<4;i++) {
-			if (characteristics[i]==true)
-				flagFlowPane.getChildren().add(new ImageView(flags[i]));
+			if (characteristics[i]==true) {
+				a= new ImageView(flags[i]);
+				a.setFitHeight(25);
+				a.setFitWidth(25);
+				flagFlowPane.getChildren().add(a);
+			}
 
 		}
-
-
 	}
 	
-	void setProduct(Product p) {
-		product=p;
+
+	static void setInitProduct(Product p) {
+		productInit=p;
 	}
 
-
-	
+	public void addProduct(ActionEvent e) {
+		System.out.println("You want to buy "+spinnerQuantity.getValue() +" shitty " + product.getName()+"?");
+	}
 	
 }

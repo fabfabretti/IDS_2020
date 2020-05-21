@@ -67,11 +67,11 @@ public class Controller {
 	public void quitNoSave(ActionEvent ae) {
 		System.exit(0);	
 	}
-	
+	/*
 	protected void init()
 	{
 		// this class is the HelloworldController class because init() is not private method
 		// do init staff if you want
 		// now FML fields are not null
-	}
+	}*/
 }

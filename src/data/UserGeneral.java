@@ -19,9 +19,9 @@ public class UserGeneral{
 	//
 	
 	
-	private String email;
-	private String password;
-	private PersonalInformation anagrafica;
+	protected String email;
+	protected String password;
+	protected PersonalInformation anagrafica;
 	
 	
 	//
@@ -31,16 +31,7 @@ public class UserGeneral{
 	//
 	
 	
-	/**
-	 * Costruttore
-	 * (TODO) presumibulmente sarà usato dalla funzione che legge il file!
-	 * @param email indovina cos'è :)
-	 * @param password indovina cos'è :)
-	 */
-	public UserGeneral(String email, String password){
-		this.email=email;
-		this.password=password;
-	}
+
 	
 	/**
 	 * E' un get
@@ -74,13 +65,14 @@ public class UserGeneral{
 	 * 
 	 */
 	
-	public String checkLogin(String otheremail, String otherpassword) {
+	public boolean checkLogin(String otheremail, String otherpassword) {
 
-		if (!(email.equals(otheremail) && password.equals(otherpassword)))
-			return "null";
-		else if (otheremail.equals("admin")||this instanceof Worker)
-			return "commesso";
-		return "utente";
+		boolean res=getEmail().equals(otheremail)&&getPassword().equals(otherpassword)? true:false;
+		return res;
+	}
+
+	public PersonalInformation getAnagrafica() {
+		return anagrafica;
 	}
 
 	/**
@@ -88,7 +80,7 @@ public class UserGeneral{
 	 * @author andreatoffaletti
 	 * Informazioni relative all'anagrafica di un User generico.
 	 */
-	private class PersonalInformation{
+	public class PersonalInformation{
 		/**
 		 * Informazioni relative all'anagrafica
 		 */
@@ -97,7 +89,7 @@ public class UserGeneral{
 		private String Address;
 		private String City;
 		private int CAP;
-		private int MobileNumber;
+		private String MobileNumber;
 		
 		
 		public String getName() {
@@ -130,11 +122,11 @@ public class UserGeneral{
 		public void setCity(String city) {
 			City = city;
 		}
-		public int getMobileNumber() {
+		public String getMobileNumber() {
 			return MobileNumber;
 		}
-		public void setMobileNumber(int mobileNumber) {
-			MobileNumber = mobileNumber;
+		public void setMobileNumber(String mobilenumber2) {
+			MobileNumber = mobilenumber2;
 		}
 		
 		

@@ -43,14 +43,14 @@ public class UserProfileController extends Controller {
 	 * ovviamente, TODO
 	 */
 	public void initialize() {
-		fieldEmail.setText("email@email.email");
-		fieldPassword.setText("Password");
-		fieldName.setText("Nome");
-		fieldSurname.setText("Cognome");
-		fieldAddress.setText("Strada Le Grazie");
-		fieldCAP.setText("1111");
-		fieldCity.setText("Città");
-		fieldNumber.setText("1234567890");
+		fieldEmail.setText(Globals.currentUser.getEmail());
+		fieldPassword.setText(Globals.currentUser.getPassword());
+		fieldName.setText(Globals.currentUser.getAnagrafica().getName());
+		fieldSurname.setText(Globals.currentUser.getAnagrafica().getFamilyName());
+		fieldAddress.setText(Globals.currentUser.getAnagrafica().getAddress());
+		fieldCAP.setText((Globals.currentUser.getAnagrafica().getCAP())+"");
+		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
+		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 	}
 
 	/***
@@ -59,7 +59,6 @@ public class UserProfileController extends Controller {
 	 */
 	public void saveAndClose(ActionEvent ae) {
 		String err="";
-		
 		
 		if(fieldEmail.getText().isEmpty() || fieldPassword.getText().isEmpty() ||
 				fieldName.getText().isEmpty() || fieldSurname.getText().isEmpty() ||
@@ -73,10 +72,11 @@ public class UserProfileController extends Controller {
 		/*
 		 * Controllo errori TODO, eventualmente display errore TODO, salvataggio TODO
 		 */
-		
+		else {
 		closeUI(ae);
 		
-		System.out.println("Salvato?");
+		System.out.println("Salvataggio da implementare");
+		}
 		
 	}
 /*	Se l'inizializzazione dovesse dare problemi dobbiamo aggiungere questo

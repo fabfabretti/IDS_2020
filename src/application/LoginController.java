@@ -2,6 +2,7 @@ package application;
 
 import java.util.HashSet;
 
+import data.User;
 import data.UserGeneral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,15 +80,13 @@ public class LoginController extends Controller{
 
 		// Carica gli utenti nel sistema
 		// Direi che questa funzione starà dentro Users (classe) ^-^ TODO
-		HashSet<UserGeneral> utenti = getUsers();
 
-		for (UserGeneral u : utenti) {
 
-			String res = u.checkLogin(logEmail, logPassword);
-
-			// debug System.out.println(res);
-
-			if (res.equals("utente")) {
+		for (User u : Globals.users) {
+			
+			if(u.checkLogin(logEmail, logPassword)) {
+				System.out.println("[✓] Accesso user effettuato con successo con combo " + u.getEmail() + "/" + u.getPassword()+"\n"
+												+ "\t-> Loggato: " + u.getAnagrafica().getName() + " "+ u.getAnagrafica().getFamilyName() );
 				lblStatus.setVisible(false);
 				Globals.logged = true;
 				Globals.currentUser = u;
@@ -96,17 +95,28 @@ public class LoginController extends Controller{
 				loginStage.close();
 				return;
 			}
+			
+/*
+			String res = u.checkLogin(logEmail, logPassword);
+
+			// debug System.out.println(res);
+
+			if (res.equals("utente")) {
+				
+			}
 
 			if (res.equals("commesso")) {
+				System.out.println("[✓] Accesso worker effettuato");
 				lblStatus.setVisible(true);
-				lblStatus.setText("La modalità admin verrà implementata presto");
-				// TODO: implementarla lol
 				launchUI("./WorkerHome.fxml");
 				return;
 			}
+*/
 		}
 
 		// caso rimanente: pwd errata
+
+		System.out.println("[✓] Combo non valida");
 		lblStatus.setVisible(true);
 		lblStatus.setText("Username o password errata.");
 
@@ -126,19 +136,7 @@ public class LoginController extends Controller{
 	 * @return Hashset di tutti gli user attualmente registrati nel file degli
 	 *         utenti
 	 */
-	private HashSet<UserGeneral> getUsers() {
 
-		// per i test attuali, usiamo solo due accessi di prova
-		UserGeneral utente = new UserGeneral("user", "user");
-		UserGeneral admin = new UserGeneral("admin", "admin");
-		UserGeneral utentebasic = new UserGeneral("a", "a");
-		HashSet<UserGeneral> users = new HashSet<UserGeneral>();
-		users.add(utente);
-		users.add(admin);
-		users.add(utentebasic);
-
-		return users;
-	}
 
 
 }

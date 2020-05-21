@@ -10,6 +10,8 @@ import data.Sections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +19,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Gestisce la pagina "home" dell'utente; in particolare tutti gli input che può
@@ -58,13 +62,10 @@ public class UserHomeController extends Controller {
 	
 	@FXML 
 	private Text lblHiUser;
-
 	@FXML
 	private Label lblCartNumber;
-	
 	@FXML
 	private Circle circleCartNumber;
-
 	@FXML
 	private JFXButton btnVeg;
 	@FXML
@@ -77,10 +78,8 @@ public class UserHomeController extends Controller {
 	private JFXButton btnDrink;
 	
 	public void initialize() {
-		lblHiUser.setText("Ciao, " + "Utente" + " :)");
+		lblHiUser.setText("Ciao, " + Globals.currentUser.getAnagrafica().getName() + " :)");
 		
-		//if carrello.elementi > 0
-		//set visible true
 		if(Globals.cart.getNumberOfProd()==0) {
 			circleCartNumber.setVisible(false);
 			lblCartNumber.setVisible(false);
@@ -108,32 +107,17 @@ public class UserHomeController extends Controller {
 	}
 
 
-	
 	public void openCart(ActionEvent e) {
 		launchUI("/application/Cart.fxml");
 	}
 	
 	
-	/**
-	 * Al click su un reparto (TODO) lancia la funzione che genera il pane
-	 * necessario, lo ottiene e lo aggiunge alla finestra
-	 * 
-	 * @param e Action event: click su bottone reparto
-	 */
-	public void loadSection(ActionEvent e) {
 
-		// FormPanel è una funzione non ancora scritta (TODO) che
-		// genera un PANE con tutti i prodotti da mostrare
-		// (magari un pane che "scorre"? Scrollpane?)
-		// La funzione, probabilmente, prenderà il nome del reparto come parametro e
-		// tornerà un Pane con dentro tutte le cose :)
-		// Potremmo anche farla flessibile e fare che piglia una lista di
-		// prodotti (così possiamo riutilizzarla nella search)
+	public void loadSection(ActionEvent e) {
 
 		HashSet<Product> section=null;
 		
 		
-
 		if(((JFXButton)e.getSource()).getId().equals("btnVeg"))
 			section=Sections.vegetali;
 		
@@ -177,22 +161,34 @@ public class UserHomeController extends Controller {
 
 		
 
-		if(products==null)
+		if(products==null) {
+			System.out.println("[✓] Caricata sezione vuota");
 			return scroller;
+			}
 		
 		
 		// 2. Genero tutti i prodotti
 
 		for (Product p : products) {
-			ProductPaneController a = new ProductPaneController();
-			a.setProduct(p);
-			System.out.println("pane "+a.getPane());
-			System.out.println("flow "+flowProdotti);
-			flowProdotti.getChildren().add(a.getPane());
-			System.out.println("pane "+a);
-			System.out.println("flow "+flowProdotti);
+
+			ProductPaneController.setInitProduct(p);
+			System.out.println("[✓] Inizializzato product");
+			AnchorPane productPane=null;
+			
+			try {
+				productPane = FXMLLoader.load(this.getClass().getResource("/application/ProductPane.fxml"));
+
+			//	System.out.println("[✓] Generato productpane: " + productPane +" for "+ p.getName());
+			} catch (Exception e) {
+				System.out.println("[x] Fxml non pervenuto :(" + e);
+			}
+			
+			
+			flowProdotti.getChildren().add(productPane);
 
 			scroller.setFitToWidth(true);
+			
+			
 		}
 
 		scroller.setContent(flowProdotti);
