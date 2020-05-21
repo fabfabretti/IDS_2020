@@ -1,0 +1,95 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root {
+	
+    -fx-font-family: hp-semplified;
+
+}
+
+.accentbg{
+    -fx-background-color: #C72D1D;
+	-fx-border-color: #E6E8E6;
+}
+
+.clearbg{
+	-fx-background-color: #E6E8E6;
+}
+
+
+.button{
+	-fx-background-color: #C72D1D;
+    -fx-font-family: hp-semplified;
+    -fx-text-fill: #ffffff;
+    }
+    
+.txtField{
+    -jfx-focus-color: #c72d1d;
+	}
+	
+.pwdField{
+	-jfx-focus-color: #c72d1d;
+	}
+	
+.searchbar{
+    -jfx-focus-color: #E6E8E6;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #E6E8E6;
+	}
+	
+.menupanel{
+	-fx-border-color: #E6E8E6;   
+	
+    -fx-text-fill: #E6E8E6; 
+	}
+	
+
+.menuvoice{
+    -fx-text-fill: #E6E8E6;
+	}
+
+
+
+.spinner {
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+    -fx-background-color: none;
+
+    -fx-padding: 0 0 3 0;   
+}
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: #007cff;
+    -fx-font-size: 30px;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+} 
+
+
+
+.combo-box,
+.choice-box {
+    -fx-background-color: none;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+    -fx-padding: 0 0 3 -8;
+}
+
+.combo-box .list-cell:filled:selected .text,
+.choice-box .list-cell:filled:selected .text {
+    -fx-fill: black;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: #4d4d4d;   
+}
+

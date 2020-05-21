@@ -1,0 +1,63 @@
+{
+	"prodotti": [
+		{
+			"name": "Albicocche",
+			"barCode": 1,
+			"imagePath": "file:images/Product_albicocche.png",
+			"brand": "Selex",
+			"weight": "500g",
+			"price": 1.95,
+			"weightPrice": "3.90€/KG",
+			"available": 5,
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+		{
+			"name": "Pesche Nettarine Gialle 5/6pz",
+			"barCode": 2,
+			"imagePath": "file:images/Product_pesche.jpg",
+			"brand": "Selex",
+			"weight": "500g",
+			"price": 1.45,
+			"weightPrice": "2.90€/KG",
+			"available": 50,
+			
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+		{
+			"name": "Ciliegie Regina confezionate",
+			"barCode": 3,
+			"imagePath": "",
+			"brand": "Selex",
+			"weight": "500g",
+			"price": 6.98,
+			"weightPrice": "13.96€/KG",
+			"available": 10,
+			
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+			{
+			"name": "Fichi Turchia confezionati",
+			"barCode": 4,
+			"imagePath": "",
+			"brand": "Selex",
+			"weight": "250g",
+			"price": 2.48,
+			"weightPrice": "9.92€/KG",
+			"available": 0,
+			
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		}
+	]
+}

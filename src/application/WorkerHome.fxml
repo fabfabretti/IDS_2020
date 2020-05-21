@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkerHomeController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="546.0000213623047" minHeight="0.0" prefHeight="64.9333251953125" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="639.6" minHeight="10.0" prefHeight="574.6666748046875" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="982.0" style="-fx-border-color: E6E8E6;" styleClass="accentbg" stylesheets="@application.css">
+         <children>
+            <JFXButton graphicTextGap="1.0" layoutX="942.0" layoutY="4.0" minWidth="10.0" onAction="#quitConfirm" prefHeight="33.0" prefWidth="37.0" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="21.0">
+                     <image>
+                        <Image url="@../../images/UI_quit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="42.0" fitWidth="60.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/UI_logoSMALL.png" />
+               </image>
+            </ImageView>
+            <JFXButton ellipsisString="" layoutX="871.0" layoutY="9.0" prefHeight="50.0" prefWidth="52.0">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/UI_profilo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <Text layoutX="319.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buongiorno, NAME">
+               <font>
+                  <Font name="HP Simplified Light" size="46.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="195.0" layoutY="232.0" prefHeight="177.0" prefWidth="207.0" text="Verifica stato ordini" />
+            <JFXButton layoutX="577.0" layoutY="232.0" prefHeight="177.0" prefWidth="207.0" text="Aggiungi o rimuovi prodotti" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
