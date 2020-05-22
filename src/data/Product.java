@@ -58,11 +58,10 @@ public class Product {
 	 * Array che indica quali caratteristiche possiede il prodotto
 	 * c[0] = biologico 
 	 * c[1] = celiachi
-	 * c[2] = no ogm 
-	 * c[3] = vegano 
-	 * c[4] = no lattosio
+	 * c[2] = vegano 
+	 * c[3] = no lattosio
 	 */
-	private boolean[] characteristics = new boolean[] { false, false, false, false, false };
+	private boolean[] characteristics = new boolean[] { false, false, false, false };
 
 	
 	

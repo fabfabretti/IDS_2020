@@ -6,6 +6,8 @@ import java.util.HashSet;
 
 import data.Product;
 import data.User;
+import data.Worker;
+
 import json.Json;
 import json.JsonArray;
 import json.JsonValue;
@@ -128,6 +130,57 @@ public class JsonLoader {
 						users.add(u);
 
 						System.out.println("[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
+					}
+
+			
+
+				}catch(IOException e){
+					System.out.println("[x] Errore I/O nel caricamento utenti");
+				}
+				
+				return users;
+	}
+	
+	
+	
+	
+	static HashSet<Worker> loadWorkers() {
+		
+		System.out.println("[...] Loading workers...");
+		HashSet<Worker> users = new HashSet<Worker>();
+		//(try/catch è necessario causa operazione input output)
+
+				//		 uso try/catch *with resource* (cioè con il reader dentro la parentesi)
+				//		 perché è più bello (cit. Spoto)
+
+				try(Reader reader= new FileReader("./data/workers.json")){
+
+					JsonArray fileWorkers = Json.parse(reader).asObject().get("workers").asArray();
+
+					for(JsonValue w : fileWorkers) {
+						//System.out.println(w); 	
+						String email = w.asObject().getString("email", "NoEmail");
+						//System.out.println("[?]" + email);
+						String password = w.asObject().getString("password", "NoPassword");
+						//System.out.println("[?]" + password);
+						String name = w.asObject().getString("name", "NoName");
+						//System.out.println("[?]" + name);
+						String familyname = w.asObject().getString("familyname", "NoFamName");
+						//System.out.println("[?]" + familyname);
+						String address = w.asObject().getString("address", "NoAddress");
+						//System.out.println("[?]" + address);
+						String city = w.asObject().getString("city", "noCity");
+						//System.out.println("[?]" + city);
+						int cap = w.asObject().getInt("CAP", -1);
+						//System.out.println("[?]" + cap);
+						String mobilenumber = w.asObject().getString("mobilenumber","errore");
+						//System.out.println("[?]" + mobilenumber);
+						int workerid = w.asObject().getInt("workerid", -1);
+						//System.out.println("[?]" + workerid);
+						Worker worker = new Worker(email,password,name,familyname,address,city,cap,mobilenumber,workerid);
+						users.add(worker);
+
+						System.out.println("[✓] Loaded worker " + worker.getAnagrafica().getName() + " " + worker.getAnagrafica().getFamilyName());
 					}
 
 			

@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkerHomeController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,7 +19,7 @@
     <RowConstraints maxHeight="639.6" minHeight="10.0" prefHeight="574.6666748046875" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="982.0" style="-fx-border-color: E6E8E6;" styleClass="accentbg" stylesheets="@application.css">
+      <AnchorPane fx:id="basePane" prefHeight="200.0" prefWidth="982.0" style="-fx-border-color: E6E8E6;" styleClass="accentbg" stylesheets="@application.css">
          <children>
             <JFXButton graphicTextGap="1.0" layoutX="942.0" layoutY="4.0" minWidth="10.0" onAction="#quitConfirm" prefHeight="33.0" prefWidth="37.0" textOverrun="CLIP">
                <graphic>
@@ -47,15 +46,19 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <AnchorPane fx:id="basePane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Text layoutX="319.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buongiorno, NAME">
-               <font>
-                  <Font name="HP Simplified Light" size="46.0" />
-               </font>
-            </Text>
-            <JFXButton layoutX="195.0" layoutY="232.0" prefHeight="177.0" prefWidth="207.0" text="Verifica stato ordini" />
-            <JFXButton layoutX="577.0" layoutY="232.0" prefHeight="177.0" prefWidth="207.0" text="Aggiungi o rimuovi prodotti" />
+            <AnchorPane layoutX="3.0" prefHeight="575.0" prefWidth="974.0">
+               <children>
+                  <Text fx:id="txtWelcome" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buongiorno, NAME" textAlignment="CENTER" wrappingWidth="973.1461486816406">
+                     <font>
+                        <Font name="HP Simplified Light" size="46.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="btnProducts" layoutX="631.0" layoutY="208.0" onAction="#openProductManager" prefHeight="177.0" prefWidth="207.0" text="Aggiungi o rimuovi prodotti" />
+                  <JFXButton fx:id="btnOrders" layoutX="173.0" layoutY="208.0" prefHeight="177.0" prefWidth="207.0" text="Verifica stato ordini" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

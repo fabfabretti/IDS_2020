@@ -11,14 +11,10 @@ public class Sections {
 	//
 
 	public static HashSet<Product> vegetali = new HashSet<Product>();
-	private HashSet<Product> carne = new HashSet<Product>();
-	private HashSet<Product> pesce = new HashSet<Product>();;
-	private HashSet<Product> latticini = new HashSet<Product>();;
-	private HashSet<Product> bevande = new HashSet<Product>();;
 	
 	
 	public static void addVeg(Product p) {
-		//System.out.println("Aggiunto" + p.toString() + "\n");
+		System.out.println("[✓] Loaded product " + p.getName());
 		vegetali.add(p);
 	}
 

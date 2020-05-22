@@ -5,6 +5,7 @@ import java.util.HashSet;
 import data.Cart;
 import data.User;
 import data.UserGeneral;
+import data.Worker;
 import javafx.stage.Stage;
 
 /**
@@ -21,13 +22,18 @@ import javafx.stage.Stage;
  */
 public class Globals {
 	static boolean logged = false;// maybe useful?
+	
 	static UserGeneral currentUser = null;
+	
 	static HashSet<User> users = JsonLoader.loadUsers();
+	
+	static HashSet<Worker> workers = JsonLoader.loadWorkers();
+	
 	static Stage stage;//
+	
 	static Cart cart = new Cart();
 	// static Products
 	// static Sections (=reparti)
 	// static carrello? ma forse va in Utente
-	
-}
 
+}

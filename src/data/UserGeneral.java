@@ -21,7 +21,7 @@ public class UserGeneral{
 	
 	protected String email;
 	protected String password;
-	protected PersonalInformation anagrafica;
+	protected PersonalInformation anagrafica=new PersonalInformation();
 	
 	
 	//

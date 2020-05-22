@@ -1,9 +1,7 @@
 package application;
 
-import java.util.HashSet;
-
 import data.User;
-import data.UserGeneral;
+import data.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -74,6 +72,7 @@ public class LoginController extends Controller{
 
 		if (logEmail.equals("") || logPassword.equals("")) {
 			lblStatus.setText("Per favore, compila entrambi i campi");
+			System.out.println("[x] Campo non compilato");
 			lblStatus.setVisible(true);
 			return;
 		}
@@ -82,8 +81,7 @@ public class LoginController extends Controller{
 		// Direi che questa funzione starà dentro Users (classe) ^-^ TODO
 
 
-		for (User u : Globals.users) {
-			
+		for (User u : Globals.users)
 			if(u.checkLogin(logEmail, logPassword)) {
 				System.out.println("[✓] Accesso user effettuato con successo con combo " + u.getEmail() + "/" + u.getPassword()+"\n"
 												+ "\t-> Loggato: " + u.getAnagrafica().getName() + " "+ u.getAnagrafica().getFamilyName() );
@@ -95,28 +93,21 @@ public class LoginController extends Controller{
 				loginStage.close();
 				return;
 			}
-			
-/*
-			String res = u.checkLogin(logEmail, logPassword);
 
-			// debug System.out.println(res);
-
-			if (res.equals("utente")) {
-				
-			}
-
-			if (res.equals("commesso")) {
-				System.out.println("[✓] Accesso worker effettuato");
+		for(Worker w : Globals.workers)
+			if (w.checkLogin(logEmail,logPassword)) {
+				System.out.println("[✓] Accesso worker effettuato con successo con combo " + w.getEmail() + "/" + w.getPassword()+"\n"
+					+ "\t-> Loggato: " + w.getAnagrafica().getName() + " "+ w.getAnagrafica().getFamilyName() );
 				lblStatus.setVisible(true);
+				Globals.currentUser=w;
 				launchUI("./WorkerHome.fxml");
 				return;
 			}
-*/
-		}
+
 
 		// caso rimanente: pwd errata
 
-		System.out.println("[✓] Combo non valida");
+		System.out.println("[x] Combo non valida");
 		lblStatus.setVisible(true);
 		lblStatus.setText("Username o password errata.");
 

@@ -1,16 +1,21 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Controller {
 	
+	
+	public void Controller() {};
 	/***
 	 * Apre una nuova finestra in JavaFX (gestendo il try/catch e impostando un paio di cose utili, come il css o il not-resizable)
 	 * @param path path dell'fxml.
@@ -74,4 +79,15 @@ public class Controller {
 		// do init staff if you want
 		// now FML fields are not null
 	}*/
+	
+	public AnchorPane launchUIPanel(String path) {
+		AnchorPane res=null;
+		try {
+			res=(FXMLLoader.load(getClass().getResource("/application/ProductManager.fxml")));
+			System.out.println(res);
+		} catch (Exception e) {
+			System.out.println("[x] Errore a caricare UI interna");
+		}
+		return res;
+	}
 }
