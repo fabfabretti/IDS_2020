@@ -1,0 +1,17 @@
+{
+	"workers": [
+		{
+		
+			"email": "admin",
+			"password": "admin",
+			"name":"Admin",
+			"familyname":"Debugging",
+			"address":"Via bestemmie, 666",
+			"city":"Quel Paese",
+			"CAP":"66420",
+			"mobilenumber": "4136181111",
+			"fidelitycard":"null",
+			"workerid":0
+		}
+	]
+}

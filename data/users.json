@@ -8,7 +8,7 @@
 			"familyname":"Debugging",
 			"address":"Via bestemmie, 666",
 			"city":"Quel Paese",
-			"CAP":66420,
+			"CAP":"66420",
 			"mobilenumber": "4136181111",
 			"fidelitycard":"null",
 			"userid":0
@@ -21,7 +21,7 @@
 			"familyname":"Combi",
 			"address":"Strada Le Grazie, Ca'Vignal",
 			"city":"verona",
-			"CAP":35137,
+			"CAP":"35137",
 			"mobilenumber": "0000000000", 
 			"fidelitycard":"null",
 			"userid":1

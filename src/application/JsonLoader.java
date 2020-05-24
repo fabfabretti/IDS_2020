@@ -120,7 +120,7 @@ public class JsonLoader {
 						//System.out.println("[?]" + address);
 						String city = user.asObject().getString("city", "noCity");
 						//System.out.println("[?]" + city);
-						int cap = user.asObject().getInt("CAP", -1);
+						String cap = user.asObject().getString("CAP", "noCap");
 						//System.out.println("[?]" + cap);
 						String mobilenumber = user.asObject().getString("mobilenumber","errore");
 						//System.out.println("[?]" + mobilenumber);
@@ -129,8 +129,9 @@ public class JsonLoader {
 						User u = new User(email,password,name,familyname,address,city,cap,mobilenumber,userid);
 						users.add(u);
 
+						System.out.println(user);
 						System.out.println("[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
-					}
+						}
 
 			
 
@@ -144,7 +145,7 @@ public class JsonLoader {
 	
 	
 	
-	static HashSet<Worker> loadWorkers() {
+	static public HashSet<Worker> loadWorkers() {
 		
 		System.out.println("[...] Loading workers...");
 		HashSet<Worker> users = new HashSet<Worker>();
@@ -171,7 +172,7 @@ public class JsonLoader {
 						//System.out.println("[?]" + address);
 						String city = w.asObject().getString("city", "noCity");
 						//System.out.println("[?]" + city);
-						int cap = w.asObject().getInt("CAP", -1);
+						String cap = w.asObject().getString("CAP", "noCap");
 						//System.out.println("[?]" + cap);
 						String mobilenumber = w.asObject().getString("mobilenumber","errore");
 						//System.out.println("[?]" + mobilenumber);

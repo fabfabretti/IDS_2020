@@ -88,7 +88,7 @@ public class UserGeneral{
 		private String FamilyName;
 		private String Address;
 		private String City;
-		private int CAP;
+		private String CAP;
 		private String MobileNumber;
 		
 		
@@ -110,10 +110,10 @@ public class UserGeneral{
 		public void setAddress(String address) {
 			Address = address;
 		}
-		public int getCAP() {
+		public String getCAP() {
 			return CAP;
 		}
-		public void setCAP(int cAP) {
+		public void setCAP(String cAP) {
 			CAP = cAP;
 		}
 		public String getCity() {

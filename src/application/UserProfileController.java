@@ -9,8 +9,6 @@ import javafx.scene.control.Label;
 
 public class UserProfileController extends Controller {
 
-
-
 	@FXML
 	private JFXTextField fieldEmail;
 
@@ -34,10 +32,10 @@ public class UserProfileController extends Controller {
 
 	@FXML
 	private JFXTextField fieldNumber;
-	
+
 	@FXML
 	private Label lblError;
-	
+
 	/***
 	 * Serve a mostrare i dati salvati dall'utente dentro i rispettivi campi
 	 * ovviamente, TODO
@@ -48,45 +46,48 @@ public class UserProfileController extends Controller {
 		fieldName.setText(Globals.currentUser.getAnagrafica().getName());
 		fieldSurname.setText(Globals.currentUser.getAnagrafica().getFamilyName());
 		fieldAddress.setText(Globals.currentUser.getAnagrafica().getAddress());
-		fieldCAP.setText((Globals.currentUser.getAnagrafica().getCAP())+"");
+		fieldCAP.setText((Globals.currentUser.getAnagrafica().getCAP()) + "");
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 	}
 
 	/***
 	 * Salva i nuovi dati e chiude la finestra
+	 * 
 	 * @param ae evento click su salva
 	 */
 	public void saveAndClose(ActionEvent ae) {
-		String err="";
-		
-		if(fieldEmail.getText().isEmpty() || fieldPassword.getText().isEmpty() ||
-				fieldName.getText().isEmpty() || fieldSurname.getText().isEmpty() ||
-				fieldAddress.getText().isEmpty() || fieldCAP.getText().isEmpty() || 
-				fieldCity.getText().isEmpty() || fieldNumber.getText().isEmpty()) {
+		String err = "";
+
+		if (fieldEmail.getText().isEmpty() || fieldPassword.getText().isEmpty() || fieldName.getText().isEmpty()
+				|| fieldSurname.getText().isEmpty() || fieldAddress.getText().isEmpty() || fieldCAP.getText().isEmpty()
+				|| fieldCity.getText().isEmpty() || fieldNumber.getText().isEmpty()) {
 			lblError.setText("ATTENZIONE: è necessario compilare tutti i campi!");
 			lblError.setVisible(true);
-			
+
 		}
-		
+
 		/*
 		 * Controllo errori TODO, eventualmente display errore TODO, salvataggio TODO
 		 */
 		else {
-		closeUI(ae);
-		
-		System.out.println("Salvataggio da implementare");
-		}
-		
-	}
-/*	Se l'inizializzazione dovesse dare problemi dobbiamo aggiungere questo
-	protected void init()
-	{
-		// this class is the HelloworldController class because init() is not private method
-		// do init staff if you want
-		// now FML fields are not null
-	}
 
-*/
+			String newName = fieldName.getText();
+			Globals.currentUser.getAnagrafica().setName(newName);
+			System.out.println("[✓] Nuovo nome salvato in memoria (ram)");
+
+			JsonSaver.saveUser();
+			closeUI(ae);
+
+		}
+
+	}
+	/*
+	 * Se l'inizializzazione dovesse dare problemi dobbiamo aggiungere questo
+	 * protected void init() { // this class is the HelloworldController class
+	 * because init() is not private method // do init staff if you want // now FML
+	 * fields are not null }
+	 * 
+	 */
 
 }
