@@ -15,6 +15,8 @@ import json.*;
 import json.JsonArray;
 import json.JsonValue;
 
+//javax.json
+
 public class JsonSaver {
 
 	 public static void saveUser() {
@@ -58,7 +60,6 @@ public class JsonSaver {
 		try(Writer writer = new FileWriter("./data/users.json")) {
 			String json = users.toString(WriterConfig.PRETTY_PRINT);
 			users.writeTo(writer, WriterConfig.PRETTY_PRINT);
-			users.writeTo(writer);
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json User!!!");
 		}
