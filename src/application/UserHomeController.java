@@ -1,20 +1,19 @@
 package application;
 
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
 import data.Product;
 import data.Section;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -73,6 +72,11 @@ public class UserHomeController extends Controller {
 	private JFXButton btnDiary;
 	@FXML
 	private JFXButton btnDrink;
+
+	@FXML
+	private JFXButton btnSearch;
+	@FXML
+	private JFXTextField txtFieldSearch;
 	
 	
 	public void initialize() {
@@ -114,7 +118,7 @@ public class UserHomeController extends Controller {
 
 	public void loadSection(ActionEvent e) {
 
-		PriorityQueue<Product> section=null;
+		TreeSet<Product> section=null;
 
 		
 		
@@ -143,19 +147,36 @@ public class UserHomeController extends Controller {
 
 
 	
+
 	
+	public void loadSearchKEY(KeyEvent e) {
+		if (e.getCode().equals(KeyCode.ENTER))
+			loadSearch();
+	}
 	
-	public void loadSearch() {
+	public void loadSearch(ActionEvent e) {
+		loadSearch();
+	}
+	
+	private void loadSearch() {
+		TreeSet<Product> result = new TreeSet<Product>();
 		
-		PriorityQueue<Product> result = new PriorityQueue<Product>();
 		
-		for(Section s : Globals.reparti) {
-			for(Product p : s.getProducts()) {
-			//	if(p.search("albicocche")!=null)
-				//result.add(p);
-				
+		String keyword=txtFieldSearch.getText();
+		
+		if(keyword!="") {
+			for(Section s : Globals.reparti) {
+				for(Product p : s.getProducts()) {
+					if(p.search(keyword)){
+						result.add(p);
+						System.out.println("[✓] Ho trovato un match!");
+						}
+					
+				}
 			}
-		}
+
+			ProductViewer viewer = new ProductViewer(mainPane,result);
+		}	
 		
 	}
 

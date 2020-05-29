@@ -1,12 +1,12 @@
 package data;
 
-import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public class Section {
 
 	String name;
-	PriorityQueue<Product> products = new PriorityQueue<Product>();
+	TreeSet<Product> products = new TreeSet<Product>();
 	
 	
 	public Section(String nome) {
@@ -22,7 +22,7 @@ public class Section {
 		return name;
 	}
 	
-	public PriorityQueue<Product> getProducts(){
+	public TreeSet<Product> getProducts(){
 		return products;
 	}
 	

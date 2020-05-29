@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 import data.Product;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +16,15 @@ public class ProductViewer {
 	
 	
 	private ScrollPane scroller = new ScrollPane();
-	private PriorityQueue<Product> displayed = new PriorityQueue<Product>();
+	private TreeSet<Product> displayed = new TreeSet<Product>();
 	private AnchorPane parent = new AnchorPane();
 	
 	
 	
-	public ProductViewer(AnchorPane parent, PriorityQueue<Product> displayed) {
-		this.displayed=displayed;
+	public ProductViewer(AnchorPane parent, TreeSet<Product> result) {
+		this.displayed=result;
 		this.parent = parent;
-		formPanel(displayed);
+		formPanel(result);
 		ScrollPane newpane = scroller;
 		parent.getChildren().add(newpane);
 		AnchorPane.setTopAnchor(newpane, 0.0);
@@ -33,16 +34,16 @@ public class ProductViewer {
 	}
 
 
-	public ProductViewer(PriorityQueue<Product> displayed) {
+	public ProductViewer(TreeSet<Product> displayed) {
 		this.displayed=displayed;
 		formPanel(displayed);
 	}
 
-	private void formPanel(PriorityQueue<Product> section) {
+	private void formPanel(TreeSet<Product> result) {
 
 		
 		//NO PRODOTTI:
-		if(section==null || (section!=null && section.size()==0) ) {
+		if(result==null || (result!=null && result.size()==0) ) {
 			System.out.println("[✓] Nessun prodotto da visualizzare! Carico pannello vuoto...");
 			Pane res;
 				try {
@@ -66,7 +67,7 @@ public class ProductViewer {
 		
 		// 1. Genero la barra x filtrare //TODO ora è un dummy
 		try {
-			flowProdotti.getChildren().add(FXMLLoader.load(section.getClass().getResource("/application/FilterOrderBar.fxml")));
+			flowProdotti.getChildren().add(FXMLLoader.load(result.getClass().getResource("/application/FilterOrderBar.fxml")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,13 +78,13 @@ public class ProductViewer {
 		
 		// 2. Genero tutti i prodotti
 
-		for (Product p : section) {
+		for (Product p : result) {
 
 			ProductPaneController.setInitProduct(p);
 			AnchorPane productPane=null;
 			
 			try {
-				productPane = FXMLLoader.load(section.getClass().getResource("/application/ProductPane.fxml"));
+				productPane = FXMLLoader.load(result.getClass().getResource("/application/ProductPane.fxml"));
 
 			//	System.out.println("[✓] Generato productpane: " + productPane +" for "+ p.getName());
 			} catch (Exception e) {

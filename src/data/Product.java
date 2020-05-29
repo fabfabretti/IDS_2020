@@ -14,45 +14,20 @@ public class Product implements Comparable<Product>{
 	//
 	//
 	
-	
-	/*
-	 * Nome del prodotto
-	 */
 	private String name;
-	
-	
-	/*
-	 * Codice univoco relativo ad ogni prodotto
-	 */
+
 	private int barCode;
-	
-	/*
-	 * Immagine relativa ad ogni prodotto
-	 */
+
 	private String imagePath = "";
 
-	
-	/*
-	 * Nome della marca
-	 */
 	private String brand;
 	
-	/*
-	 * Quantità contenuta nella confezione
-	 */
 	private String weight;
 	
-	/*
-	 * Prezzo del prodotto
-	 */
 	private float price;	
 	
-	/*
-	 * Prezzo del prodotto
-	 */
 	private String weightPrice;
 	
-	// hashlist dei tag
 	private int available;
 
 	
@@ -95,9 +70,18 @@ public class Product implements Comparable<Product>{
 		public Product() {
 		};
 		
-
+		//
+		//
+		// Utility
+		//
+		//
 	
-	
+		public boolean search(String keyword) {			
+			if(name.toLowerCase().contains(keyword.toLowerCase()) || brand.toLowerCase().contains(keyword.toLowerCase()))
+				return true;
+			return false;
+			
+		}
 	
 	
 	//
@@ -311,10 +295,8 @@ public class Product implements Comparable<Product>{
 	@Override
 	public int compareTo(Product other) {	
 		
-		if(this.barCode==other.barCode)
-			return 0;
 		
-		else return (int) (price-other.getPrice());
+	 return barCode - other.barCode ;
 			
 	
 	}
