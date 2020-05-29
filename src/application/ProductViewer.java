@@ -9,17 +9,20 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 public class ProductViewer {
 	
 	
 	private ScrollPane scroller = new ScrollPane();
 	private PriorityQueue<Product> displayed = new PriorityQueue<Product>();
+	private AnchorPane parent = new AnchorPane();
 	
 	
 	
 	public ProductViewer(AnchorPane parent, PriorityQueue<Product> displayed) {
 		this.displayed=displayed;
+		this.parent = parent;
 		formPanel(displayed);
 		ScrollPane newpane = scroller;
 		parent.getChildren().add(newpane);
@@ -36,7 +39,22 @@ public class ProductViewer {
 	}
 
 	private void formPanel(PriorityQueue<Product> section) {
+
 		
+		//NO PRODOTTI:
+		if(section==null || (section!=null && section.size()==0) ) {
+			System.out.println("[✓] Nessun prodotto da visualizzare! Carico pannello vuoto...");
+			Pane res;
+				try {
+					res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
+					//System.out.println(res);
+					//System.out.println(parent);
+					scroller.setContent(res);
+				} catch (Exception e) {
+					System.out.println("[x] Errore caricamento UI interna");
+				}
+			return;
+			}
 
 		//// DICHIARO I PANNELLI NECESSARI:
 
@@ -55,10 +73,6 @@ public class ProductViewer {
 
 		
 
-		if(section==null || (section!=null && section.size()==0) ) {
-			System.out.println("[✓] Caricata sezione vuota");
-			this.scroller=scroller;
-			}
 		
 		
 		// 2. Genero tutti i prodotti
