@@ -18,6 +18,12 @@ public class Cart {
 			int oldqty= products.get(p);
 			products.replace(p, qty + oldqty);
 		}
+		
+		
+		total = total + qty*p.getPrice();
+		numberOfProd += qty;
+		
+		
 	}	
 	
 	public void removeProduct(Product p) {
@@ -61,6 +67,9 @@ public class Cart {
 	 */
 	public void setNumberOfProd(int numberOfProd) {
 		this.numberOfProd = numberOfProd;
+	}
+	public  HashMap<Product, Integer> getProducts() {
+		return products;
 	}
 	
 	

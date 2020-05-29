@@ -107,7 +107,7 @@ public class UserHomeController extends Controller {
 
 
 	public void openCart(ActionEvent e) {
-		launchUI("/application/Cart.fxml");
+		launchUI("/application/UserCart.fxml");
 	}
 	
 	
