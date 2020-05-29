@@ -77,9 +77,11 @@ public class UserHomeController extends Controller {
 	
 	public void initialize() {
 		
-		
+		//Saluta Antonio
 		lblHiUser.setText("Ciao, " + Globals.currentUser.getAnagrafica().getName() + " :)");
+		lblCartNumber.setText(""+Globals.cart.getNumberOfProd());
 		
+		//(De-)Visualizza correttamente la notifica del carrello
 		if(Globals.cart.getNumberOfProd()==0) {
 			circleCartNumber.setVisible(false);
 			lblCartNumber.setVisible(false);
@@ -89,19 +91,12 @@ public class UserHomeController extends Controller {
 	
 	
 	
-		/*
-		 * 
+		/* 
 		 * 		GESTORI  BOTTONI
 		 * 				|
 		 * 				v
 		 */
-	
-	//ICONA PROFILO
-	/**
-	 * Al rilevamento di clic su user apre il profilo
-	 * 
-	 * @param e ActionEvent click sul'icona user
-	 */
+
 	public void loadProfile(ActionEvent e) {
 		launchUI("/application/UserProfile.fxml");
 	}
@@ -112,6 +107,10 @@ public class UserHomeController extends Controller {
 	}
 	
 	
+	
+	
+	
+	//Visualizzazione e ricerca prodotti (sostanzialmente devono generare la queue di prodotti; poi ci pensa il viewer a visualizzarla
 
 	public void loadSection(ActionEvent e) {
 
@@ -138,29 +137,10 @@ public class UserHomeController extends Controller {
 			section=Globals.bevande.getProducts();
 	
 	
-		//chiama la funzione che fa il display dei prodotti
-		
-		ProductViewer viewer = new ProductViewer(section);
-		
-		ScrollPane newpane = viewer.getScroller();
-		mainPane.getChildren().add(newpane);
-
-		// Il nuovo pannello deve essere grande tanto quanto il pannello di partenza,
-		// quindi faccio un bel fit
-		AnchorPane.setTopAnchor(newpane, 0.0);
-		AnchorPane.setBottomAnchor(newpane, 0.0);
-		AnchorPane.setLeftAnchor(newpane, 0.0);
-		AnchorPane.setRightAnchor(newpane, 0.0);
-
+		//Per riutilizzare facilmente questo codice anche nella parte del Worker, usiamo un gestore della view dei prodotti chiamato ProductViewer :)
+		ProductViewer viewer = new ProductViewer(mainPane,section);
 	}
 
-	/**
-	 * E' la funzione che genera il pannello con tutti i prodotti
-	 * 
-	 * @param set Prende un set generico di oggetti (Può essere il risultato di una
-	 *            ricerca o anche il set di prodotti di un reparto)
-	 * @return uno scrollpane con gli oggetti mostrati.
-	 */
 
 	
 	
