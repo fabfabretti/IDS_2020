@@ -32,7 +32,7 @@
 		{
 			"name": "Ciliegie Regina confezionate",
 			"barCode": 3,
-			"imagePath": "",
+			"imagePath": "file:images/Product_ciliegie.png",
 			"brand": "Selex",
 			"weight": "500g",
 			"price": 6.98,
@@ -55,6 +55,53 @@
 			"available": 0,
 			
 			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+			{
+			"name": "Prezzemolo foglia confezionato",
+			"barCode": 5,
+			"imagePath": "file:images/Product_prezzemolo.png",
+			"brand": "Selex",
+			"weight": "40g",
+			"price": 1.10,
+			"weightPrice": "27.50€/KG",
+			"available": 10,
+			
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+		
+			{
+			"name": "Cipolle dorate bio",
+			"barCode": 6,
+			"imagePath": "file:images/Product_cipollebio.png",
+			"brand": "Esselunga",
+			"weight": "500g",
+			"price": 1.48,
+			"weightPrice": "2.96€/KG",
+			"available": 10,
+			
+			"bio": true,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+		
+			{
+			"name": "Rucola biologica bio",
+			"barCode": 7,
+			"imagePath": "file:images/Product_rucolabio.png",
+			"brand": "Bonduelle",
+			"weight": "100g",
+			"price": 1.85,
+			"weightPrice": "12.90€/KG",
+			"available": 10,
+			
+			"bio": true,
 			"glutenfree":true,
 			"vegan":true,
 			"lactosefree":true

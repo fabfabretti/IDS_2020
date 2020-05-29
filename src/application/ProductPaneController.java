@@ -97,7 +97,22 @@ public class ProductPaneController extends Controller{
 	}
 
 	public void addProduct(ActionEvent e) {
-		System.out.println("You want to buy "+spinnerQuantity.getValue() +" shitty " + product.getName()+"?");
+		System.out.println("[?] You want to buy "+spinnerQuantity.getValue() +" shitty " + product.getName()+"?");
+		Globals.cart.addProduct(product, spinnerQuantity.getValue());
+		
+		System.out.println("There's " + (product.getAvailable()-spinnerQuantity.getValue()) + " "+ product.getName() + " left.");
+		product.setAvailable(product.getAvailable()-spinnerQuantity.getValue());
+
+		if(product.getAvailable()!=0) {
+			txtFinished.setVisible(false);
+			spinnerQuantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getAvailable(), 1));
+		}else {
+			System.out.println("You are a fucking asshole, I wanted some.");
+			spinnerQuantity.setVisible(false);
+			btnAdd.setDisable(true);
+			txtFinished.setVisible(true);
+		}
+		
 	}
 	
 }
