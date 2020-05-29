@@ -46,7 +46,7 @@ public class Main extends Application {
 		try {
 			
 
-			JsonLoader.loadProduct();
+			JsonLoader.loadProducts();
 			//carica file FXML con la formattazione
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 			

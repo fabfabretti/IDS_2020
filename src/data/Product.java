@@ -1,10 +1,12 @@
 package data;
 
 import java.io.IOException;
+
+import application.Globals;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	
 	//
 	//
@@ -87,7 +89,7 @@ public class Product {
 			characteristics[2]=vegan;	
 			characteristics[3]=lactosefree;
 
-			Sections.addVeg(this);
+			Globals.vegetali.addProduct(this);
 		}
 		
 		public Product() {
@@ -304,6 +306,17 @@ public class Product {
 	 */
 	public void setCharacteristics(boolean[] characteristics) {
 		this.characteristics = characteristics;
+	}
+
+	@Override
+	public int compareTo(Product other) {	
+		
+		if(this.barCode==other.barCode)
+			return 0;
+		
+		else return (int) (price-other.getPrice());
+			
+	
 	}
 	
 }

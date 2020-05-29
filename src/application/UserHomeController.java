@@ -2,16 +2,15 @@ package application;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 
 import com.jfoenix.controls.JFXButton;
 
 import data.Product;
-import data.Sections;
+import data.Section;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -19,8 +18,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * Gestisce la pagina "home" dell'utente; in particolare tutti gli input che può
@@ -77,7 +74,10 @@ public class UserHomeController extends Controller {
 	@FXML
 	private JFXButton btnDrink;
 	
+	
 	public void initialize() {
+		
+		
 		lblHiUser.setText("Ciao, " + Globals.currentUser.getAnagrafica().getName() + " :)");
 		
 		if(Globals.cart.getNumberOfProd()==0) {
@@ -115,14 +115,34 @@ public class UserHomeController extends Controller {
 
 	public void loadSection(ActionEvent e) {
 
-		HashSet<Product> section=null;
-		
-		
-		if(((JFXButton)e.getSource()).getId().equals("btnVeg"))
-			section=Sections.vegetali;
-		
-		ScrollPane newpane = formPanel(section);
+		PriorityQueue<Product> section=null;
 
+		
+		
+		//Scopri quale è il reparto richiesto
+		String sourcebutton = ((JFXButton)e.getSource()).getId();
+		
+		if(sourcebutton.equals("btnVeg"))
+			section=Globals.vegetali.getProducts();
+	
+		if(sourcebutton.equals("btnFish"))
+			section=Globals.pesce.getProducts();
+		
+		if(sourcebutton.equals("btnMeat"))
+			section=Globals.carne.getProducts();
+
+		if(sourcebutton.equals("btnDiary"))
+			section=Globals.latticini.getProducts();
+
+		if(sourcebutton.equals("btnDrink"))
+			section=Globals.bevande.getProducts();
+	
+	
+		//chiama la funzione che fa il display dei prodotti
+		
+		ProductViewer viewer = new ProductViewer(section);
+		
+		ScrollPane newpane = viewer.getScroller();
 		mainPane.getChildren().add(newpane);
 
 		// Il nuovo pannello deve essere grande tanto quanto il pannello di partenza,
@@ -141,55 +161,22 @@ public class UserHomeController extends Controller {
 	 *            ricerca o anche il set di prodotti di un reparto)
 	 * @return uno scrollpane con gli oggetti mostrati.
 	 */
-	private ScrollPane formPanel(HashSet<Product> products) {
+
+	
+	
+	
+	public void loadSearch() {
 		
-
-		//// DICHIARO I PANNELLI NECESSARI:
-
-		ScrollPane scroller = new ScrollPane();
-		FlowPane flowProdotti = new FlowPane();
-
-
+		PriorityQueue<Product> result = new PriorityQueue<Product>();
 		
-		
-		// 1. Genero la barra x filtrare //TODO ora è un dummy
-		try {
-			flowProdotti.getChildren().add(FXMLLoader.load(getClass().getResource("/application/FilterOrderBar.fxml")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		
-
-		if(products==null) {
-			System.out.println("[✓] Caricata sezione vuota");
-			return scroller;
+		for(Section s : Globals.reparti) {
+			for(Product p : s.getProducts()) {
+			//	if(p.search("albicocche")!=null)
+				//result.add(p);
+				
 			}
-		
-		
-		// 2. Genero tutti i prodotti
-
-		for (Product p : products) {
-
-			ProductPaneController.setInitProduct(p);
-			AnchorPane productPane=null;
-			
-			try {
-				productPane = FXMLLoader.load(this.getClass().getResource("/application/ProductPane.fxml"));
-
-			//	System.out.println("[✓] Generato productpane: " + productPane +" for "+ p.getName());
-			} catch (Exception e) {
-				System.out.println("[x] Fxml non pervenuto :(" + e);
-			}
-			flowProdotti.getChildren().add(productPane);
-			System.out.println("[✓] Mostrato: " + p);
-			scroller.setFitToWidth(true);
-			
-			
 		}
-
-		scroller.setContent(flowProdotti);
-		return scroller;
+		
 	}
 
 }

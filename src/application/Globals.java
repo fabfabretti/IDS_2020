@@ -3,6 +3,7 @@ package application;
 import java.util.HashSet;
 
 import data.Cart;
+import data.Section;
 import data.User;
 import data.UserGeneral;
 import data.Worker;
@@ -21,19 +22,25 @@ import javafx.stage.Stage;
  *
  */
 public class Globals {
-	static boolean logged = false;// maybe useful?
 	
-	static UserGeneral currentUser = null;
 	
+	//Users
 	static HashSet<User> users = JsonLoader.loadUsers();
-	
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
 	
-	static Stage stage;//
+	// Sections
+	public static Section vegetali = new Section("Frutta e Verdura");
+	public static Section pesce = new Section("Pesce");
+	public static Section carne = new Section("Carne");
+	public static Section latticini = new Section("Latte e Formaggi");
+	public static Section bevande = new Section("Bevande");
 	
+	public static Section reparti[] = {vegetali};
+	
+	//Current Session
+
+	static UserGeneral currentUser = null;	
 	static Cart cart = new Cart();
-	// static Products
-	// static Sections (=reparti)
-	// static carrello? ma forse va in Utente
+	
 
 }

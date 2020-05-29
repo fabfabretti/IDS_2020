@@ -86,7 +86,6 @@ public class LoginController extends Controller{
 				System.out.println("[✓] Accesso user effettuato con successo con combo " + u.getEmail() + "/" + u.getPassword()+"\n"
 												+ "\t-> Loggato: " + u.getAnagrafica().getName() + " "+ u.getAnagrafica().getFamilyName() );
 				lblStatus.setVisible(false);
-				Globals.logged = true;
 				Globals.currentUser = u;
 				launchUI("/application/UserHome.fxml");
 				Stage loginStage = (Stage) lblStatus.getScene().getWindow();

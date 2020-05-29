@@ -2,8 +2,8 @@
 	"workers": [
 		{
 		
-			"email": "admin",
-			"password": "admin",
+			"email": "q",
+			"password": "q",
 			"name":"Admin",
 			"familyname":"Debugging",
 			"address":"Via bestemmie, 666",

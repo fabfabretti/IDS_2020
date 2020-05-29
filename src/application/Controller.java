@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -31,7 +30,6 @@ public class Controller {
 
 			// Aggiungiamo questo stage alle variabili visibili a tutto il rpogramma per
 			// comodità
-			Globals.stage = mainStage;
 
 			// Dato che si tratta di un prototipo, non ci preoccupiamo di rendere la
 			// finestra responsiva(?)

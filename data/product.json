@@ -1,5 +1,5 @@
 {
-	"prodotti": [
+	"Frutta e Verdura": [
 		{
 			"name": "Albicocche",
 			"barCode": 1,
@@ -58,6 +58,22 @@
 			"glutenfree":true,
 			"vegan":true,
 			"lactosefree":true
+		}
+	],
+	"Pesce": [
+		{
+			"name": "Pesce",
+			"barCode": 1,
+			"imagePath": "",
+			"brand": "Selex",
+			"weight": "Bho",
+			"price": 10.00,
+			"weightPrice": "0.0€/KG",
+			"available": 0,
+			"bio": false,
+			"glutenfree":false,
+			"vegan":false,
+			"lactosefree":false
 		}
 	]
 }
