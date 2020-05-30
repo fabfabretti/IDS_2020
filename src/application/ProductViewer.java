@@ -1,12 +1,11 @@
 package application;
 
 import java.io.IOException;
-import java.util.PriorityQueue;
 import java.util.TreeSet;
 
+import data.Cart;
 import data.Product;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -24,7 +23,22 @@ public class ProductViewer {
 	public ProductViewer(AnchorPane parent, TreeSet<Product> result) {
 		this.displayed=result;
 		this.parent = parent;
-		formPanel(result);
+		
+		System.out.println("Visualizzo in modalità section!");
+		formPanel(displayed,"section");
+		ScrollPane newpane = scroller;
+		parent.getChildren().add(newpane);
+		AnchorPane.setTopAnchor(newpane, 0.0);
+		AnchorPane.setBottomAnchor(newpane, 0.0);
+		AnchorPane.setLeftAnchor(newpane, 0.0);
+		AnchorPane.setRightAnchor(newpane, 0.0);
+	}
+	
+	public ProductViewer(AnchorPane parent, Cart cart) {
+		this.displayed= new TreeSet<Product>(cart.getProducts().keySet());
+		this.parent = parent;
+		System.out.println("Visualizzo in modalità cart!");
+		formPanel(displayed,"cart");
 		ScrollPane newpane = scroller;
 		parent.getChildren().add(newpane);
 		AnchorPane.setTopAnchor(newpane, 0.0);
@@ -34,12 +48,9 @@ public class ProductViewer {
 	}
 
 
-	public ProductViewer(TreeSet<Product> displayed) {
-		this.displayed=displayed;
-		formPanel(displayed);
-	}
 
-	private void formPanel(TreeSet<Product> result) {
+
+	private void formPanel(TreeSet<Product> result, String mode) {
 
 		
 		//NO PRODOTTI:
@@ -47,9 +58,17 @@ public class ProductViewer {
 			System.out.println("[✓] Nessun prodotto da visualizzare! Carico pannello vuoto...");
 			Pane res;
 				try {
-					res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
-					//System.out.println(res);
-					//System.out.println(parent);
+
+					System.out.println("Cart?"+ "cart".equals(mode));
+					System.out.println("Section?" + "section".equals(mode));
+						if(mode.equals("cart"))
+							res=FXMLLoader.load( getClass().getResource("/application/CartViewEmpty.fxml") );
+						
+						else if (mode.equals("section")) 
+							res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
+							
+						
+						else res=null;
 					scroller.setContent(res);
 				} catch (Exception e) {
 					System.out.println("[x] Errore caricamento UI interna");
@@ -64,7 +83,7 @@ public class ProductViewer {
 
 
 		
-		
+		if(!mode.equals("cart"))
 		// 1. Genero la barra x filtrare //TODO ora è un dummy
 		try {
 			flowProdotti.getChildren().add(FXMLLoader.load(result.getClass().getResource("/application/FilterOrderBar.fxml")));
@@ -84,7 +103,12 @@ public class ProductViewer {
 			AnchorPane productPane=null;
 			
 			try {
-				productPane = FXMLLoader.load(result.getClass().getResource("/application/ProductPane.fxml"));
+				
+				if(mode.equals("section"))
+					productPane = FXMLLoader.load(result.getClass().getResource("/application/ProductPane.fxml"));
+				else
+					productPane = FXMLLoader.load(result.getClass().getResource("/application/ProductPaneCompact.fxml"));
+					
 
 			//	System.out.println("[✓] Generato productpane: " + productPane +" for "+ p.getName());
 			} catch (Exception e) {
@@ -109,3 +133,7 @@ public class ProductViewer {
 	
 	
 }
+
+
+
+

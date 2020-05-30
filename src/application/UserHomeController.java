@@ -149,8 +149,7 @@ public class UserHomeController extends Controller {
 	
 
 	
-	public void loadSearchKEY(KeyEvent e) {
-		if (e.getCode().equals(KeyCode.ENTER))
+	public void loadSearchKEY(KeyEvent e) { 
 			loadSearch();
 	}
 	

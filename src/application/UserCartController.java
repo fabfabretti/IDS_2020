@@ -28,9 +28,7 @@ public class UserCartController extends Controller{
 		txtPoints.setText("Questa spesa vale " + (int)Globals.cart.getTotal() + " punti!");
 		lblItems.setText(""+Globals.cart.getNumberOfProd());
 		
-		
-		TreeSet<Product> cart = new TreeSet<Product>( Globals.cart.getProducts().keySet());
-		ProductViewer viewer = new ProductViewer(cartviewPane,cart);
+		ProductViewer viewer = new ProductViewer(cartviewPane,Globals.cart);
 		
 	}
 
