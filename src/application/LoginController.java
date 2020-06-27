@@ -53,6 +53,7 @@ public class LoginController extends Controller{
 
 
 	// funzioni di supporto:
+	
 	/**
 	 * Data l'interazione col pulsante Accedi, verifica se username e password sono
 	 * corretti chiamando {@link data.User#checkLogin(String,String)} e modifica la
@@ -111,21 +112,6 @@ public class LoginController extends Controller{
 		lblStatus.setText("Username o password errata.");
 
 	}
-
-	/**
-	 * Carica nella memoria del programma (intesa come RAM) la lista degli utenti,
-	 * salvata in un file
-	 * 
-	 * (TODO):Al momento sono banalmente due utenti definiti nel programma;
-	 * Successivamente utilizzerà una funzione che porterà in memoria la lista degli
-	 * utenti presenti su un file (quindi salvati in memoria).
-	 * 
-	 * 
-	 * (TODO) Probabilmente conviene metterla dentro la classe User (ha più senso).
-	 * 
-	 * @return Hashset di tutti gli user attualmente registrati nel file degli
-	 *         utenti
-	 */
 
 
 

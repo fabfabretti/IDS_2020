@@ -7,7 +7,6 @@ import data.Section;
 import data.User;
 import data.UserGeneral;
 import data.Worker;
-import javafx.stage.Stage;
 
 /**
  * Dato che Java non prevede la possibilità di avere variabili globali, la cosa
@@ -36,6 +35,10 @@ public class Globals {
 	public static Section bevande = new Section("Bevande");
 	
 	public static Section reparti[] = {vegetali};
+
+	public static UserCartController cartController=null;
+	public static UserHomeController viewController=null;
+	public static WorkerProductManagerController editController=null;
 	
 	//Current Session
 

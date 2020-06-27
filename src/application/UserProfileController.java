@@ -7,6 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+
+/**
+ * gestise la schermata di modifica dati dell'user.
+ *
+ */
 public class UserProfileController extends Controller {
 
 	@FXML
@@ -82,12 +87,4 @@ public class UserProfileController extends Controller {
 		}
 
 	}
-	/*
-	 * Se l'inizializzazione dovesse dare problemi dobbiamo aggiungere questo
-	 * protected void init() { // this class is the HelloworldController class
-	 * because init() is not private method // do init staff if you want // now FML
-	 * fields are not null }
-	 * 
-	 */
-
 }

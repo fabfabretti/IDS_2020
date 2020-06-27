@@ -1,6 +1,6 @@
 package application;
 
-import java.util.PriorityQueue;
+import java.io.IOException;
 import java.util.TreeSet;
 
 import com.jfoenix.controls.JFXButton;
@@ -10,10 +10,11 @@ import data.Product;
 import data.Section;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -78,8 +79,11 @@ public class UserHomeController extends Controller {
 	@FXML
 	private JFXTextField txtFieldSearch;
 	
+	private TreeSet<Product> currDisplay;
 	
 	public void initialize() {
+		
+		Globals.viewController=this;
 		
 		//Saluta Antonio
 		lblHiUser.setText("Ciao, " + Globals.currentUser.getAnagrafica().getName() + " :)");
@@ -89,6 +93,17 @@ public class UserHomeController extends Controller {
 		if(Globals.cart.getNumberOfProd()==0) {
 			circleCartNumber.setVisible(false);
 			lblCartNumber.setVisible(false);
+			try {
+
+				BorderPane res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
+				mainPane.getChildren().setAll(res);
+			} catch (Exception e) {
+				System.out.println("[x] Errore caricamento UI interna");
+			}
+			
+	
+			
+			
 		}
 	}
 	
@@ -140,6 +155,7 @@ public class UserHomeController extends Controller {
 		if(sourcebutton.equals("btnDrink"))
 			section=Globals.bevande.getProducts();
 	
+		currDisplay=section;
 	
 		//Per riutilizzare facilmente questo codice anche nella parte del Worker, usiamo un gestore della view dei prodotti chiamato ProductViewer :)
 		ProductViewer viewer = new ProductViewer(mainPane,section);
@@ -173,10 +189,25 @@ public class UserHomeController extends Controller {
 					
 				}
 			}
-
+			currDisplay = result;
 			ProductViewer viewer = new ProductViewer(mainPane,result);
 		}	
 		
 	}
 
+	
+	public void update() {
+		
+		System.out.println("I'm resetting!");
+		
+		//(De-)Visualizza correttamente la notifica del carrello
+		if(Globals.cart.getNumberOfProd()==0) {
+			circleCartNumber.setVisible(false);
+			lblCartNumber.setVisible(false);
+			
+			
+		ProductViewer viewer = new ProductViewer(mainPane,currDisplay);
+		
+		}
+	}
 }

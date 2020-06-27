@@ -11,6 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Superclasse che gestisce tutte le questioni comuni a tutti i controller.
+ * @author Fabiola
+ *
+ */
 public class Controller {
 	
 	
@@ -47,37 +52,11 @@ public class Controller {
 	}
 	
 	
-	/***
-	 * Chiude la finestra da cui è partito il segnale. NON salva!!! 
-	 * @param ae e
+	/**
+	 * Lancia una nuova parte di UI all'interno di una già presente; torna l'anchorpane che contiene la nuova finestra.
+	 * @param path
+	 * @return
 	 */
-	public void closeUI(Event ae) {
-		final Node source = (Node) ae.getSource();
-		final Stage stage = (Stage) source.getScene().getWindow();
-		stage.close();
-	}
-	
-	public void quitConfirm(ActionEvent e) {
-		launchUI("/application/Exit.fxml");
-	}
-	
-	public void quit(ActionEvent ae) {
-
-		///TODO 	SALVA LE COSE IN SOSPESO
-		System.exit(0);	
-	}
-	
-	public void quitNoSave(ActionEvent ae) {
-		System.exit(0);	
-	}
-	/*
-	protected void init()
-	{
-		// this class is the HelloworldController class because init() is not private method
-		// do init staff if you want
-		// now FML fields are not null
-	}*/
-	
 	public AnchorPane launchUIPanel(String path) {
 		AnchorPane res=null;
 		try {
@@ -89,5 +68,43 @@ public class Controller {
 		return res;
 	}
 	
+	/**
+	 * Apre la finestra di dialogo di conferma chiusura
+	 * @param e
+	 */
+	public void quitConfirm(ActionEvent e) {
+		launchUI("/application/Exit.fxml");
+	}
+	
+	/***
+	 * Chiude la finestra da cui è partito il segnale. NON salva!!! 
+	 * @param ae e
+	 */
+	public void closeUI(Event ae) {
+		final Node source = (Node) ae.getSource();
+		final Stage stage = (Stage) source.getScene().getWindow();
+		stage.close();
+	}
+	
+	
+	
+	/**
+	 * Chiude e salva le cose in sospeso
+	 * @param ae
+	 */
+	public void quit(ActionEvent ae) {
+
+		///TODO 	SALVA LE COSE IN SOSPESO
+		System.exit(0);	
+	}
+	
+	/**
+	 *  Chiude tutto senza salvare.
+	 * @param ae
+	 */
+	public void quitNoSave(ActionEvent ae) {
+		System.exit(0);	
+	}
+
 	
 }

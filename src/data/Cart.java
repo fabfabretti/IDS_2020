@@ -28,12 +28,12 @@ public class Cart {
 	
 	public void removeProduct(Product p) {
 		
-		if(!products.containsKey(p))
+		if(!(products.containsKey(p)))
 			System.out.println("Something went wrong, product is not present");
 		else {
+			total=total-products.get(p)*p.getPrice();
+			numberOfProd=numberOfProd-products.get(p);	
 			products.remove(p);
-			total=total-p.getPrice();
-			numberOfProd--;	
 		}
 	}
 	
