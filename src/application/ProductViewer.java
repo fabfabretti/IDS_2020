@@ -33,12 +33,12 @@ public class ProductViewer {
 	 * @param parent pannello su cui attaccare lo scrollpane con tuttecose
 	 * @param result elenco prodotti da mostrare
 	 */
-	public ProductViewer(AnchorPane parent, TreeSet<Product> result) {
+	public ProductViewer(AnchorPane parent, TreeSet<Product> result, String type) {
 		this.displayed=result;
 		this.parent = parent;
 		
 		System.out.println("Visualizzo in modalità section!");
-		formPanel(displayed,"edit");
+		formPanel(displayed,type);
 		ScrollPane newpane = scroller;
 		parent.getChildren().add(newpane);
 		AnchorPane.setTopAnchor(newpane, 0.0);

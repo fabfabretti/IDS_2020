@@ -82,7 +82,7 @@ public class WorkerProductManagerController {
 			allproducts.addAll(s.getProducts());
 		
 		
-		ProductViewer viewer = new ProductViewer(viewScrollPane,allproducts);
+		ProductViewer viewer = new ProductViewer(viewScrollPane,allproducts,"edit");
 	}
 	
 	
