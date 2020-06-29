@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package json;
+package minimalJson;
 
 /**
  * A handler for parser events. Instances of this class can be given to a

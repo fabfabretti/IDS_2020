@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 EclipseSource.
+ * Copyright (c) 2013, 2015 EclipseSource.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,33 +19,75 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package json;
+package minimalJson;
 
-import java.io.Writer;
+import java.io.IOException;
 
-/**
- * Controls the formatting of the JSON output. Use one of the available
- * constants.
- */
-public abstract class WriterConfig {
+@SuppressWarnings("serial") // use default serial UID
+class JsonNumber extends JsonValue {
 
-	/**
-	 * Write JSON in its minimal form, without any additional whitespace. This is
-	 * the default.
-	 */
-	public static WriterConfig MINIMAL = new WriterConfig() {
-		@Override
-		JsonWriter createWriter(Writer writer) {
-			return new JsonWriter(writer);
+	private final String string;
+
+	JsonNumber(String string) {
+		if (string == null) {
+			throw new NullPointerException("string is null");
 		}
-	};
+		this.string = string;
+	}
 
-	/**
-	 * Write JSON in pretty-print, with each value on a separate line and an
-	 * indentation of two spaces.
-	 */
-	public static WriterConfig PRETTY_PRINT = PrettyPrint.indentWithSpaces(2);
+	@Override
+	public String toString() {
+		return string;
+	}
 
-	abstract JsonWriter createWriter(Writer writer);
+	@Override
+	void write(JsonWriter writer) throws IOException {
+		writer.writeNumber(string);
+	}
+
+	@Override
+	public boolean isNumber() {
+		return true;
+	}
+
+	@Override
+	public int asInt() {
+		return Integer.parseInt(string, 10);
+	}
+
+	@Override
+	public long asLong() {
+		return Long.parseLong(string, 10);
+	}
+
+	@Override
+	public float asFloat() {
+		return Float.parseFloat(string);
+	}
+
+	@Override
+	public double asDouble() {
+		return Double.parseDouble(string);
+	}
+
+	@Override
+	public int hashCode() {
+		return string.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object == null) {
+			return false;
+		}
+		if (getClass() != object.getClass()) {
+			return false;
+		}
+		JsonNumber other = (JsonNumber) object;
+		return string.equals(other.string);
+	}
 
 }

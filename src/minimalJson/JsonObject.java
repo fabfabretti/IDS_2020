@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package json;
+package minimalJson;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import json.JsonObject.Member;
+import minimalJson.JsonObject.Member;
 
 /**
  * Represents a JSON object, a set of name/value pairs, where the names are

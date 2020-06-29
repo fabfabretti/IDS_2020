@@ -10,56 +10,67 @@ import java.util.HashSet;
 import data.Product;
 import data.User;
 import data.Worker;
-
-import json.*;
-import json.JsonArray;
-import json.JsonValue;
-
-//javax.json
+import minimalJson.*;
 
 public class JsonSaver {
 
-	 public static void saveUser() {
+	public static void saveUser() {
 
 		/**
-		 * JsonObject user = Json.object().add("name", "Alice").add("points", 23); // ->
-		 * {"name": "Alice", "points": 23}
+		 * Il contenuto, per comodità implementativa, viene completamente riscritto nei
+		 * vari json file.
+		 * 
+		 * Tale scelta è stata apportata a posteri rispetto all'implementazione di
+		 * JsonLoader. La libreria minimalJson, infatti, non permette una facile
+		 * gestione dei cambi dei singoli valori come nel nostro caso.
 		 */
-
 		JsonArray users = new JsonArray();
 
 		for (User u : Globals.users) {
-			
-			JsonObject jsonUser = new JsonObject().add("email", u.getEmail());
+
+			JsonObject jsonUser = new JsonObject();
+
+			jsonUser.add("email", u.getEmail());
+
 			jsonUser.add("password", u.getPassword());
 
 			jsonUser.add("name", u.getAnagrafica().getName());
+
 			jsonUser.add("familyname", u.getAnagrafica().getFamilyName());
 
 			jsonUser.add("address", u.getAnagrafica().getAddress());
+
 			jsonUser.add("city", u.getAnagrafica().getCity());
+
 			jsonUser.add("CAP", u.getAnagrafica().getCAP());
+
 			jsonUser.add("mobilenumber", u.getAnagrafica().getMobileNumber());
+
 			jsonUser.add("fidelitycard", "");
+
 			jsonUser.add("userid", u.getUserID());
-			
+
 			users.add(jsonUser);
+
 			System.out.println(jsonUser);
 		}
-		
 
-		
-		System.out.println("[?]" + users);
-		/*
-		 * "email": "a", "password": "a", "name":"User", "familyname":"Debugging",
-		 * "address":"Via bestemmie, 666", "city":"Quel Paese", "CAP":66420,
-		 * "mobilenumber": "4136181111", "fidelitycard":"null", "userid":0
+		/**
+		 * Una volta aggiornati i dati, questi vengono inseriti all'interno di un nuovo
+		 * JsonObject e trascritti sul file.
 		 */
+		JsonObject newJson = new JsonObject();
 
-		
-		try(Writer writer = new FileWriter("./data/users.json")) {
-			String json = users.toString(WriterConfig.PRETTY_PRINT);
-			users.writeTo(writer, WriterConfig.PRETTY_PRINT);
+		newJson.add("users", users);
+
+		System.out.println("\n[?] " + users);
+
+		/**
+		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
+		 */
+		try (Writer writer = new FileWriter("./data/users.json")) {
+			// String json = users.toString(WriterConfig.PRETTY_PRINT);
+			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json User!!!");
 		}

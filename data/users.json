@@ -1,30 +1,28 @@
 {
-	"users": [
-		{
-		
-			"email": "a",
-			"password": "a",
-			"name":"User",
-			"familyname":"Debugging",
-			"address":"Via bestemmie, 666",
-			"city":"Quel Paese",
-			"CAP":"66420",
-			"mobilenumber": "4136181111",
-			"fidelitycard":"null",
-			"userid":0
-		},
-		{
-		
-			"email": "combi@email.com",
-			"password": "password",
-			"name":"Carlo",
-			"familyname":"Combi",
-			"address":"Strada Le Grazie, Ca'Vignal",
-			"city":"verona",
-			"CAP":"35137",
-			"mobilenumber": "0000000000", 
-			"fidelitycard":"null",
-			"userid":1
-		}
-	]
+  "users": [
+    {
+      "email": "a",
+      "password": "a",
+      "name": "GenericUser",
+      "familyname": "Debugging",
+      "address": "Via bestemmie, 666",
+      "city": "Quel Paese",
+      "CAP": "66420",
+      "mobilenumber": "4136181111",
+      "fidelitycard": "",
+      "userid": 0
+    },
+    {
+      "email": "combi@email.com",
+      "password": "password",
+      "name": "Carlo",
+      "familyname": "Combi",
+      "address": "Strada Le Grazie, Ca'Vignal",
+      "city": "verona",
+      "CAP": "35137",
+      "mobilenumber": "0000000000",
+      "fidelitycard": "",
+      "userid": 1
+    }
+  ]
 }
