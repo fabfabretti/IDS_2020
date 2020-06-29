@@ -36,8 +36,7 @@ public class ProductViewer {
 	public ProductViewer(AnchorPane parent, TreeSet<Product> result, String type) {
 		this.displayed=result;
 		this.parent = parent;
-		
-		System.out.println("Visualizzo in modalità section!");
+
 		formPanel(displayed,type);
 		ScrollPane newpane = scroller;
 		parent.getChildren().add(newpane);
@@ -92,17 +91,16 @@ public class ProductViewer {
 						else if (mode.equals("section")) 
 							res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
 						
-						else if (mode.equals("edit"))  //TODO
-							res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
-							
-						
+						else if (mode.equals("edit"))  
+							res=FXMLLoader.load( getClass().getResource("/application/EditViewEmpty.fxml") );
 						else res=null;
+						
 					scroller.setContent(res);
 				} catch (Exception e) {
 					System.out.println("[x] Errore caricamento UI interna");
 				}
 				
-			System.out.println("[✓] Cart visualizzato");
+			System.out.println("[✓] Pannello vuoto isualizzato");
 			return;
 			}
 
@@ -117,7 +115,11 @@ public class ProductViewer {
 		// 1. Genero la barra x filtrare //TODO ora è un dummy// se necessaria
 		if(!mode.equals("cart"))
 		try {
-			flowProdotti.getChildren().add(FXMLLoader.load(result.getClass().getResource("/application/FilterOrderBar.fxml")));
+			if(mode.equals("section"))
+				flowProdotti.getChildren().add(FXMLLoader.load(result.getClass().getResource("/application/FilterOrderBar.fxml")));
+			if(mode.equals("edit"))
+				flowProdotti.getChildren().add(FXMLLoader.load(result.getClass().getResource("/application/FilterEditBar.fxml")));
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

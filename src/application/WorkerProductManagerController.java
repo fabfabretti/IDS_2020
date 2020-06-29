@@ -9,6 +9,7 @@ import data.Product;
 import data.Section;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
@@ -47,6 +48,9 @@ public class WorkerProductManagerController {
 	@FXML
 	private JFXTextField  fieldImagePath;
 	
+	@FXML
+	private ChoiceBox<String> chboxSection;
+	
 
 	@FXML
 	private Spinner<Integer> spinnerQuantity;
@@ -65,12 +69,18 @@ public class WorkerProductManagerController {
 	private Product displayed;
 
 	public void initialize(){
-		
+
+		//Inizializzo choicebox con i reparti
+		for(Section s : Globals.reparti) {
+        chboxSection.getItems().add(s.getName());
+        }
+		//Nascondiamo la scritta di errore
 		txtStatus.setText("");
 		mainEditor.setVisible(false);
 		defaultPane.setVisible(true);
 		
 		
+
 		
 		//carichiamo TUTTI i prodotti!
 		
@@ -78,8 +88,14 @@ public class WorkerProductManagerController {
 		
 		TreeSet<Product> allproducts = new TreeSet<Product>();
 		
-		for(Section s : Globals.reparti) 
-			allproducts.addAll(s.getProducts());
+		for(Section s : Globals.reparti) {
+			System.out.println("checking "+ s.getName());
+			for(Product p : s.getProducts()) {
+				System.out.println("		checking "+ p.getName());
+				allproducts.add(p);
+			}
+			
+		}
 		
 		
 		ProductViewer viewer = new ProductViewer(viewScrollPane,allproducts,"edit");
@@ -87,6 +103,11 @@ public class WorkerProductManagerController {
 	
 	
 	public void editInfo(Product p){
+		//Inizializzo choicebox con i reparti
+		for(Section s : Globals.reparti) {
+			if(!chboxSection.getItems().contains(s.getName()))
+				chboxSection.getItems().add(s.getName());
+        }
 		
 		displayed=p;
 		defaultPane.setVisible(false);
@@ -99,6 +120,13 @@ public class WorkerProductManagerController {
 		fieldPrice.setText(p.getPrice()+"");
 		fieldImagePath.setText(p.getImagePath());
 		txtCode.setText("Codice Prodotto:" + p.getBarCode());
+		
+
+		System.out.println(chboxSection);
+		System.out.println(displayed.getSection());
+		System.out.println(displayed.getSection().getName());
+		chboxSection.setValue(displayed.getSection().getName());
+		
 		
 		spinnerQuantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, p.getAvailable()));
 		
@@ -125,12 +153,14 @@ public class WorkerProductManagerController {
 		
 		//controlli!
 		if(fieldName.getText().equals("") || fieldBrand.getText().equals("") || fieldWeight.getText().equals("") || fieldPriceWeight.getText().equals("") ||fieldPrice.getText().equals("") ) {
-			txtStatus.setText("Errore: è necessario compilare tutti i campi!");
+			txtStatus.setStyle("-fx-text-fill: red;");
+			txtStatus.setText("Errore:\nE' necessario compilare tutti i campi!");
 			return;
 		}			
 		
 		if(spinnerQuantity.getValue() < 0) {
-			txtStatus.setText("Errore: la quantità disponibile deve essere un numero non negativo.");
+			txtStatus.setStyle("-fx-text-fill: red;");
+			txtStatus.setText("Errore:\nLa quantità disponibile deve essere un numero non negativo.");
 			return;
 		}
 		
@@ -152,12 +182,27 @@ public class WorkerProductManagerController {
 	*/		
 		
 		if(Float.parseFloat(fieldPrice.getText()) == Float.NaN) {
-			txtStatus.setText("Errore: un valore non è valido.");
+			txtStatus.setStyle("-fx-text-fill: red;");
+			txtStatus.setText("Errore:\nUn valore non è valido.");
 			return;
 	}
 		
 		
 		//salvataggio
+		
+		
+		//Controllo se è un nuovo prodotto!
+		boolean isPresent=false;
+		for(Section s : Globals.reparti) {
+			if (s.getProducts().contains(displayed)==true)
+				isPresent=true;	
+		}
+		
+		if(isPresent==false)
+			Globals.reparti[0].addProduct(displayed);
+			
+		
+		//Ora posso salvare tutto		
 		displayed.setName(fieldName.getText());
 		
 		displayed.setBrand(fieldBrand.getText());
@@ -180,6 +225,7 @@ public class WorkerProductManagerController {
 		
 		
 		System.out.println("[✓] Salvati nuovi valori di "+ displayed);
+		txtStatus.setStyle("-fx-text-fill: black;");
 		txtStatus.setText("Salvataggio effettuato!");
 	}
 	

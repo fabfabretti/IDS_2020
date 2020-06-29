@@ -29,6 +29,8 @@ public class Product implements Comparable<Product>{
 	private String weightPrice;
 	
 	private int available;
+	
+	private Section section;
 
 	
 	/*
@@ -48,7 +50,7 @@ public class Product implements Comparable<Product>{
 		//
 		//
 	
-		public Product(String name, int barCode, String imagePath, String brand, String weight, float price, String weightPrice, int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree) {
+		public Product(String name, int barCode, String imagePath, String brand, String weight, float price, String weightPrice, int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree, Section section) {
 			this.name=name;
 			this.barCode=barCode;
 			this.imagePath=imagePath;
@@ -57,14 +59,14 @@ public class Product implements Comparable<Product>{
 			this.price=price;
 			this.weightPrice=weightPrice;
 			this.available=available;
-			
+			this.section=section;
 			
 			characteristics[0]=bio;	
 			characteristics[1]=glutenfree;	
 			characteristics[2]=vegan;	
 			characteristics[3]=lactosefree;
 
-			Globals.vegetali.addProduct(this);
+			section.addProduct(this);
 		}
 		
 		public Product() {
@@ -291,6 +293,25 @@ public class Product implements Comparable<Product>{
 	public void setCharacteristics(boolean[] characteristics) {
 		this.characteristics = characteristics;
 	}
+	
+	/**
+	 * @param the section
+	 */
+	public Section getSection() {
+		return section;
+	}
+	
+	/**
+	 * @param characteristics the characteristics to set
+	 */
+	public void setSection(Section section) {
+		this.section=section;
+	}
+	
+	
+	
+	
+	
 
 	@Override
 	public int compareTo(Product other) {	

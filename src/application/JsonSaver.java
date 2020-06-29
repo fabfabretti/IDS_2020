@@ -69,7 +69,6 @@ public class JsonSaver {
 		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
 		 */
 		try (Writer writer = new FileWriter("./data/users.json")) {
-			// String json = users.toString(WriterConfig.PRETTY_PRINT);
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json User!!!");

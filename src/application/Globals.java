@@ -34,7 +34,7 @@ public class Globals {
 	public static Section latticini = new Section("Latte e Formaggi");
 	public static Section bevande = new Section("Bevande");
 	
-	public static Section reparti[] = {vegetali};
+	public static Section reparti[] = {vegetali,pesce,carne,latticini,bevande};
 
 	public static UserCartController cartController=null;
 	public static UserHomeController viewController=null;

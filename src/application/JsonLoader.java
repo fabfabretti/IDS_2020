@@ -11,6 +11,7 @@ import data.User;
 import data.Worker;
 import minimalJson.Json;
 import minimalJson.JsonArray;
+import minimalJson.JsonObject;
 import minimalJson.JsonValue;
 
 public class JsonLoader {
@@ -24,13 +25,15 @@ public class JsonLoader {
 
 		try (Reader reader = new FileReader("./data/product.json")) {
 
-			for (Section s : Globals.reparti) {
 
-				System.out.println();
-				JsonArray sezione = Json.parse(reader).asObject().get(s.getName()).asArray();
+				JsonObject read = Json.parse(reader).asObject();
+			
+				for (Section s : Globals.reparti) {
+			
+				JsonArray sezione = read.get(s.getName()).asArray();
 
 				for (JsonValue prodotto : sezione) {
-					// System.out.println(prodotto);
+					 System.out.println(prodotto);
 					/*
 					 * [! ! ! ! ! ] |-----> Da questa print di debug si evince che ciascun JsonValue
 					 * (ovvero ciascun elemento di ciascun indice del JsonArray)è una schifosissima
@@ -70,7 +73,7 @@ public class JsonLoader {
 					boolean lactosefree = prodotto.asObject().getBoolean("lactosefree", false);
 
 					Product p = new Product(name, barCode, imagePath, brand, weight, price, weightPrice, available, bio,
-							glutenfree, vegan, lactosefree);
+							glutenfree, vegan, lactosefree,s);
 
 				}
 			}

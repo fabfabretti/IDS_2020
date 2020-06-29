@@ -2,7 +2,7 @@
 	"Frutta e Verdura": [
 		{
 			"name": "Albicocche",
-			"barCode": 1,
+			"barCode": 1000001,
 			"imagePath": "file:images/Product_albicocche.png",
 			"brand": "Selex",
 			"weight": "500g",
@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "Pesche Nettarine Gialle 5/6pz",
-			"barCode": 2,
+			"barCode": 1000002,
 			"imagePath": "file:images/Product_pesche.jpg",
 			"brand": "Selex",
 			"weight": "500g",
@@ -31,7 +31,7 @@
 		},
 		{
 			"name": "Ciliegie Regina confezionate",
-			"barCode": 3,
+			"barCode": 1000003,
 			"imagePath": "file:images/Product_ciliegie.png",
 			"brand": "Selex",
 			"weight": "500g",
@@ -46,7 +46,7 @@
 		},
 			{
 			"name": "Fichi Turchia confezionati",
-			"barCode": 4,
+			"barCode": 1000004,
 			"imagePath": "",
 			"brand": "Selex",
 			"weight": "250g",
@@ -61,7 +61,7 @@
 		},
 			{
 			"name": "Prezzemolo foglia confezionato",
-			"barCode": 5,
+			"barCode": 1000005,
 			"imagePath": "file:images/Product_prezzemolo.png",
 			"brand": "Selex",
 			"weight": "40g",
@@ -77,7 +77,7 @@
 		
 			{
 			"name": "Cipolle dorate bio",
-			"barCode": 6,
+			"barCode": 1000006,
 			"imagePath": "file:images/Product_cipollebio.png",
 			"brand": "Esselunga",
 			"weight": "500g",
@@ -93,7 +93,7 @@
 		
 			{
 			"name": "Rucola biologica bio",
-			"barCode": 7,
+			"barCode": 1000007,
 			"imagePath": "file:images/Product_rucolabio.png",
 			"brand": "Bonduelle",
 			"weight": "100g",
@@ -109,18 +109,80 @@
 	],
 	"Pesce": [
 		{
-			"name": "Pesce",
-			"barCode": 1,
+			"name": "Filetti di sgombro al naturale",
+			"barCode": 2000001,
 			"imagePath": "",
-			"brand": "Selex",
-			"weight": "Bho",
-			"price": 10.00,
-			"weightPrice": "0.0€/KG",
+			"brand": "Esselunga",
+			"weight": "250g",
+			"price": 4.79,
+			"weightPrice": "28.18€/KG",
+			"available": 3,
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		},
+		{
+			"name": "Tonno all'olio d'oliva",
+			"barCode": 2000002,
+			"imagePath": "",
+			"brand": "Esselunga",
+			"weight": "4x120g",
+			"price": 6.99,
+			"weightPrice": "19.42€/KG",
+			"available": 10,
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
+		}
+	],
+	"Carne": [
+		{
+			"name": "Alette di pollo allevato senza antibiotici",
+			"barCode": 3000001,
+			"imagePath": "file:images/Product_3000001.png",
+			"brand": "Naturama",
+			"weight": "700g",
+			"price": 2.79,
+			"weightPrice": "3.99€/KG",
 			"available": 0,
+			"bio": true,
+			"glutenfree":false,
+			"vegan":false,
+			"lactosefree":false
+		}
+	],
+	"Latte e Formaggi": [
+		{
+			"name": "Calcium Plus latte UHT parzialmente scremato",
+			"barCode": 4000001,
+			"imagePath": "file:images/Product_4000001.png",
+			"brand": "Parmalat",
+			"weight": "1L",
+			"price": 1.53,
+			"weightPrice": "1.53€/L",
+			"available": 50,
 			"bio": false,
 			"glutenfree":false,
 			"vegan":false,
 			"lactosefree":false
+		}
+	],
+	"Bevande": [
+		{
+			"name": "Tea limone con nota di Lemongrass senza zuccheri",
+			"barCode": 5000001,
+			"imagePath": "file:images/Product_5000001.png",
+			"brand": "Selex",
+			"weight": "0.4L",
+			"price":0.79,
+			"weightPrice": "1.98/L",
+			"available": 0,
+			"bio": false,
+			"glutenfree":true,
+			"vegan":true,
+			"lactosefree":true
 		}
 	]
 }
