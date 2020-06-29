@@ -59,11 +59,11 @@ public class JsonLoader {
 
 					String brand = prodotto.asObject().getString("brand", "Unknown image");
 
-					String weight = prodotto.asObject().getString("weight", "Unknown weight");
+					float weight = prodotto.asObject().getFloat("weight", (float) -1.0);
+					
+					String unit = prodotto.asObject().getString("unit", "Unknown unit");
 
 					float price = prodotto.asObject().getFloat("price", (float) -1.0);
-
-					String weightPrice = prodotto.asObject().getString("weightPrice", "Unknown w. price");
 
 					int available = prodotto.asObject().getInt("available", -1);
 
@@ -72,8 +72,10 @@ public class JsonLoader {
 					boolean vegan = prodotto.asObject().getBoolean("vegan", false);
 					boolean lactosefree = prodotto.asObject().getBoolean("lactosefree", false);
 
-					Product p = new Product(name, barCode, imagePath, brand, weight, price, weightPrice, available, bio,
+					
+					Product p = new Product(name, barCode, imagePath, brand, weight, unit,price, available, bio,
 							glutenfree, vegan, lactosefree,s);
+
 
 				}
 			}

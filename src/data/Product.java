@@ -22,7 +22,9 @@ public class Product implements Comparable<Product>{
 
 	private String brand;
 	
-	private String weight;
+	private String unit;
+	
+	private float weight;
 	
 	private float price;	
 	
@@ -50,14 +52,15 @@ public class Product implements Comparable<Product>{
 		//
 		//
 	
-		public Product(String name, int barCode, String imagePath, String brand, String weight, float price, String weightPrice, int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree, Section section) {
+		public Product(String name, int barCode, String imagePath, String brand, float weight, String unit, float price, int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree, Section section) {
 			this.name=name;
 			this.barCode=barCode;
 			this.imagePath=imagePath;
 			this.brand=brand;
 			this.weight=weight;
+			this.unit=unit;
 			this.price=price;
-			this.weightPrice=weightPrice;
+			this.weightPrice= String.format("%.2f €/%s", (float)price / weight, unit);
 			this.available=available;
 			this.section=section;
 			
@@ -70,6 +73,38 @@ public class Product implements Comparable<Product>{
 		}
 		
 		public Product() {
+			name="";
+
+			imagePath = "";
+
+			brand="";
+			
+			unit="KG";
+			
+			weight=0;
+			
+			price=0;	
+			
+			weightPrice="";
+			
+			available=0;
+			
+			section=null;
+			
+			barCode=0 + Globals.reparti[0].getProducts().size();
+
+			
+			/*
+			 * Array che indica quali caratteristiche possiede il prodotto
+			 * c[0] = biologico 
+			 * c[1] = celiachi
+			 * c[2] = vegano 
+			 * c[3] = no lattosio
+			 */
+			characteristics = new boolean[] { false, false, false, false };
+
+			
+			
 		};
 		
 		//
@@ -227,15 +262,16 @@ public class Product implements Comparable<Product>{
 	/**
 	 * @return the weight
 	 */
-	public String getWeight() {
+	public float getWeight() {
 		return weight;
 	}
 
 	/**
 	 * @param weight the weight to set
 	 */
-	public void setWeight(String weight) {
+	public void setWeight(float weight) {
 		this.weight = weight;
+		this.weightPrice=String.format("%.2f €/%s", (float)price / weight, unit);		
 	}
 
 	/**
@@ -250,6 +286,7 @@ public class Product implements Comparable<Product>{
 	 */
 	public void setPrice(float price) {
 		this.price = price;
+		this.weightPrice=String.format("%.2f €/%s", (float)price / weight, unit);
 	}
 
 	/**
@@ -320,6 +357,14 @@ public class Product implements Comparable<Product>{
 	 return barCode - other.barCode ;
 			
 	
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	
 }
