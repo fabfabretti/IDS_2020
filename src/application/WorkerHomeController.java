@@ -31,6 +31,7 @@ public class WorkerHomeController extends Controller{
 	
 	
 	
+	
 	/**
 	 * Inizializza la scena (Es. scritta "hi admin")
 	 */
@@ -51,6 +52,13 @@ public class WorkerHomeController extends Controller{
 			AnchorPane.setRightAnchor(p, 0.0);
 		} catch (IOException e1) {
 		}
+	}
+	
+	
+	public void loadHome(ActionEvent e) {
+		basePane.getChildren().clear();
+		basePane.getChildren().addAll(homePane);
+		
 	}
 
 

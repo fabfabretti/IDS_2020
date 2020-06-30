@@ -22,7 +22,7 @@ public class ProductPaneControllerEdit extends ProductPaneController {
 
 	public void initialize() {
 		product = productInit;
-		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight());	
+		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight() + " " + product.getUnit());	
 		
 		//image prodotto
 		Image image;

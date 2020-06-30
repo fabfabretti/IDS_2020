@@ -258,7 +258,7 @@ public class WorkerProductManagerController {
 					if (Globals.reparti[i].getName().equals(chboxSection.getValue())) {
 						newsection=Globals.reparti[i];
 						//Se il prodotto è nuovo, setto il barcode
-						displayed.setBarCode((i+1)*1000000 + Globals.reparti[i].getProducts().size());
+						displayed.setBarCode((i+1)*1000000+ 1 + Globals.reparti[i].getProducts().size());
 						txtCode.setText("Codice Prodotto: "+ displayed.getBarCode());
 						}
 				}
