@@ -40,6 +40,8 @@ public class Globals {
 	public static UserHomeController viewController=null;
 	public static WorkerProductManagerController editController=null;
 	
+	public static ProductViewer currentView = null;
+	
 	//Current Session
 
 	static UserGeneral currentUser = null;	

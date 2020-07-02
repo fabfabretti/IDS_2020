@@ -36,8 +36,8 @@ public class ProductPaneControllerUser extends ProductPaneController {
 
 	public void initialize() {
 		product = productInit;
-		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight());
-		price.setText("€ "+product.getPrice());
+		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight()+ " " + product.getUnit());
+		price.setText(String.format("€ %.2f", product.getPrice()));  
 		weightPrice.setText(product.getWeightPrice());
 		
 		
@@ -80,17 +80,17 @@ public class ProductPaneControllerUser extends ProductPaneController {
 	
 
 	public void addProduct(ActionEvent e) {
-		System.out.println("[?] You want to buy "+spinnerQuantity.getValue() +" shitty " + product.getName()+"?");
+		System.out.println("[✓] "+spinnerQuantity.getValue() +" "+ product.getName()+" added to cart");
 		Globals.cart.addProduct(product, spinnerQuantity.getValue());
 		
-		System.out.println("There's " + (product.getAvailable()-spinnerQuantity.getValue()) + " "+ product.getName() + " left.");
+		System.out.println("    There's " + (product.getAvailable()-spinnerQuantity.getValue()) + " "+ product.getName() + " left.");
 		product.setAvailable(product.getAvailable()-spinnerQuantity.getValue());
 
 		if(product.getAvailable()!=0) {
 			txtFinished.setVisible(false);
 			spinnerQuantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, product.getAvailable(), 1));
 		}else {
-			System.out.println("You are a fucking asshole, I wanted some.");
+			System.out.println("[✓] No " + product.getName() + " left.");
 			spinnerQuantity.setVisible(false);
 			btnAdd.setDisable(true);
 			txtFinished.setVisible(true);

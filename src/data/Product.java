@@ -367,4 +367,27 @@ public class Product implements Comparable<Product>{
 		this.unit = unit;
 	}
 	
+	public boolean isChar(String chara) {
+		
+		
+		/*
+		 * Array che indica quali caratteristiche possiede il prodotto
+		 * c[0] = biologico 
+		 * c[1] = celiachi
+		 * c[2] = vegano 
+		 * c[3] = no lattosio
+		 */
+		if(chara.toLowerCase().equals("bio"))
+			return characteristics[0];
+		if(chara.toLowerCase().equals("gluten"))
+			return characteristics[1];		
+		if(chara.toLowerCase().equals("vegan"))
+			return characteristics[2];	
+		if(chara.toLowerCase().equals("diary"))
+			return characteristics[3];
+	return false;
+	
+	}
+	
+	
 }
