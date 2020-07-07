@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane layoutY="25.0" prefHeight="60.0" prefWidth="387.0">
                      <children>
-                        <JFXTextField fx:id="fieldAddress" focusColor="#c72d1d" layoutX="15.0" layoutY="32.0" prefHeight="23.0" prefWidth="363.0" styleClass="txtField" stylesheets="@application.css">
+                        <JFXTextField fx:id="fieldAddress" focusColor="#c72d1d" layoutX="15.0" layoutY="32.0" prefHeight="23.0" prefWidth="387.0" styleClass="txtField" stylesheets="@application.css">
                            <font>
                               <Font name="HP Simplified Light Italic" size="12.0" />
                            </font>
@@ -39,7 +39,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="8.0" layoutY="85.0" prefHeight="52.0" prefWidth="138.0">
                      <children>
-                        <JFXTextField fx:id="fieldCity" focusColor="#c72d1d" layoutX="7.0" layoutY="22.0" prefHeight="23.0" prefWidth="200.0" styleClass="txtField" stylesheets="@application.css">
+                        <JFXTextField fx:id="fieldCity" focusColor="#c72d1d" layoutX="7.0" layoutY="22.0" prefHeight="23.0" prefWidth="234.0" styleClass="txtField" stylesheets="@application.css">
                            <font>
                               <Font name="HP Simplified Light Italic" size="12.0" />
                            </font>
@@ -51,14 +51,14 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="231.0" layoutY="79.0" prefHeight="52.0" prefWidth="79.0">
+                  <AnchorPane layoutX="250.0" layoutY="85.0" prefHeight="36.0" prefWidth="142.0">
                      <children>
-                        <JFXTextField fx:id="fieldCAP" focusColor="#c72d1d" layoutX="3.0" layoutY="27.0" prefHeight="22.0" prefWidth="138.0" styleClass="txtField" stylesheets="@application.css">
+                        <JFXTextField fx:id="fieldCAP" focusColor="#c72d1d" layoutX="14.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" styleClass="txtField" stylesheets="@application.css">
                            <font>
                               <Font name="HP Simplified Light Italic" size="12.0" />
                            </font>
                         </JFXTextField>
-                        <Text layoutX="2.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAP">
+                        <Text layoutX="2.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAP">
                            <font>
                               <Font name="HP Simplified Light" size="15.0" />
                            </font>
@@ -169,7 +169,7 @@
             </AnchorPane>
             <AnchorPane fx:id="paneConsegna" layoutX="14.0" layoutY="82.0" prefHeight="122.0" prefWidth="394.0">
                <children>
-                  <Text layoutX="33.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TBA: IMMAGINE PUCCIOSA sul fatto che nond evi fare nient'altro." wrappingWidth="163.19999999999993" />
+                  <Text layoutX="33.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TBA: IMMAGINE PUCCIOSA sul fatto che non devi fare nient'altro." wrappingWidth="346.40007324218743" />
                </children>
             </AnchorPane>
          </children>

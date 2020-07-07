@@ -2,6 +2,8 @@ package data;
 
 import java.util.Date;
 
+import application.Globals;
+
 /*
  * Per ogni spesa si memorizzano il codice (univoco), la data prevista per la consegna, insieme
 all’intervallo di tempo in cui la spesa potrà essere consegnata, i prodotti che la compongono e in
@@ -12,13 +14,130 @@ considerata.
  * 
  * */
 public class Order {
+	//Identificativo dell'ordine
 	int orderid;
-	Date deliveryDate;
-	Cart carrello;
+	//Consegna prevista
+	Date date;
+	OrderDeliveryTime time;
+	OrderDeliveryState state= OrderDeliveryState.WAITING;
+	Cart cart;
 	User user;
-	//Il costo totale e i punti sono nel carrello
+	//Il costo totale e i punti sono nel carrello!
+	Payment payment;
+	String paymentInfo;
 	
-	//Pagamento payment;
 	
+	public Order(Cart cart, Payment payment, String paymentInfo) {
+		System.out.println("[✓] Ordine generato");
+		this.cart=cart;
+		this.payment=payment;
+		this.paymentInfo=paymentInfo;
+	}
+	
+	public void confirmOrder(Date date, OrderDeliveryTime time) {
+		this.date=date;
+		this.time=time;
+		
+		orderid= Globals.storico.size()+1;
+		Globals.storico.add(this);
+	}
 
+
+	/**
+	 * @return the orderid
+	 */
+	public int getOrderid() {
+		return orderid;
+	}
+
+	/**
+	 * @param orderid the orderid to set
+	 */
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	/**
+	 * @return the time
+	 */
+	public OrderDeliveryTime getTime() {
+		return time;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(OrderDeliveryTime time) {
+		this.time = time;
+	}
+
+	/**
+	 * @return the state
+	 */
+	public OrderDeliveryState getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(OrderDeliveryState state) {
+		this.state = state;
+	}
+
+	/**
+	 * @return the cart
+	 */
+	public Cart getCart() {
+		return cart;
+	}
+
+	/**
+	 * @param cart the cart to set
+	 */
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	/**
+	 * @return the payment
+	 */
+	public Payment getPayment() {
+		return payment;
+	}
+
+	/**
+	 * @param payment the payment to set
+	 */
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	/**
+	 * @return the paymentInfo
+	 */
+	public String getPaymentInfo() {
+		return paymentInfo;
+	}
+
+	/**
+	 * @param paymentInfo the paymentInfo to set
+	 */
+	public void setPaymentInfo(String paymentInfo) {
+		this.paymentInfo = paymentInfo;
+	}
 }

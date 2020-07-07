@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
+import data.Order;
+import data.Payment;
 import data.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,8 @@ import javafx.scene.text.Text;
  */
 public class UserCartController extends Controller{
 
+	Order order;
+	
 	//Parametri FXML
 	
 	//Info carrello	
@@ -132,10 +136,25 @@ public class UserCartController extends Controller{
 		}
 
 		//Step 2: generiamo un ordine con i prodotti del carrello e aggiungiamolo alla lista
-		//TODO
+		Payment payment = data.Payment.CONSEGNA;
+		String info="Nessuna informazione aggiuntiva";
+		
+		if(radioPayPal.isSelected()) {
+			payment=data.Payment.PAYPAL;
+			info="Account: "+fieldPayPalEmail.getText();
+			}
+		if(radioCarta.isSelected()) {
+			payment=data.Payment.CARTA;
+			info="Carta: "+fieldCartaNumero.getText() + " (" + fieldCartaNome.getText() + " " + fieldCartaCognome.getText() +" )";
+			}
+		
+		 order = new Order(Globals.cart, payment, info);
 		
 		//Step 3: svuotiamo il carrello.
 		Globals.cart.flushCart();
+		
+		//Step4: selezione giorno e ora
+		//launchUI(String path);
 	}
 	
 	//verifica se nel frattempo sono finiti alcuni prodotti. Torna vero se è tutto a posto, falso se ha dovuto rimuovere dei prodotti.

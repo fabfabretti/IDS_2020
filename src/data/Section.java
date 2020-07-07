@@ -1,6 +1,5 @@
 package data;
 
-import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 public class Section {
