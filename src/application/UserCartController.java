@@ -20,7 +20,6 @@ import javafx.scene.text.Text;
  */
 public class UserCartController extends Controller{
 
-	Order order;
 	
 	//Parametri FXML
 	
@@ -87,6 +86,9 @@ public class UserCartController extends Controller{
 		private AnchorPane cartviewPane;
 	
 	
+		
+	//Date Picker
+	
 	
 	public void initialize() {
 		
@@ -148,13 +150,13 @@ public class UserCartController extends Controller{
 			info="Carta: "+fieldCartaNumero.getText() + " (" + fieldCartaNome.getText() + " " + fieldCartaCognome.getText() +" )";
 			}
 		
-		 order = new Order(Globals.cart, payment, info);
+		Globals.currentOrder = new Order(Globals.cart, payment, info);
 		
 		//Step 3: svuotiamo il carrello.
 		Globals.cart.flushCart();
 		
 		//Step4: selezione giorno e ora
-		//launchUI(String path);
+		launchUI("/application/UserDatePicker.fxml");
 	}
 	
 	//verifica se nel frattempo sono finiti alcuni prodotti. Torna vero se è tutto a posto, falso se ha dovuto rimuovere dei prodotti.
