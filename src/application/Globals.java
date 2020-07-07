@@ -1,8 +1,10 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import data.Cart;
+import data.Order;
 import data.Section;
 import data.User;
 import data.UserGeneral;
@@ -24,10 +26,12 @@ public class Globals {
 	
 	
 	//Users
+	
 	static HashSet<User> users = JsonLoader.loadUsers();
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
 	
 	// Sections
+	
 	public static Section vegetali = new Section("Frutta e Verdura");
 	public static Section pesce = new Section("Pesce");
 	public static Section carne = new Section("Carne");
@@ -36,16 +40,22 @@ public class Globals {
 	
 	public static Section reparti[] = {vegetali,pesce,carne,latticini,bevande};
 
-	public static UserCartController cartController=null;
-	public static UserHomeController viewController=null;
-	public static WorkerProductManagerController editController=null;
+
 	
-	public static ProductViewer currentView = null;
+	//Storico
+	
+	public static ArrayList<Order> storico= new ArrayList<Order>();
+	
+	
 	
 	//Current Session
 
 	static UserGeneral currentUser = null;	
 	static Cart cart = new Cart();
 	
+	public static ProductViewer currentView = null;
+	public static UserCartController cartController=null;
+	public static UserHomeController viewController=null;
+	public static WorkerProductManagerController editController=null;
 
 }

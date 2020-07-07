@@ -75,8 +75,46 @@ public class JsonSaver {
 		}
 	}
 
-	public void saveWorker(Worker u) {
 
+	// TODO: Fare test quando gui è implementata
+	public static void saveWorker() {
+		JsonArray worker = new JsonArray();
+
+		for (Worker w : Globals.workers) {
+
+			JsonObject jsonWorker = new JsonObject();
+
+			jsonWorker.add("email", w.getEmail());
+			jsonWorker.add("password", w.getPassword());
+			jsonWorker.add("name", w.getName());
+			jsonWorker.add("familyname", w.getAnagrafica().getFamilyName());
+			jsonWorker.add("address", w.getAnagrafica().getAddress());
+			jsonWorker.add("city", w.getAnagrafica().getCity());
+			jsonWorker.add("CAP", w.getAnagrafica().getCAP());
+			jsonWorker.add("mobilenumber", w.getAnagrafica().getMobileNumber());
+			jsonWorker.add("fideltycard", "null");
+			jsonWorker.add("familyname", w.getWorkerID());
+
+			worker.add(jsonWorker);
+
+			System.out.println(jsonWorker);
+		}
+
+		JsonObject newJson = new JsonObject();
+
+		newJson.add("users", worker);
+
+		System.out.println("\n[?] " + worker);
+
+		/**
+		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
+		 */
+		try (Writer writer = new FileWriter("./data/workers.json")) {
+			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+		} catch (IOException e) {
+			System.out.println("[x] Errore scrittura Json Worker!!!");
+		}
+	
 	}
 
 }

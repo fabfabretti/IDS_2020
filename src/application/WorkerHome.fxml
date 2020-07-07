@@ -35,7 +35,7 @@
                   <Image url="@../../images/UI_logoSMALL.png" />
                </image>
             </ImageView>
-            <JFXButton ellipsisString="" layoutX="871.0" layoutY="9.0" prefHeight="50.0" prefWidth="52.0">
+            <JFXButton ellipsisString="" layoutX="871.0" layoutY="9.0" onAction="#loadProfile" prefHeight="50.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>

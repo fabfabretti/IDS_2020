@@ -15,7 +15,17 @@ public class Worker extends UserGeneral{
 		getAnagrafica().setCity(city);
 		getAnagrafica().setCAP(cap);
 		getAnagrafica().setMobileNumber(number);
-		WorkerID=workerid;
+		setWorkerID(workerid);
+	}
+
+
+	public int getWorkerID() {
+		return WorkerID;
+	}
+
+
+	public void setWorkerID(int workerID) {
+		WorkerID = workerID;
 	}
 }
 	

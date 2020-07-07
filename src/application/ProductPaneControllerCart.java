@@ -35,8 +35,11 @@ public class ProductPaneControllerCart extends ProductPaneController {
 	@FXML
 	protected Text txtQuantity;
 
-
+/**
+ *  Inizializza il pannello mostrando il nome, il costo, l'immagine [...] del prodotto.
+ */
 	public void initialize() {
+		//Precedentemente deve essere stato inizializzato (staticamente) il prodotto di cui stiamo per 
 		product = productInit;
 		
 		System.out.println(product.getUnit());
@@ -71,6 +74,11 @@ public class ProductPaneControllerCart extends ProductPaneController {
 		}
 	}
 	
+	
+	/**
+	 * Rimuove un prodotto dal carrello.
+	 * @param e
+	 */
 	public void removeProduct(ActionEvent e) {
 			
 			int qty=product.getAvailable()+Globals.cart.getProducts().get(product);

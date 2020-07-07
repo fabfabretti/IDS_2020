@@ -61,5 +61,9 @@ public class WorkerHomeController extends Controller{
 		
 	}
 
+	public void loadProfile(ActionEvent e) {
+		launchUI("/application/WorkerProfile.fxml");
+	}
+
 
 }

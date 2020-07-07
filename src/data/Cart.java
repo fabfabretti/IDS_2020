@@ -34,6 +34,9 @@ public class Cart {
 			total=total-products.get(p)*p.getPrice();
 			numberOfProd=numberOfProd-products.get(p);	
 			products.remove(p);
+			
+			if(products.size()==0)
+				total=0;
 		}
 	}
 	

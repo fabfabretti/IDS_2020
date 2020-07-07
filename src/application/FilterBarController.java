@@ -1,10 +1,7 @@
 package application;
 
-import java.util.TreeSet;
-
 import com.jfoenix.controls.JFXToggleButton;
 
-import data.Product;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

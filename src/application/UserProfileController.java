@@ -82,6 +82,7 @@ public class UserProfileController extends Controller {
 			System.out.println("[✓] Nuovo nome salvato in memoria (ram)");
 
 			JsonSaver.saveUser();
+			JsonSaver.saveWorker();
 			closeUI(ae);
 
 		}

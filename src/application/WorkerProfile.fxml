@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="647.0" prefWidth="448.0" style="-fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
+<AnchorPane prefHeight="489.0" prefWidth="448.0" style="-fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
    <children>
-      <Text layoutX="39.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il Mio Profilo">
+      <Text layoutX="37.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il Mio Profilo">
          <font>
             <Font name="HP Simplified" size="28.0" />
          </font>
       </Text>
-      <Pane layoutX="46.0" layoutY="98.0" prefHeight="512.0" prefWidth="374.0">
+      <Pane layoutX="37.0" layoutY="57.0" prefHeight="445.0" prefWidth="374.0">
          <children>
             <AnchorPane layoutX="6.0" layoutY="179.0" prefHeight="52.0" prefWidth="180.0">
                <children>
@@ -116,7 +116,17 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="field" layoutX="7.0" layoutY="74.0" prefHeight="52.0" prefWidth="357.0">
+            <AnchorPane layoutX="7.0" layoutY="379.0" prefHeight="52.0" prefWidth="358.0" visible="false">
+               <children>
+                  <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metodo di pagamento:" wrappingWidth="87.52500915527344">
+                     <font>
+                        <Font name="HP Simplified Light" size="15.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutX="283.0" layoutY="13.0" stylesheets="@application.css" text="Cambia" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="7.0" layoutY="74.0" prefHeight="52.0" prefWidth="357.0">
                <children>
                   <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                      <font>
@@ -130,10 +140,11 @@
                   </JFXPasswordField>
                </children>
             </AnchorPane>
-            <JFXButton layoutX="197.0" layoutY="461.0" onAction="#saveAndClose" prefHeight="38.0" prefWidth="79.0" text="Salva" />
-            <JFXButton graphicTextGap="1.0" layoutX="97.0" layoutY="463.0" minWidth="10.0" onAction="#closeUI" prefHeight="35.0" prefWidth="79.0" text="Esci" textOverrun="CLIP" />
-            <Label fx:id="lblError" layoutX="40.0" layoutY="438.0" text="Eventuale testo di errore nella compilazione dei campi." visible="false" />
+            <JFXButton layoutX="197.0" layoutY="403.0" onAction="#saveAndClose" prefHeight="38.0" prefWidth="79.0" text="Salva" />
+            <JFXButton graphicTextGap="1.0" layoutX="104.0" layoutY="405.0" minWidth="10.0" onAction="#closeUI" prefHeight="35.0" prefWidth="79.0" text="Esci" textOverrun="CLIP" />
+            <Label fx:id="lblError" layoutX="16.0" layoutY="376.0" prefHeight="17.0" prefWidth="345.0" text="Eventuale testo di errore nella compilazione dei campi." textAlignment="CENTER" visible="false" />
          </children>
       </Pane>
+      <JFXButton layoutX="18.0" layoutY="77.0" prefHeight="32.0" prefWidth="411.0" text="Visualizza storico ordini" visible="false" />
    </children>
 </AnchorPane>
