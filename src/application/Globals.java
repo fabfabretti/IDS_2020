@@ -32,6 +32,11 @@ public class Globals {
 	static HashSet<User> users = JsonLoader.loadUsers();
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
 	
+	//Storico
+	
+	public static ArrayList<Order> storico= new ArrayList<Order>() ;
+	
+	
 	// Sections e prodotti
 	
 	public static Section vegetali = new Section("Frutta e Verdura");
@@ -46,10 +51,7 @@ public class Globals {
 
 
 	
-	//Storico
-	
-	public static ArrayList<Order> storico= new ArrayList<Order>();
-	
+
 	
 	
 	//Current Session
@@ -64,6 +66,7 @@ public class Globals {
 	public static Order currentOrder = null;
 	
 	public static HashMap<Integer,Product> computeTable() {
+		storico.add(new Order());
 		HashMap<Integer,Product> result = new HashMap<Integer,Product>();
 		
 		for(Section s : reparti)

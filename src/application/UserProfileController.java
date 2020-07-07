@@ -4,8 +4,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import data.Order;
+import data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -62,26 +64,32 @@ public class UserProfileController extends Controller {
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 
-		
-		System.out.println(Globals.storico);
-		//pannello degli ordini
-		FlowPane flower = new FlowPane();
-		AnchorPane pane;
-		if(Globals.storico.size()!=0) {
-			for(Order o : Globals.storico) {
-				pane=Globals.viewController.launchUIPanel("/application/CartReview.fxml");
-				flower.getChildren().add(pane);
+		if(Globals.currentUser instanceof User) {
+			System.out.println(Globals.storico);
+			//pannello degli ordini
+			FlowPane flower = new FlowPane();
+			AnchorPane pane=null;
+			if(Globals.storico.size()!=0) {
+				Controller c = new Controller();
+				for(Order o : Globals.storico) {
+					try {
+						pane=(FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
+						System.out.println(pane);
+					} catch (Exception e) {
+						System.out.println("[x] Errore a caricare UI interna");
+					}
+					flower.getChildren().add(pane);
+				}
+
+				AnchorPane.setTopAnchor(flower, 0.0);
+				AnchorPane.setBottomAnchor(flower, 0.0);
+				AnchorPane.setLeftAnchor(flower, 0.0);
+				AnchorPane.setRightAnchor(flower, 0.0);
+
+				scrollPaneOrders.setContent(flower);
 			}
-			
-			/*AnchorPane.setTopAnchor(scrollPaneOrders, 0.0);
-			AnchorPane.setBottomAnchor(scrollPaneOrders, 0.0);
-			AnchorPane.setLeftAnchor(scrollPaneOrders, 0.0);
-			AnchorPane.setRightAnchor(scrollPaneOrders, 0.0);*/
-		
-		scrollPaneOrders.setContent(flower);
+
 		}
-		
-		
 		
 		
 	}
@@ -107,8 +115,17 @@ public class UserProfileController extends Controller {
 		 */
 		else {
 
-			String newName = fieldName.getText();
-			Globals.currentUser.getAnagrafica().setName(newName);
+			//Salvataggio dati
+			Globals.currentUser.setEmail(fieldEmail.getText());
+			Globals.currentUser.setPassword(fieldPassword.getText());
+			Globals.currentUser.getAnagrafica().setName(fieldName.getText());
+			Globals.currentUser.getAnagrafica().setFamilyName(fieldSurname.getText());
+			Globals.currentUser.getAnagrafica().setAddress(fieldAddress.getText());
+			Globals.currentUser.getAnagrafica().setAddress(fieldAddress.getText());
+			Globals.currentUser.getAnagrafica().setCity(fieldCity.getText());
+			Globals.currentUser.getAnagrafica().setCAP(fieldCAP.getText());
+			Globals.currentUser.getAnagrafica().setMobileNumber(fieldNumber.getText());
+			
 			System.out.println("[✓] Nuovo nome salvato in memoria (ram)");
 
 			JsonSaver.saveUser();

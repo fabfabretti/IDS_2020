@@ -280,6 +280,7 @@ public class WorkerProductManagerController {
 
 		displayed.setCharacteristics(chara);
 
+		JsonSaver.saveProducts();
 
 
 		System.out.println("[✓] Salvati nuovi valori di "+ displayed);

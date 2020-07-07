@@ -1,18 +1,6 @@
 {
   "users": [
     {
-      "email": "a",
-      "password": "a",
-      "name": "GenericUserrr",
-      "familyname": "Debugging",
-      "address": "Via bestemmie, 666",
-      "city": "Quel Paese",
-      "CAP": "66420",
-      "mobilenumber": "4136181111",
-      "fidelitycard": "",
-      "userid": 0
-    },
-    {
       "email": "combi@email.com",
       "password": "password",
       "name": "Carlo",
@@ -23,6 +11,18 @@
       "mobilenumber": "0000000000",
       "fidelitycard": "",
       "userid": 1
+    },
+    {
+      "email": "a",
+      "password": "a",
+      "name": "GenericUserrr",
+      "familyname": "Debugging",
+      "address": "Via bestemmie, 666",
+      "city": "Quel Paese",
+      "CAP": "66420",
+      "mobilenumber": "4136181111",
+      "fidelitycard": "",
+      "userid": 0
     }
   ]
 }

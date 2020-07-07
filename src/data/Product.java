@@ -369,7 +369,6 @@ public class Product implements Comparable<Product>{
 	
 	public boolean isChar(String chara) {
 		
-		
 		/*
 		 * Array che indica quali caratteristiche possiede il prodotto
 		 * c[0] = biologico 

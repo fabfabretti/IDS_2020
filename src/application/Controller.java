@@ -105,6 +105,16 @@ public class Controller {
 	public void quitNoSave(ActionEvent ae) {
 		System.exit(0);	
 	}
-
+	
+	public AnchorPane loadInternalUI(String path) {
+		AnchorPane res=null;
+		try {
+			res=(FXMLLoader.load(getClass().getResource(path)));
+			System.out.println(res);
+		} catch (Exception e) {
+			System.out.println("[x] Errore a caricare UI interna");
+		}
+		return res;
+	}
 	
 }
