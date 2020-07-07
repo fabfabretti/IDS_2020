@@ -40,6 +40,12 @@ public class Cart {
 		}
 	}
 	
+	public void flushCart() {
+		products.clear();
+		total = 0;
+		numberOfProd = 0;
+	}
+	
 	
 	
 	

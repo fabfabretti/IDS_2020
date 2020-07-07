@@ -1,10 +1,14 @@
 package application;
 
-import java.util.TreeSet;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 
 import data.Product;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -14,17 +18,71 @@ import javafx.scene.text.Text;
  */
 public class UserCartController extends Controller{
 
-	@FXML
-	private Label lblTotal;
+	//Parametri FXML
 	
-	@FXML
-	private Text txtPoints;
+	//Info carrello	
+		@FXML
+		private  Label lblTotal;
+		
+		@FXML
+		private  Text txtPoints;
 
-	@FXML
-	private Label lblItems;
+		@FXML
+		private  Label lblItems;
+		
+		@FXML
+		private  Text txtError;
+		
+	//Pagamento
+		
+		//Bottoni
+		@FXML
+		private  JFXRadioButton radioConsegna;
+		@FXML
+		private  JFXRadioButton radioPayPal;
+		@FXML
+		private  JFXRadioButton radioCarta;
+		
+		//Pannelli Info
+		
+			//Paypal
+			@FXML
+			private  AnchorPane panePayPal;
+			@FXML
+			private JFXTextField fieldPayPalEmail;
+			@FXML
+			private JFXPasswordField fieldPayPalPassword;
+			
+			//Carta
+			@FXML
+			private  AnchorPane paneCarta;
+			@FXML
+			private JFXTextField fieldCartaNome;
+			@FXML
+			private JFXTextField fieldCartaCognome;
+			@FXML
+			private JFXTextField fieldCartaNumero;
+			@FXML
+			private JFXTextField fieldCartaCVV;
+			
+			//Alla consegna
+			@FXML
+			private AnchorPane paneConsegna;
+
+	//Spedizione
+
+		@FXML
+		private JFXTextField fieldCAP;
+		@FXML
+		private JFXTextField fieldAddress;
+		@FXML
+		private JFXTextField fieldCity;
+		
+	// Display prodotti
+		@FXML
+		private AnchorPane cartviewPane;
 	
-	@FXML
-	private AnchorPane cartviewPane;
+	
 	
 	public void initialize() {
 		
@@ -32,12 +90,113 @@ public class UserCartController extends Controller{
 		lblTotal.setText("€ "+ String.format("%.2f", Globals.cart.getTotal()));
 		txtPoints.setText("Questa spesa vale " + (int)Globals.cart.getTotal() + " punti!");
 		lblItems.setText(""+Globals.cart.getNumberOfProd());
+		txtError.setVisible(false);
 		
 		ProductViewer viewer = new ProductViewer(cartviewPane,Globals.cart);
 		
+		
+		final ToggleGroup group = new ToggleGroup();
+
+		radioConsegna.setToggleGroup(group);
+		radioCarta.setToggleGroup(group);
+		radioPayPal.setToggleGroup(group);
+		
+		radioConsegna.setSelected(true);
+		
+		paneConsegna.setVisible(radioConsegna.isSelected());
+		paneCarta.setVisible(radioCarta.isSelected());
+		panePayPal.setVisible(radioPayPal.isSelected());
+
 	}
 
 
-	
+	public void changePayment(ActionEvent ae) {
+		paneConsegna.setVisible(radioConsegna.isSelected());
+		paneCarta.setVisible(radioCarta.isSelected());
+		panePayPal.setVisible(radioPayPal.isSelected());
+	}
 
+	// Crea un ordine dal carrello corrente; ovviamente fa tutte le verifiche (validità dei campi E availability dei prodotti)
+	public void makeOrder(ActionEvent ae) {
+		
+		//Step 0: carrello non vuoto e valori validi
+		if (checkParameters()==false) {
+			return;
+		}
+
+		//Step 1: Controlliamo se tutti i prodotti sono ancora disponibili!
+		if(checkIfEverythingAvailable()==false) {
+			System.out.println("WARNING: products removed");
+			txtError.setText("Alcuni dei prodotti del carrello sono terminati e sono stati rimossi. Puoi riprovare ad eseguire l'acquisto con il tasto \"conferma\".");
+			return;
+		}
+
+		//Step 2: generiamo un ordine con i prodotti del carrello e aggiungiamolo alla lista
+		//TODO
+		
+		//Step 3: svuotiamo il carrello.
+		Globals.cart.flushCart();
+	}
+	
+	//verifica se nel frattempo sono finiti alcuni prodotti. Torna vero se è tutto a posto, falso se ha dovuto rimuovere dei prodotti.
+	private boolean checkIfEverythingAvailable() {
+		boolean isStillAvailable = true;
+		
+		JsonLoader.loadProducts();
+		for(Product p : Globals.cart.getProducts().keySet()) {
+			if(Globals.cart.getProducts().get(p) > p.getAvailable()){
+				System.out.println("[x] "+p.getName()+" is not available anymore!! ");		
+				Globals.cart.removeProduct(p);
+				isStillAvailable = false;
+			}
+		}
+		
+		return isStillAvailable;
+	}
+	
+	private boolean checkParameters() {
+		
+		boolean result = true;
+		
+		// 1. Carrello non vuoto
+		if(Globals.cart.getProducts().isEmpty() == true) {
+			txtError.setText("Errore: il carrello non può essere vuoto!");
+			txtError.setVisible(true);
+			return false;
+			}
+		
+		// 2. Pagamento impostato (obv. controllo solo il pagamento selezionato!)
+		if(radioCarta.isSelected()) {
+			result &= !fieldCartaNome.getText().equals("");
+			result &= fieldCartaCognome.getText().equals("");
+			result &= !fieldCartaCVV.getText().equals("");
+			result &= !fieldCartaNumero.getText().equals("");
+			if (result==false) {
+				txtError.setText("Errore: Il metodo di pagamento non è valido!");
+				txtError.setVisible(true);
+				return false;
+				}
+		}
+		if(radioPayPal.isSelected()) {
+			result &= !fieldPayPalEmail.getText().equals("");
+			result &= !fieldPayPalPassword.getText().equals("");
+			if (result==false){
+				txtError.setText("Errore: Il metodo di pagamento non è valido!");
+				txtError.setVisible(true);
+				return false;
+				}
+		}
+		
+		
+		// 3. Indirizzo impostato
+		result &= !fieldAddress.getText().equals("");
+		result &= !fieldCAP.getText().equals("");
+		result &= !fieldCity.getText().equals("");
+		if (result==false){
+			txtError.setText("Errore: L'indirizzo non è valido!");
+			txtError.setVisible(true);
+			return false;
+			}
+		return result;
+	}
 }

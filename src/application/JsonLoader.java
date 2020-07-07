@@ -30,6 +30,7 @@ public class JsonLoader {
 			
 				for (Section s : Globals.reparti) {
 			
+				s.getProducts().clear();
 				JsonArray sezione = read.get(s.getName()).asArray();
 
 				for (JsonValue prodotto : sezione) {
