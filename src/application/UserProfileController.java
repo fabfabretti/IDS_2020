@@ -3,9 +3,13 @@ package application;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import data.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
 
 /**
@@ -40,6 +44,9 @@ public class UserProfileController extends Controller {
 
 	@FXML
 	private Label lblError;
+	
+	@FXML
+	private ScrollPane scrollPaneOrders;
 
 	/***
 	 * Serve a mostrare i dati salvati dall'utente dentro i rispettivi campi
@@ -54,6 +61,29 @@ public class UserProfileController extends Controller {
 		fieldCAP.setText((Globals.currentUser.getAnagrafica().getCAP()) + "");
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
+
+		
+		System.out.println(Globals.storico);
+		//pannello degli ordini
+		FlowPane flower = new FlowPane();
+		AnchorPane pane;
+		if(Globals.storico.size()!=0) {
+			for(Order o : Globals.storico) {
+				pane=Globals.viewController.launchUIPanel("/application/CartReview.fxml");
+				flower.getChildren().add(pane);
+			}
+			
+			/*AnchorPane.setTopAnchor(scrollPaneOrders, 0.0);
+			AnchorPane.setBottomAnchor(scrollPaneOrders, 0.0);
+			AnchorPane.setLeftAnchor(scrollPaneOrders, 0.0);
+			AnchorPane.setRightAnchor(scrollPaneOrders, 0.0);*/
+		
+		scrollPaneOrders.setContent(flower);
+		}
+		
+		
+		
+		
 	}
 
 	/***
@@ -87,5 +117,10 @@ public class UserProfileController extends Controller {
 
 		}
 
+	}
+	
+	
+	public void changePayment(ActionEvent ae) {
+		
 	}
 }

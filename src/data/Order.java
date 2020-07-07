@@ -1,5 +1,6 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import application.Globals;
@@ -17,11 +18,11 @@ public class Order {
 	//Identificativo dell'ordine
 	int orderid;
 	//Consegna prevista
-	Date date;
+	LocalDate date;
 	OrderDeliveryTime time;
-	OrderDeliveryState state= OrderDeliveryState.WAITING;
+	OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
 	Cart cart;
-	User user;
+	User user=(User) Globals.currentUser;
 	//Il costo totale e i punti sono nel carrello!
 	Payment payment;
 	String paymentInfo;
@@ -34,7 +35,7 @@ public class Order {
 		this.paymentInfo=paymentInfo;
 	}
 	
-	public void confirmOrder(Date date, OrderDeliveryTime time) {
+	public void confirmOrder(LocalDate date, OrderDeliveryTime time) {
 		this.date=date;
 		this.time=time;
 		
@@ -60,14 +61,14 @@ public class Order {
 	/**
 	 * @return the date
 	 */
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

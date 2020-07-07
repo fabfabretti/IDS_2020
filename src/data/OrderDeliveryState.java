@@ -1,5 +1,5 @@
 package data;
 
 public enum OrderDeliveryState {
-WAITING,PROCESSING, DELIVERY ,DELIVERED
+CONFERMATA,IN_PREPARAZIONE,CONSEGNATA
 }

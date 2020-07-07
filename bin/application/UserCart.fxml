@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="793.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserCartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="793.0" style="-fx-border-width: 3; -fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserCartController">
    <children>
       <AnchorPane layoutX="373.0" layoutY="152.0" prefHeight="314.0" prefWidth="414.0">
          <children>
@@ -25,14 +25,14 @@
                <children>
                   <AnchorPane layoutY="25.0" prefHeight="60.0" prefWidth="387.0">
                      <children>
-                        <JFXTextField fx:id="fieldAddress" focusColor="#c72d1d" layoutX="15.0" layoutY="32.0" prefHeight="23.0" prefWidth="387.0" styleClass="txtField" stylesheets="@application.css">
+                        <JFXTextField fx:id="fieldAddress" focusColor="#c72d1d" layoutX="15.0" layoutY="32.0" prefHeight="23.0" prefWidth="370.0" styleClass="txtField" stylesheets="@application.css">
                            <font>
                               <Font name="HP Simplified Light Italic" size="12.0" />
                            </font>
                         </JFXTextField>
-                        <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indirizzo">
+                        <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indirizzo">
                            <font>
-                              <Font name="HP Simplified Light" size="15.0" />
+                              <Font name="HP Simplified Light" size="16.0" />
                            </font>
                         </Text>
                      </children>
@@ -46,21 +46,21 @@
                         </JFXTextField>
                         <Text layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Città">
                            <font>
-                              <Font name="HP Simplified Light" size="15.0" />
+                              <Font name="HP Simplified Light" size="16.0" />
                            </font>
                         </Text>
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="250.0" layoutY="85.0" prefHeight="36.0" prefWidth="142.0">
                      <children>
-                        <JFXTextField fx:id="fieldCAP" focusColor="#c72d1d" layoutX="14.0" layoutY="22.0" prefHeight="22.0" prefWidth="138.0" styleClass="txtField" stylesheets="@application.css">
+                        <JFXTextField fx:id="fieldCAP" focusColor="#c72d1d" layoutX="14.0" layoutY="22.0" prefHeight="23.0" prefWidth="124.0" styleClass="txtField" stylesheets="@application.css">
                            <font>
                               <Font name="HP Simplified Light Italic" size="12.0" />
                            </font>
                         </JFXTextField>
                         <Text layoutX="2.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAP">
                            <font>
-                              <Font name="HP Simplified Light" size="15.0" />
+                              <Font name="HP Simplified Light" size="16.0" />
                            </font>
                         </Text>
                      </children>
@@ -123,7 +123,7 @@
                         </Text>
                         <AnchorPane layoutX="263.0" prefHeight="54.0" prefWidth="66.0">
                            <children>
-                              <JFXTextField fx:id="fieldCartaCVV" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="38.0" styleClass="txtField" stylesheets="@application.css">
+                              <JFXTextField fx:id="fieldCartaCVV" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="102.0" styleClass="txtField" stylesheets="@application.css">
                                  <font>
                                     <Font name="HP Simplified Light Italic" size="12.0" />
                                  </font>
@@ -151,7 +151,7 @@
                         </Text>
                         <AnchorPane layoutX="179.0" layoutY="-2.0" prefHeight="54.0" prefWidth="163.0">
                            <children>
-                              <JFXTextField fx:id="fieldCartaCognome" focusColor="#c72d1d" layoutX="15.0" layoutY="21.0" prefHeight="23.0" prefWidth="138.0" styleClass="txtField" stylesheets="@application.css">
+                              <JFXTextField fx:id="fieldCartaCognome" focusColor="#c72d1d" layoutX="15.0" layoutY="21.0" prefHeight="23.0" prefWidth="192.0" styleClass="txtField" stylesheets="@application.css">
                                  <font>
                                     <Font name="HP Simplified Light Italic" size="12.0" />
                                  </font>
@@ -184,9 +184,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <ScrollPane prefHeight="611.0" prefWidth="370.0">
+      <ScrollPane layoutX="12.0" layoutY="12.0" prefHeight="592.0" prefWidth="364.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="420.0" AnchorPane.topAnchor="1.0">
          <content>
-            <AnchorPane fx:id="cartviewPane" prefHeight="608.0" prefWidth="366.0">
+            <AnchorPane fx:id="cartviewPane" prefHeight="603.0" prefWidth="366.0">
                <children>
                   <Text layoutX="60.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questo carrello è vuoto :(">
                      <font>

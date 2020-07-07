@@ -1,5 +1,5 @@
 package data;
 
 public enum OrderDeliveryTime{
-PRIMA_MATTINA,MATTINA,POMERIGGIO,SERA
+MATTINA,PRANZO,POMERIGGIO,SERA
 }

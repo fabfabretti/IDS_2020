@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="270.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero ordine:             12                 " wrappingWidth="225.31287384033203" />
+      <ScrollPane layoutX="65.0" layoutY="173.0" prefHeight="90.0" prefWidth="187.0">
+         <content>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </content>
+      </ScrollPane>
+      <Text layoutX="14.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotti:" />
+   </children>
+</AnchorPane>

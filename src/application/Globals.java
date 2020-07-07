@@ -1,10 +1,12 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import data.Cart;
 import data.Order;
+import data.Product;
 import data.Section;
 import data.User;
 import data.UserGeneral;
@@ -30,7 +32,7 @@ public class Globals {
 	static HashSet<User> users = JsonLoader.loadUsers();
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
 	
-	// Sections
+	// Sections e prodotti
 	
 	public static Section vegetali = new Section("Frutta e Verdura");
 	public static Section pesce = new Section("Pesce");
@@ -39,6 +41,8 @@ public class Globals {
 	public static Section bevande = new Section("Bevande");
 	
 	public static Section reparti[] = {vegetali,pesce,carne,latticini,bevande};
+	
+	public static HashMap<Integer,Product> barCodeTable = computeTable();
 
 
 	
@@ -50,13 +54,24 @@ public class Globals {
 	
 	//Current Session
 
-	static UserGeneral currentUser = null;	
-	static Cart cart = new Cart();
+	public static UserGeneral currentUser = null;	
+	public static Cart cart = new Cart();
 	
 	public static ProductViewer currentView = null;
 	public static UserCartController cartController=null;
 	public static UserHomeController viewController=null;
 	public static WorkerProductManagerController editController=null;
 	public static Order currentOrder = null;
+	
+	public static HashMap<Integer,Product> computeTable() {
+		HashMap<Integer,Product> result = new HashMap<Integer,Product>();
+		
+		for(Section s : reparti)
+			for(Product p : s.getProducts()) 
+				result.put(p.getBarCode(),p);
+			
+		barCodeTable = result;
+		return result;
+	}
 
 }

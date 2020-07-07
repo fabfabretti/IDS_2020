@@ -165,7 +165,7 @@ public class UserCartController extends Controller{
 		
 		JsonLoader.loadProducts();
 		for(Product p : Globals.cart.getProducts().keySet()) {
-			if(Globals.cart.getProducts().get(p) > p.getAvailable()){
+			if(Globals.cart.getProducts().get(p) > p.getAvailable() + Globals.cart.getProducts().get(p)){
 				System.out.println("[x] "+p.getName()+" is not available anymore!! ");		
 				Globals.cart.removeProduct(p);
 				isStillAvailable = false;
@@ -219,5 +219,10 @@ public class UserCartController extends Controller{
 			return false;
 			}
 		return result;
+	}
+	
+	public void orderConfirmed() {
+		txtError.setVisible(true);
+		txtError.setText("L'ordine è stato confermato!");
 	}
 }

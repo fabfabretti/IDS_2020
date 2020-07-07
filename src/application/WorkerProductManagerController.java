@@ -270,7 +270,9 @@ public class WorkerProductManagerController {
 			//aggiungiamolo :)
 			newsection.addProduct(displayed);
 			displayed.setSection(newsection);
-			System.out.println("[✓] E' avvenuto un cambio di reparto");
+			//Aggiorno la tabella dei codici a barre
+			Globals.computeTable();
+			System.out.println("[✓] E' avvenuto un cambio di reparto e ho ricalcolato la table");
 		}
 
 
@@ -289,8 +291,9 @@ public class WorkerProductManagerController {
 		txtWeightPrice.setText(displayed.getWeightPrice());
 		txtWeightPrice.setText(displayed.getWeightPrice());
 
-
 		initializeView();
+		
+		
 	}
 
 	public void refresh(ActionEvent ae) {
