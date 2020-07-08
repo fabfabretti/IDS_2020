@@ -35,8 +35,11 @@ public class ProductPaneControllerUser extends ProductPaneController {
 	protected FlowPane flagFlowPane;
 
 	public void initialize() {
+		System.out.println("ay1");
 		product = productInit;
+		System.out.println("ay2->" + productName);
 		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight()+ " " + product.getUnit());
+		System.out.println("ay3");
 		price.setText(String.format("€ %.2f", product.getPrice()));  
 		weightPrice.setText(product.getWeightPrice());
 		
