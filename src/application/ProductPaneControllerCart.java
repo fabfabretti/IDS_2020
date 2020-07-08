@@ -48,7 +48,7 @@ public class ProductPaneControllerCart extends ProductPaneController {
 		weightPrice.setText(product.getWeightPrice());
 
 		
-		txtQuantity.setText("Q.tà:" + Globals.cart.getProducts().get(product));
+		txtQuantity.setText("Q.tà:" + Globals.cart.getProducts().get(product.getBarCode()));
 		//image prodotto
 		Image image;
 		try {
@@ -81,7 +81,7 @@ public class ProductPaneControllerCart extends ProductPaneController {
 	 */
 	public void removeProduct(ActionEvent e) {
 			
-			int qty=product.getAvailable()+Globals.cart.getProducts().get(product);
+			int qty=product.getAvailable()+Globals.cart.getProducts().get(product.getBarCode());
 
 			Globals.cart.removeProduct(product);
 			System.out.println(qty);

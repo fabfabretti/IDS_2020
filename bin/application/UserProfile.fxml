@@ -204,9 +204,9 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Text layoutX="415.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storico Ordini" wrappingWidth="108.14501953125">
+      <Text layoutX="369.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storico Ordini" wrappingWidth="108.14501953125">
          <font>
-            <Font name="HP Simplified Light" size="15.0" />
+            <Font name="HP Simplified Light" size="19.0" />
          </font>
       </Text>
       <JFXButton layoutX="373.0" layoutY="520.0" onAction="#saveAndClose" prefHeight="38.0" prefWidth="79.0" text="Salva" />

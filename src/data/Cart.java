@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class Cart {
 	
-	HashMap<Product,Integer> products = new HashMap<Product,Integer>();
+	HashMap<Integer,Integer> products = new HashMap<Integer,Integer>();
 	float total = 0;
 	int numberOfProd = 0;
 	
@@ -19,13 +19,13 @@ public class Cart {
 	 * @param qty quantità da aggiungere
 	 */
 	public void addProduct(Product p,int qty) {
-		if(products.containsKey(p)==false) {
-			products.put(p, qty);
+		if(products.containsKey(p.getBarCode())==false) {
+			products.put(p.getBarCode(), qty);
 		}
 		
 		else {
-			int oldqty= products.get(p);
-			products.replace(p, qty + oldqty);
+			int oldqty= products.get(p.getBarCode());
+			products.replace(p.getBarCode(), qty + oldqty);
 		}
 		
 		
@@ -41,12 +41,12 @@ public class Cart {
 	 */
 	public void removeProduct(Product p) {
 		
-		if(!(products.containsKey(p)))
+		if(!(products.containsKey(p.getBarCode())))
 			System.out.println("Something went wrong, product is not present");
 		else {
-			total=total-products.get(p)*p.getPrice();
-			numberOfProd=numberOfProd-products.get(p);	
-			products.remove(p);
+			total=total-products.get(p.getBarCode())*p.getPrice();
+			numberOfProd=numberOfProd-products.get(p.getBarCode());	
+			products.remove(p.getBarCode());
 			
 			if(products.size()==0)
 				total=0;
@@ -67,7 +67,7 @@ public class Cart {
 		Cart res = new Cart();
 		res.setNumberOfProd(numberOfProd);
 		res.setTotal(total);
-		res.setProducts(new HashMap<Product,Integer>(products));
+		res.setProducts(new HashMap<Integer,Integer>(products));
 		return res;
 	}
 	
@@ -103,14 +103,14 @@ public class Cart {
 	 * 
 	 * @return the products set
 	 */
-	public  HashMap<Product, Integer> getProducts() {
+	public  HashMap<Integer, Integer> getProducts() {
 		return products;
 	}
 	
 	/** 
 	 * @param the product set
 	 */
-	public void setProducts(HashMap<Product, Integer> products) {
-		this.products=products;
+	public void setProducts(HashMap<Integer, Integer> hashMap) {
+		this.products=hashMap;
 	}	
 }

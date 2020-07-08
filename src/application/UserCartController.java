@@ -147,7 +147,7 @@ public class UserCartController extends Controller{
 			info="Carta: "+fieldCartaNumero.getText() + " (" + fieldCartaNome.getText() + " " + fieldCartaCognome.getText() +" )";
 			}
 		
-		Globals.currentOrder = new Order(Globals.cart, payment, info);
+		Globals.currentOrder = new Order(Globals.cart, payment, info,fieldAddress.getText()+", "+fieldCAP.getText()+", "+fieldCity.getText());
 		
 		//Step 3: svuotiamo il carrello.
 		Globals.cart.flushCart();
@@ -172,8 +172,8 @@ public class UserCartController extends Controller{
 		JsonLoader.loadProducts();
 		
 		//debug
-		for(Product p : Globals.cart.getProducts().keySet())
-			System.out.println("NEW: " +Globals.barCodeTable.get(p.getBarCode()));
+		//for(Product p : Globals.cart.getProducts().keySet())
+		//	System.out.println("NEW: " +Globals.barCodeTable.get(p.getBarCode()));
 		
 		// ATTENZIONE!! 
 		// Dato che ho ricaricato i prodotti daccapo, adesso gli oggetti salvati nel carrello sono
@@ -182,18 +182,19 @@ public class UserCartController extends Controller{
 		
 		//Devo lavorare su una lista separata perché java è stupido e non ti fa eliminare le cose se usi iterator >:(
 		Cart tmpcart = new Cart();
+		
 	
-		for(Product oldProduct : Globals.cart.getProducts().keySet()) {
+		for(Integer oldProduct : Globals.cart.getProducts().keySet()) {
 			
 			//E' la versione "aggiornata" del prodotto
-			Product newProduct = Globals.barCodeTable.get(oldProduct.getBarCode());
+			Product newProduct = Globals.barCodeTable.get(oldProduct);
 			
 			//debug
 			System.out.println("cart="+ Globals.cart.getProducts().get(oldProduct) +" available="+newProduct.getAvailable());
 			
 			//Se il prodotto non è disponibile abbasso il flag
 			if(Globals.cart.getProducts().get(oldProduct) > newProduct.getAvailable()){
-				System.out.println("[x] "+oldProduct.getName()+" is not available anymore!! ");		
+				System.out.println("[x] "+ Globals.barCodeTable.get(oldProduct).getName()+" is not available anymore!! ");		
 				//Globals.cart.removeProduct(p);
 				isStillAvailable = false;
 			}

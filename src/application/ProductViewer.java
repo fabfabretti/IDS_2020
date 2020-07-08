@@ -105,10 +105,16 @@ public class ProductViewer {
 		Globals.currentView=this;
 		
 		//Settiamo result come prodotti visibili
-		this.displayable.addAll(cart.getProducts().keySet());
+		
+		TreeSet<Product> codesToProducts = new TreeSet<Product>();
+		
+		for ( Integer i : cart.getProducts().keySet())
+			codesToProducts.add(Globals.barCodeTable.get(i));
+		
+		this.displayable.addAll(codesToProducts);
 		
 		//Non abbiamo filtri attivi, dunque tutti i prodotti visibili sono effettivamente mostrati a schermo
-		this.actuallyDisplayed.addAll(cart.getProducts().keySet());
+		this.actuallyDisplayed.addAll(codesToProducts);
 		
 		//Settiamo il parent di questo pannello
 		this.setParent(parent);

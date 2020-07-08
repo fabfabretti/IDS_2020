@@ -107,7 +107,7 @@ public class WorkerProductManagerController {
 
 
 
-		ProductViewer viewer = new ProductViewer(viewScrollPane,allproducts,"edit");
+		new ProductViewer(viewScrollPane,allproducts,"edit");
 
 	}
 

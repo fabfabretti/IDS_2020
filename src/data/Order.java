@@ -1,7 +1,7 @@
 package data;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.HashMap;
 
 import application.Globals;
 
@@ -15,37 +15,73 @@ considerata.
  * 
  * */
 public class Order {
+	
 	//Identificativo dell'ordine
-	int orderid;
-	//Consegna prevista
-	LocalDate date;
-	OrderDeliveryTime time;
-	OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
-	Cart cart;
-	User user=(User) Globals.currentUser;
-
-
-	//Il costo totale e i punti sono nel carrello!
-	Payment payment;
-	String paymentInfo;
+	private int orderid;
 	
-	public Order() {
-		
-	}
+	//Data prevista consegna
+	private LocalDate date;
 	
-	public Order(Cart cart, Payment payment, String paymentInfo) {
+	//Orario previsto consegna
+	private OrderDeliveryTime time;
+	
+	//Stato consegna
+	private OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
+	
+	//Contiene il cart; la parte rilevante è l'elenco dei prodotti (Now comes in barcodes!! :D)
+	private Cart cart;
+	
+	//Me serve per tenere in memoria il costo al momento dell'acquisto.
+	private HashMap<Integer,Float> prices = new HashMap<Integer,Float>();
+	//User che ha effettuato l'ordine
+	private User user=(User) Globals.currentUser;
+
+	//Metodo di pagamento
+	private Payment payment;
+	
+	//Ulteriori informazioni (es. carta di credito, paypal...)
+	private String paymentInfo;
+	
+	//Info consegna
+	private String address;
+	
+	/**
+	 * Crea un ordine.
+	 * @param cart il cart
+	 * @param payment tipo di pagamento
+	 * @param paymentInfo info sul tipo di pagamento (es. paypal->credenziali,/carta->codice...)
+	 * @param address
+	 */
+	public Order(Cart cart, Payment payment, String paymentInfo, String address) {
+
+		//Inseriamo questo ordine nella lista di ordini esistenti.
 		Globals.storico.add(this);
-		System.out.println("[✓] Ordine generato");
+		
+		//Inseriamo i dati dell'ordine...
 		this.cart=cart.copyCart();
 		this.payment=payment;
 		this.paymentInfo=paymentInfo;
+		this.address=address;
+		orderid= Globals.storico.size()+2;
+		
+		//Inseriamo i dati sul prezzo!
+		for(Integer i : cart.getProducts().keySet()) {
+			float currentPrice = Globals.barCodeTable.get(i).getPrice();
+			prices.put(i, currentPrice);
+		}
+		
+		//debug
+		System.out.println("[✓] Ordine generato");
 	}
 	
+	/**
+	 * Aggiunge data e ora all'ordine
+	 * @param date la data
+	 * @param time la fascia oraria
+	 */
 	public void confirmOrder(LocalDate date, OrderDeliveryTime time) {
 		this.date=date;
 		this.time=time;
-		
-		orderid= Globals.storico.size()+2;
 	}
 
 
@@ -160,4 +196,36 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+
+	
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	/**
+	 * @return the prices
+	 */
+	public HashMap<Integer, Float> getPrices() {
+		return prices;
+	}
+
+	/**
+	 * @param prices the prices to set
+	 */
+	public void setPrices(HashMap<Integer, Float> prices) {
+		this.prices = prices;
+	}
+
 }

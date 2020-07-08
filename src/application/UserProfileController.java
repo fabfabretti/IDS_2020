@@ -73,7 +73,7 @@ public class UserProfileController extends Controller {
 			FlowPane flower = new FlowPane();
 			AnchorPane pane=null;
 			if(Globals.storico.size()!=0) {
-				Controller c = new Controller();
+				 new Controller();
 				for(Order o : Globals.storico) {
 					try {
 						if(o.getUser().getUserID() == ((User)Globals.currentUser).getUserID()) {
@@ -108,7 +108,6 @@ public class UserProfileController extends Controller {
 	 * @param ae evento click su salva
 	 */
 	public void saveAndClose(ActionEvent ae) {
-		String err = "";
 
 		if (fieldEmail.getText().isEmpty() || fieldPassword.getText().isEmpty() || fieldName.getText().isEmpty()
 				|| fieldSurname.getText().isEmpty() || fieldAddress.getText().isEmpty() || fieldCAP.getText().isEmpty()
