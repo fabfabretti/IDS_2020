@@ -81,6 +81,8 @@ public class UserHomeController extends Controller {
 	private TreeSet<Product> currDisplay;
 	
 	public void initialize() {
+		refreshCartIcon();
+		
 		
 		Globals.viewController=this;
 		
@@ -90,8 +92,6 @@ public class UserHomeController extends Controller {
 		
 		//(De-)Visualizza correttamente la notifica del carrello
 		if(Globals.cart.getNumberOfProd()==0) {
-			circleCartNumber.setVisible(false);
-			lblCartNumber.setVisible(false);
 			try {
 
 				BorderPane res=FXMLLoader.load( getClass().getResource("/application/ProductViewEmpty.fxml") );
@@ -204,9 +204,23 @@ public class UserHomeController extends Controller {
 			circleCartNumber.setVisible(false);
 			lblCartNumber.setVisible(false);
 			
-			
+		refreshCartIcon();
+		
 		new ProductViewer(mainPane,currDisplay,"section");
 		
 		}
+	}
+	
+	public void refreshCartIcon() {
+		if(Globals.cart.getNumberOfProd()!=0) {
+			lblCartNumber.setText(Globals.cart.getNumberOfProd()+"");
+			lblCartNumber.setVisible(true);
+			circleCartNumber.setVisible(true);
+			return;
+			}
+
+		lblCartNumber.setVisible(false);
+		circleCartNumber.setVisible(false);
+		
 	}
 }

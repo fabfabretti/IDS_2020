@@ -70,8 +70,10 @@ public class ProductPaneControllerCart extends ProductPaneController {
 				a.setFitWidth(25);
 				flagFlowPane.getChildren().add(a);
 			}
-
 		}
+		
+		Globals.viewController.refreshCartIcon();
+		
 	}
 	
 	
@@ -90,5 +92,6 @@ public class ProductPaneControllerCart extends ProductPaneController {
 			
 			Globals.viewController.initialize();
 			Globals.cartController.initialize();
+			Globals.viewController.refreshCartIcon();
 	}
 }

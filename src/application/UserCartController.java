@@ -229,7 +229,7 @@ public class UserCartController extends Controller{
 		// 2. Pagamento impostato (obv. controllo solo il pagamento selezionato!)
 		if(radioCarta.isSelected()) {
 			result &= !fieldCartaNome.getText().equals("");
-			result &= fieldCartaCognome.getText().equals("");
+			result &= !fieldCartaCognome.getText().equals("");
 			result &= !fieldCartaCVV.getText().equals("");
 			result &= !fieldCartaNumero.getText().equals("");
 			if (result==false) {

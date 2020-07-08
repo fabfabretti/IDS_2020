@@ -1,6 +1,7 @@
 package application;
 
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
 import data.Order;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
@@ -49,13 +51,58 @@ public class UserProfileController extends Controller {
 	@FXML
 	private Label lblError;
 	
+	//Ordini	
 	@FXML
 	private ScrollPane scrollPaneOrders;
+
+	//Pagamento predefinito
+	@FXML
+	private JFXRadioButton radioPayPal;
+	@FXML
+	private JFXRadioButton radioCarta;
+	@FXML
+	private JFXRadioButton radioConsegna;
+	
+		//Consegna
+			@FXML
+			private AnchorPane paneConsegna;
+			
+		// PayPal
+			@FXML
+			private AnchorPane panePayPal;
+			@FXML
+			private JFXTextField fieldPayPalEmail;
+			@FXML
+			private JFXPasswordField fieldPayPalPassword;
+			
+		//Carta
+			@FXML
+			private AnchorPane paneCarta;
+			@FXML
+			private JFXTextField fieldCardNumber;
+			@FXML
+			private JFXTextField fieldCartaCVV;
+			@FXML
+			private JFXTextField fieldCartaNome;
+			@FXML
+			private JFXTextField fieldCartaCognome;
 
 	/***
 	 * Serve a mostrare i dati salvati dall'utente dentro i rispettivi campi
 	 */
 	public void initialize() {
+	
+	//Pagamento predefinito
+		final ToggleGroup group = new ToggleGroup();
+		radioConsegna.setToggleGroup(group);
+		radioCarta.setToggleGroup(group);
+		radioPayPal.setToggleGroup(group);
+		radioConsegna.setSelected(true);
+		paneConsegna.setVisible(radioConsegna.isSelected());
+		paneCarta.setVisible(radioCarta.isSelected());
+		panePayPal.setVisible(radioPayPal.isSelected());
+		
+	//Informazioni generali
 		fieldEmail.setText(Globals.currentUser.getEmail());
 		fieldPassword.setText(Globals.currentUser.getPassword());
 		fieldName.setText(Globals.currentUser.getAnagrafica().getName());
@@ -65,7 +112,7 @@ public class UserProfileController extends Controller {
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 
-		//Se questo è un user, allora dobbiamo mostrare anche lo storico.
+	//Se questo è un user, allora dobbiamo mostrare anche lo storico e il metodo di pagamento.
 		if(Globals.currentUser instanceof User) {
 			System.out.println(Globals.storico);
 			
@@ -145,6 +192,8 @@ public class UserProfileController extends Controller {
 	
 	
 	public void changePayment(ActionEvent ae) {
-		
+		paneConsegna.setVisible(radioConsegna.isSelected());
+		paneCarta.setVisible(radioCarta.isSelected());
+		panePayPal.setVisible(radioPayPal.isSelected());
 	}
 }

@@ -98,6 +98,7 @@ public class ProductPaneControllerUser extends ProductPaneController {
 			btnAdd.setDisable(true);
 			txtFinished.setVisible(true);
 		}
+		Globals.viewController.refreshCartIcon();
 		
 	}
 	

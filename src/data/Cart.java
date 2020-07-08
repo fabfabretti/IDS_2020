@@ -2,6 +2,8 @@ package data;
 
 import java.util.HashMap;
 
+import application.Globals;
+
 /**
  * Contiene le info di un carrello.
  *
@@ -32,6 +34,7 @@ public class Cart {
 		total = total + qty*p.getPrice();
 		numberOfProd += qty;
 		
+		Globals.viewController.refreshCartIcon();
 		
 	}	
 	
@@ -51,6 +54,8 @@ public class Cart {
 			if(products.size()==0)
 				total=0;
 		}
+
+		Globals.viewController.refreshCartIcon();
 	}
 	
 	/**
@@ -60,6 +65,8 @@ public class Cart {
 		products.clear();
 		total = 0;
 		numberOfProd = 0;
+
+		Globals.viewController.refreshCartIcon();
 	}
 	
 	
@@ -69,6 +76,8 @@ public class Cart {
 		res.setTotal(total);
 		res.setProducts(new HashMap<Integer,Integer>(products));
 		return res;
+		
+		
 	}
 	
 	

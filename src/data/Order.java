@@ -62,7 +62,7 @@ public class Order {
 		this.payment=payment;
 		this.paymentInfo=paymentInfo;
 		this.address=address;
-		orderid= Globals.storico.size()+2;
+		orderid= Globals.storico.size();
 		
 		//Inseriamo i dati sul prezzo!
 		for(Integer i : cart.getProducts().keySet()) {
