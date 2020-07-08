@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 /**
  * Contiene le info di un carrello.
- * @author Fabiola
  *
  */
 public class Cart {

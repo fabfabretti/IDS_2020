@@ -84,7 +84,7 @@
       "unit": "KG",
       "price": 1.48,
       "weightPrice": "2,96 €/KG",
-      "available": 10,
+      "available": 0,
       "bio": true,
       "glutenfree": true,
       "vegan": true,
