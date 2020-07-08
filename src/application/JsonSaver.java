@@ -12,18 +12,20 @@ import minimalJson.JsonArray;
 import minimalJson.JsonObject;
 import minimalJson.WriterConfig;
 
+/**
+ * Il contenuto, per comodità implementativa, viene completamente riscritto nei
+ * vari json file.
+ * 
+ * Tale scelta è stata apportata a posteri rispetto all'implementazione di
+ * JsonLoader. La libreria minimalJson, infatti, non permette una facile
+ * gestione dei cambi dei singoli valori come nel nostro caso.
+ */
 public class JsonSaver {
 
+	/**
+	 * Salva tutti i dati di tutti gli utenti.
+	 */
 	public static void saveUser() {
-
-		/**
-		 * Il contenuto, per comodità implementativa, viene completamente riscritto nei
-		 * vari json file.
-		 * 
-		 * Tale scelta è stata apportata a posteri rispetto all'implementazione di
-		 * JsonLoader. La libreria minimalJson, infatti, non permette una facile
-		 * gestione dei cambi dei singoli valori come nel nostro caso.
-		 */
 		JsonArray users = new JsonArray();
 
 		for (User u : Globals.users) {
@@ -67,6 +69,9 @@ public class JsonSaver {
 		}
 	}
 
+	/**
+	 * Salva tutti i dati di tutti i worker.
+	 */
 	public static void saveWorker() {
 		JsonArray worker = new JsonArray();
 
@@ -106,6 +111,9 @@ public class JsonSaver {
 
 	}
 
+	/**
+	 * Salva tutti i dati di tutti i prodotti.
+	 */
 	public static void saveProducts() {
 
 		JsonArray /*product = new JsonArray(),*/ productTmp = new JsonArray();
@@ -151,4 +159,66 @@ public class JsonSaver {
 
 	}
 
+	/**
+	 * Salva tutte le bozze dei carrelli utente.
+	 */
+	public static void saveCart() {
+		/*
+		 * Array che conterrà l'intero Json dei carrelli in stato di bozza.
+		 */
+		JsonArray cartsJson = new JsonArray();
+		
+		/*
+		 * Singolo carrello temporaneo (usato per formare gli ordini in stallo).
+		 */
+		JsonObject singleCart = new JsonObject();
+		
+		/*
+		 * Array che conterrà varie instanze di oggetti (barCode - quantity).
+		 */
+		JsonArray products = new JsonArray();
+		
+		/*
+		 * Utile per ottenere informazioni sull'user
+		 */
+		User actualUser = (User) Globals.currentUser;
+		
+		
+		singleCart.add("userID", actualUser.getUserID());
+		
+		// Scorrimento prodotti del carrello e inserimento nell'arrai "products".
+		for(Entry<Product, Integer> p : Globals.cart.getProducts().entrySet()) {
+			JsonObject jsonProduct = new JsonObject();
+			
+			jsonProduct.add("barCode", p.getKey().getBarCode());
+			jsonProduct.add("quantity", p.getValue());
+			
+			products.add(jsonProduct);
+		}
+		
+		singleCart.add("products", products);
+		
+		
+		cartsJson.add(singleCart);
+		
+		JsonObject newJson = new JsonObject();
+
+		newJson.add("carrelli non confermati", cartsJson);
+
+		System.out.println("\n[?] " + cartsJson);
+
+		/**
+		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
+		 */
+		try (Writer writer = new FileWriter("./data/cartDrafts.json")) {
+			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+		} catch (IOException e) {
+			System.out.println("[x] Errore scrittura Json Worker!!!");
+		}
+
+	}
+	
+	
+	
+	
 }

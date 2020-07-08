@@ -2,6 +2,7 @@ package application;
 
 import data.Order;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
@@ -24,7 +25,9 @@ public class CartReviewController {
 	@FXML
 	private Text txtState;
 	@FXML
-	private FlowPane paneProducts;
+	private Text txtProducts;
+	@FXML
+	private ScrollPane scrollProducts;
 	
 	public void initialize(){
 		order=orderInit;
@@ -37,6 +40,7 @@ public class CartReviewController {
 
 		txtOrderId.setText(String.format("Ordine #%d", order.getOrderid()));
 		txtDate.setText(order.getDate().toString());
+		txtTotal.setText("€ "+order.getCart().getTotal());
 		txtTime.setText(stringheTime[order.getTime().ordinal()]);
 		txtPayment.setText(stringhePayment[order.getPayment().ordinal()]);
 		txtPoints.setText(""+((int)order.getCart().getTotal()));	
