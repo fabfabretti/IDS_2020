@@ -1,0 +1,31 @@
+{
+  "carrelli non confermati": [
+    {
+      "userID": 0,
+      "products": [
+        {
+          "barCode": 2000001,
+          "quantity": 2
+        },
+        {
+          "barCode": 2000002,
+          "quantity": 2
+        }
+      ]
+    },
+    
+        {
+      "userID": 1,
+      "products": [
+        {
+          "barCode": 2000001,
+          "quantity": 2
+        },
+        {
+          "barCode": 2000002,
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}

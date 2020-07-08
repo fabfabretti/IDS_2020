@@ -2,6 +2,7 @@ package application;
 
 import data.Order;
 import javafx.fxml.FXML;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
 public class CartReviewController {
@@ -20,19 +21,26 @@ public class CartReviewController {
 	private Text txtPayment;
 	@FXML
 	private Text txtPoints;
+	@FXML
+	private Text txtState;
+	@FXML
+	private FlowPane paneProducts;
 	
 	public void initialize(){
 		order=orderInit;
 
+		//Stringhe più carine di quelle di default!!
 		String[] stringhePayment = {"Alla consegna", "PayPal", "Carta di credito"};
 		String[] stringheTime = {"Mattina (08:00-11:00)", "Pranzo (11:00-14:00)", "Pomeriggio (14:00-17:00)","Sera (17:00-20:00)"};
+		String[] stringheState = {"Confermata","In preparazione","Consegnata"};
 
 
-		txtOrderId.setText(String.format("Ordine #%5d", order.getOrderid()));
+		txtOrderId.setText(String.format("Ordine #%d", order.getOrderid()));
 		txtDate.setText(order.getDate().toString());
 		txtTime.setText(stringheTime[order.getTime().ordinal()]);
 		txtPayment.setText(stringhePayment[order.getPayment().ordinal()]);
 		txtPoints.setText(""+((int)order.getCart().getTotal()));	
+		txtState.setText(""+ stringheState[order.getState().ordinal()]);
 	}
 
 	public static void initializeOrder(Order order) {

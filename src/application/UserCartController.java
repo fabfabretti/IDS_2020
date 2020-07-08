@@ -192,7 +192,7 @@ public class UserCartController extends Controller{
 			System.out.println("cart="+ Globals.cart.getProducts().get(oldProduct) +" available="+newProduct.getAvailable());
 			
 			//Se il prodotto non è disponibile abbasso il flag
-			if(Globals.cart.getProducts().get(oldProduct) < newProduct.getAvailable()){
+			if(Globals.cart.getProducts().get(oldProduct) > newProduct.getAvailable()){
 				System.out.println("[x] "+oldProduct.getName()+" is not available anymore!! ");		
 				//Globals.cart.removeProduct(p);
 				isStillAvailable = false;
@@ -210,10 +210,6 @@ public class UserCartController extends Controller{
 		System.out.println(tmpcart);
 		Globals.cart = tmpcart;
 		
-		//Avendoli ricaricati, devo anche riaggiornare i product available!!
-		for(Product p : Globals.cart.getProducts().keySet()) {
-			p.setAvailable(p.getAvailable()-Globals.cart.getProducts().get(p));
-		}
 		
 		return isStillAvailable;
 	}
@@ -266,6 +262,7 @@ public class UserCartController extends Controller{
 	
 	public void orderConfirmed() {
 		txtError.setVisible(true);
+		JsonSaver.saveProducts();
 		txtError.setText("L'ordine è stato confermato!");
 	}
 }

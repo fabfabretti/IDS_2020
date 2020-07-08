@@ -23,6 +23,8 @@ public class Order {
 	OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
 	Cart cart;
 	User user=(User) Globals.currentUser;
+
+
 	//Il costo totale e i punti sono nel carrello!
 	Payment payment;
 	String paymentInfo;
@@ -43,7 +45,7 @@ public class Order {
 		this.date=date;
 		this.time=time;
 		
-		orderid= Globals.storico.size()+1;
+		orderid= Globals.storico.size()+2;
 	}
 
 
@@ -143,5 +145,19 @@ public class Order {
 	 */
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
+	}	
+	
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

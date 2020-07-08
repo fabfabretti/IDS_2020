@@ -76,13 +76,17 @@ public class UserProfileController extends Controller {
 				Controller c = new Controller();
 				for(Order o : Globals.storico) {
 					try {
-						CartReviewController.initializeOrder(o);
-						pane=(FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
-						System.out.println(pane);
+						if(o.getUser().getUserID() == ((User)Globals.currentUser).getUserID()) {
+							CartReviewController.initializeOrder(o);
+							pane=(FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
+							//System.out.println(pane);
+						}
 					} catch (Exception e) {
 						System.out.println("[x] Errore a caricare UI interna");
 					}
-					flower.getChildren().add(pane);
+					
+					if(pane!=null)
+						flower.getChildren().add(pane);
 				}
 
 				AnchorPane.setTopAnchor(flower, 0.0);

@@ -27,22 +27,6 @@ public class User extends UserGeneral {
 		userID=userid;
 	}
 
-	
-	
-	
-	/***
-	 * Carica tutti gli utenti salvati in memoria e ritorna una collezione di questi
-	 * utenti
-	 * 
-	 * @return hashset di questi utenti in memoria
-	 */
-	public static HashSet<UserGeneral> getUsers() {
-
-		// ....ci serve un parser
-
-		// TODO
-		return null;
-	}
 
 	/***
 	 * getter

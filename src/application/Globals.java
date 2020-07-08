@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import data.Cart;
+import data.CartDraft;
 import data.Order;
 import data.Product;
 import data.Section;
@@ -31,6 +32,8 @@ public class Globals {
 	
 	static HashSet<User> users = JsonLoader.loadUsers();
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
+	
+	static ArrayList<CartDraft> drafts = new ArrayList<CartDraft>(); //TODO: qui ci andrà JsonLoader.loadDrafts()
 	
 	//Storico
 	
