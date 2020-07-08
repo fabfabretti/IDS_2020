@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.util.TreeSet;
 
 import com.jfoenix.controls.JFXButton;
@@ -158,7 +157,7 @@ public class UserHomeController extends Controller {
 		currDisplay=section;
 	
 		//Per riutilizzare facilmente questo codice anche nella parte del Worker, usiamo un gestore della view dei prodotti chiamato ProductViewer :)
-		ProductViewer viewer = new ProductViewer(mainPane,section,"section");
+		new ProductViewer(mainPane,section,"section");
 	}
 
 
@@ -190,7 +189,7 @@ public class UserHomeController extends Controller {
 				}
 			}
 			currDisplay = result;
-			ProductViewer viewer = new ProductViewer(mainPane,result,"section");
+			new ProductViewer(mainPane,result,"section");
 		}	
 		
 	}
@@ -206,7 +205,7 @@ public class UserHomeController extends Controller {
 			lblCartNumber.setVisible(false);
 			
 			
-		ProductViewer viewer = new ProductViewer(mainPane,currDisplay,"section");
+		new ProductViewer(mainPane,currDisplay,"section");
 		
 		}
 	}

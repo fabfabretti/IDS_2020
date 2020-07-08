@@ -17,6 +17,12 @@ import minimalJson.JsonValue;
 public class JsonLoader {
 
 	static void loadProducts() {
+		
+		//Se è un aggiornamento, devo prima svuotare il reparto.
+		for(Section s : Globals.reparti) 
+			if(!(s.getProducts().isEmpty()))
+				s.getProducts().clear();
+		
 
 		// (try/catch è necessario causa operazione input output)
 
@@ -34,7 +40,7 @@ public class JsonLoader {
 				JsonArray sezione = read.get(s.getName()).asArray();
 
 				for (JsonValue prodotto : sezione) {
-					 System.out.println(prodotto);
+					// System.out.println(prodotto);
 					/*
 					 * [! ! ! ! ! ] |-----> Da questa print di debug si evince che ciascun JsonValue
 					 * (ovvero ciascun elemento di ciascun indice del JsonArray)è una schifosissima
@@ -74,9 +80,9 @@ public class JsonLoader {
 					boolean lactosefree = prodotto.asObject().getBoolean("lactosefree", false);
 
 					
-					Product p = new Product(name, barCode, imagePath, brand, weight, unit,price, available, bio,
+					new Product(name, barCode, imagePath, brand, weight, unit,price, available, bio,
 							glutenfree, vegan, lactosefree,s);
-
+					Globals.computeTable();
 
 				}
 			}
@@ -126,8 +132,8 @@ public class JsonLoader {
 				users.add(u);
 
 				// System.out.println(user);
-				System.out.println(
-						"\n[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
+			//	System.out.println(
+					//	"\n[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
 			}
 
 		} catch (IOException e) {
@@ -174,8 +180,8 @@ public class JsonLoader {
 						workerid);
 				users.add(worker);
 
-				System.out.println("[✓] Loaded worker " + worker.getAnagrafica().getName() + " "
-						+ worker.getAnagrafica().getFamilyName());
+			//	System.out.println("[✓] Loaded worker " + worker.getAnagrafica().getName() + " "
+					//+ worker.getAnagrafica().getFamilyName());
 			}
 
 		} catch (IOException e) {

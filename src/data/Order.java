@@ -34,7 +34,7 @@ public class Order {
 	public Order(Cart cart, Payment payment, String paymentInfo) {
 		Globals.storico.add(this);
 		System.out.println("[✓] Ordine generato");
-		this.cart=cart;
+		this.cart=cart.copyCart();
 		this.payment=payment;
 		this.paymentInfo=paymentInfo;
 	}

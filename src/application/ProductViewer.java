@@ -34,17 +34,21 @@ public class ProductViewer {
 	// Scroller ove verrà agganciato il flowpane con i prodotti
 	private ScrollPane scroller = new ScrollPane();
 
-	//Insieme dei prodotti attualmente mostrati
-	private TreeSet<Product> displayed = new TreeSet<Product>(currComparator);
-	//Insieme dei prodotti attualmente mostrati
-	private TreeSet<Product> actuallydisplayed = new TreeSet<Product>(currComparator);
+	//Insieme dei prodotti attualmente mostrabili (es: se siamo in un reparto sono tutti quelli del reparto).
+	//Può differire da actuallydisplayed, poiché se applico dei filtri quelli che non li rispettano verranno nascosti.
+	private TreeSet<Product> displayable = new TreeSet<Product>(currComparator);
 	
+	//Insieme dei prodotti attualmente mostrati
+	private TreeSet<Product> actuallyDisplayed = new TreeSet<Product>(currComparator);
+	
+	//Barra per filtrare i prodotti
 	private AnchorPane filterBar = null;
 	
 
 	//Pannello al quale voglio agganciare lo scrollpane
 	private AnchorPane parent = new AnchorPane();
 	
+	//Modalità di visualizzazione (cart, user...)
 	private String type;
 	
 	
@@ -54,17 +58,35 @@ public class ProductViewer {
 	 * 
 	 * @param parent pannello su cui attaccare lo scrollpane con tuttecose
 	 * @param result elenco prodotti da mostrare
+	 * @param type il tipo di visualizzazione (cart, user...)
 	 */
 	public ProductViewer(AnchorPane parent, TreeSet<Product> result, String type) {
+		
+		//Settiamo questa come visualizzazione attuale
 		Globals.currentView=this;
-		this.displayed.addAll(result);
-		this.actuallydisplayed.addAll(result);
+		
+		//Settiamo result come prodotti visibili
+		this.displayable.addAll(result);
+		
+		//Non abbiamo filtri attivi, dunque tutti i prodotti visibili sono effettivamente mostrati a schermo
+		this.actuallyDisplayed.addAll(result);
+		
+		//Settiamo il parent di questo pannello
 		this.setParent(parent);
+		
+		//Settiamo la modalità
 		this.type=type;
 
-		formPanel(displayed,type);
+		//Avvio la procedura di costruzione di un pannello
+		formPanel(displayable,type);
+		
+		//Al solito vogliamo "scorrere" i prodotti, dunque creiamo lo scroller
 		ScrollPane newpane = scroller;
+		
+		//Aggiungiamo il risultato al parent
 		parent.getChildren().add(newpane);
+		
+		//robba necessaria allo scroller
 		AnchorPane.setTopAnchor(newpane, 0.0);
 		AnchorPane.setBottomAnchor(newpane, 0.0);
 		AnchorPane.setLeftAnchor(newpane, 0.0);
@@ -78,14 +100,29 @@ public class ProductViewer {
 	 * @param result elenco prodotti da mostrare
 	 */
 	public ProductViewer(AnchorPane parent, Cart cart) {
+		
+		//Settiamo questa come visualizzazione attuale
 		Globals.currentView=this;
-		this.displayed.addAll(cart.getProducts().keySet());
-		this.actuallydisplayed.addAll(cart.getProducts().keySet());
+		
+		//Settiamo result come prodotti visibili
+		this.displayable.addAll(cart.getProducts().keySet());
+		
+		//Non abbiamo filtri attivi, dunque tutti i prodotti visibili sono effettivamente mostrati a schermo
+		this.actuallyDisplayed.addAll(cart.getProducts().keySet());
+		
+		//Settiamo il parent di questo pannello
 		this.setParent(parent);
-		System.out.println("Visualizzo in modalità cart!");
-		formPanel(displayed,"cart");
+		
+		//Settiamo la modalità
+		formPanel(displayable,"cart");
+		
+		//Al solito vogliamo "scorrere" i prodotti, dunque creiamo lo scroller
 		ScrollPane newpane = scroller;
+		
+		//Aggiungiamo il risultato al parent
 		parent.getChildren().add(newpane);
+		
+		//robba necessaria allo scroller
 		AnchorPane.setTopAnchor(newpane, 0.0);
 		AnchorPane.setBottomAnchor(newpane, 0.0);
 		AnchorPane.setLeftAnchor(newpane, 0.0);
@@ -102,12 +139,13 @@ public class ProductViewer {
 	 */
 	private void formPanel(TreeSet<Product> result, String mode) {
 		
-		// 1. Genero la barra x filtrare //TODO ora è un dummy// se necessaria
+		// PARTE A. Genero la barra x filtrare se necessaria
+		//(= se la modalità lo richiede e se NON è già stata generata)
 		
 		ScrollPane scroller = new ScrollPane();
 		FlowPane flowProdotti = new FlowPane();
 		
-		//0 : formulo la barra
+		//A0) formulo la barra
 
 		if (filterBar==null) {
 			if (!mode.equals("cart"))
@@ -127,12 +165,13 @@ public class ProductViewer {
 		}
 		
 		else {
-			//System.out.println("Keeping previous bar: " + filterBar);
 			flowProdotti.getChildren().add(filterBar);
 		}
 		
 		
-		//se non ho prodotti, carico il pannello vuoto
+		//PARTE B. Inserisco i prodotti.
+		
+		//B0) se non ho prodotti, carico il pannello vuoto
 		
 		if(result==null || (result!=null && result.size()==0) ) {
 			System.out.println("[✓] Nessun prodotto da visualizzare! Carico pannello vuoto...");
@@ -159,17 +198,13 @@ public class ProductViewer {
 			return;
 			}
 
-		//
-		// Case 1: Ho prodotti!
-		//
-		// 2. Genero tutti i prodotti: per ogni prodotto genero il pannellino
+		// B1) Se ci sono, genero tutti i prodotti: per ogni prodotto genero il pannellino
+		
 		for (Product p : result) {
-
-			ProductPaneController.setInitProduct(p);
+			ProductPaneController.setInitProduct(p); //serve a dire al controller che prodotto sta controllando!!
 			AnchorPane productPane=null;
 			
 			try {
-				
 				if(mode.equals("section"))
 					productPane = FXMLLoader.load(result.getClass().getResource("/application/ProductPane.fxml"));
 				if(mode.equals("cart"))
@@ -180,9 +215,7 @@ public class ProductViewer {
 				System.out.println("[x] Fxml non pervenuto :(" + e);
 			}
 			
-			
 			flowProdotti.getChildren().add(productPane);
-			//System.out.println("[✓] Mostrato: " + p);
 			scroller.setFitToWidth(true);
 			
 			
@@ -191,11 +224,11 @@ public class ProductViewer {
 		scroller.setContent(flowProdotti);
 		this.scroller=scroller;
 	}
-
-	public ScrollPane getScroller() {
-		return scroller;
-	}
 	
+	/***
+	 * Cambia l'ordine di visualizzazione.
+	 * @param mode il nuovo ordine.
+	 */
 	public void changeOrder(String mode) {
 
 		// STEP 1: DEFINISCO IL NUOVO COMPARATOR
@@ -235,12 +268,14 @@ public class ProductViewer {
 		        }
 		    };
 		
-	
-	   TreeSet<Product> dispOrdered = new TreeSet<>(currComparator);
-	
-	   dispOrdered.addAll(actuallydisplayed);
-	   
+	    //STEP 2: METTO TUTTI I PRODUCT IN UN ALTRO TREESET
+	    //		  Il quale avrà il nuovo comparator :)
 
+	   TreeSet<Product> dispOrdered = new TreeSet<>(currComparator);
+
+	   dispOrdered.addAll(actuallyDisplayed);	   
+
+	   //rigenero la schermata! STessa solfa di prima
 	   formPanel(dispOrdered,type);
 		ScrollPane newpane = scroller;
 		parent.getChildren().clear();
@@ -253,38 +288,35 @@ public class ProductViewer {
 		System.out.println("[✓] Sorted in mode \"" + mode + "\"");
 	}
 	
-	public class ComparatorP implements Comparator<Product> {
-		 
-        @Override
-        public int compare(Product p1, Product p2) {
-            return p1.getBrand().compareTo(p2.getBrand());
-        }
-	}
-	
+	/**
+	 * Filtra i prodotti "visualizzabili", e mostra il risultato (che viene salvato in actuallydisplayed).
+	 * @param selectedCharas
+	 */
 	public void filterChara(boolean selectedCharas[]) {
 		
 		TreeSet<Product> newset = new TreeSet<Product>(currComparator);
-		
 		boolean condition;
-		for(Product p : displayed) {
-
+		for(Product p : displayable) {
+			
 			//rispetta vegano?
 			condition= !selectedCharas[0] ||(selectedCharas[0] && p.isChar("vegan") );
+			
 			//rispetta diary?
-			condition=condition&&(( !selectedCharas[1] || selectedCharas[1] && p.isChar("diary") ));
+			condition&=(( !selectedCharas[1] || selectedCharas[1] && p.isChar("diary") ));
+			
 			//rispetta bio?
-			condition=condition&&((!selectedCharas[2] || selectedCharas[2] && p.isChar("bio") ));
+			condition&=((!selectedCharas[2] || selectedCharas[2] && p.isChar("bio") ));
+			
 			//rispetta gluten?
-			condition=condition&&((!selectedCharas[3] || selectedCharas[3] && p.isChar("gluten") ));
+			condition&=((!selectedCharas[3] || selectedCharas[3] && p.isChar("gluten") ));
 			
-			
+			//Se le rispetta tutte, allora posso mostrare il prodotto.
 			if(condition == true) {
 				newset.add(p);
 			}
 		
-
 		}
-		actuallydisplayed=newset;
+		actuallyDisplayed=newset;
 		System.out.println("[✓] Filtered: " + newset.size() + " products found");
 		formPanel(newset,type);
 		ScrollPane newpane = scroller;
@@ -295,11 +327,19 @@ public class ProductViewer {
 		AnchorPane.setLeftAnchor(newpane, 0.0);
 		AnchorPane.setRightAnchor(newpane, 0.0);
 	}
-
+	
+	/**
+	 * 
+	 * @return the parent
+	 */
 	public AnchorPane getParent() {
 		return parent;
 	}
-
+	
+	/**
+	 * 
+	 * @param parent the parent to set
+	 */
 	public void setParent(AnchorPane parent) {
 		this.parent = parent;
 	}
@@ -308,14 +348,21 @@ public class ProductViewer {
 	 * @return the displayed
 	 */
 	public TreeSet<Product> getDisplayed() {
-		return displayed;
+		return displayable;
 	}
 
 	/**
 	 * @param displayed the displayed to set
 	 */
 	public void setDisplayed(TreeSet<Product> displayed) {
-		this.displayed = displayed;
+		this.displayable = displayed;
+	}
+	
+	/**
+	 * @return the scroller
+	 */
+	public ScrollPane getScroller() {
+		return scroller;
 	}
 }
 

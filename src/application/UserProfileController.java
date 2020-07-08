@@ -20,6 +20,8 @@ import javafx.scene.layout.FlowPane;
  */
 public class UserProfileController extends Controller {
 
+	//FXML
+	
 	@FXML
 	private JFXTextField fieldEmail;
 
@@ -52,7 +54,6 @@ public class UserProfileController extends Controller {
 
 	/***
 	 * Serve a mostrare i dati salvati dall'utente dentro i rispettivi campi
-	 * ovviamente, TODO
 	 */
 	public void initialize() {
 		fieldEmail.setText(Globals.currentUser.getEmail());
@@ -64,8 +65,10 @@ public class UserProfileController extends Controller {
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 
+		//Se questo è un user, allora dobbiamo mostrare anche lo storico.
 		if(Globals.currentUser instanceof User) {
 			System.out.println(Globals.storico);
+			
 			//pannello degli ordini
 			FlowPane flower = new FlowPane();
 			AnchorPane pane=null;
@@ -73,6 +76,7 @@ public class UserProfileController extends Controller {
 				Controller c = new Controller();
 				for(Order o : Globals.storico) {
 					try {
+						CartReviewController.initializeOrder(o);
 						pane=(FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
 						System.out.println(pane);
 					} catch (Exception e) {

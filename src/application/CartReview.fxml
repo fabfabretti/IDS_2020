@@ -2,16 +2,49 @@
 
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="270.0" prefWidth="239.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="270.0" prefWidth="239.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CartReviewController">
    <children>
-      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero ordine:             12                 " wrappingWidth="225.31287384033203" />
-      <ScrollPane layoutX="65.0" layoutY="173.0" prefHeight="90.0" prefWidth="169.0">
+      <ScrollPane layoutX="84.0" layoutY="173.0" prefHeight="90.0" prefWidth="121.0">
          <content>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </content>
       </ScrollPane>
-      <Text layoutX="14.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotti:" />
+      <Text layoutX="31.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prodotti:" />
+      <GridPane layoutX="31.0" layoutY="40.0" prefHeight="126.0" prefWidth="197.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.60003662109375" minWidth="10.0" prefWidth="115.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.39996337890625" minWidth="10.0" prefWidth="83.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Consegna prevista:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Orario previsto:" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Totale:" GridPane.rowIndex="4" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pagamento:" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo punti:" GridPane.rowIndex="2" />
+            <Text fx:id="txtDate" strokeType="OUTSIDE" strokeWidth="0.0" text="valore" GridPane.columnIndex="1" />
+            <Text fx:id="txtTime" strokeType="OUTSIDE" strokeWidth="0.0" text="valore" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="txtTotal" strokeType="OUTSIDE" strokeWidth="0.0" text="valore" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Text fx:id="txtPayment" strokeType="OUTSIDE" strokeWidth="0.0" text="valore" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fx:id="txtPoints" strokeType="OUTSIDE" strokeWidth="0.0" text="valore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Text fx:id="txtOrderId" layoutX="8.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordine ####">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

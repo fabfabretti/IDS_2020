@@ -1,17 +1,16 @@
 package application;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
-import java.util.HashSet;
 
 import data.Product;
 import data.Section;
 import data.User;
 import data.Worker;
-import minimalJson.*;
+import minimalJson.JsonArray;
+import minimalJson.JsonObject;
+import minimalJson.WriterConfig;
 
 public class JsonSaver {
 
@@ -109,155 +108,36 @@ public class JsonSaver {
 
 	public static void saveProducts() {
 
-		JsonArray product = new JsonArray(), productTmp = new JsonArray();
+		JsonArray /*product = new JsonArray(),*/ productTmp = new JsonArray();
 
 		JsonObject newJson = new JsonObject();
-
-		/*
-		 * BEVANDE
-		 */
-		for (Product p : Globals.bevande.getProducts()) {
-
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("name", p.getName());
-			jsonProduct.add("barCode", p.getBarCode());
-			jsonProduct.add("imagePath", p.getImagePath());
-			jsonProduct.add("brand", p.getBrand());
-			jsonProduct.add("weight", p.getWeight());
-			jsonProduct.add("unit", p.getUnit());
-			jsonProduct.add("price", p.getPrice());
-			jsonProduct.add("weightPrice", p.getWeightPrice());
-			jsonProduct.add("available", p.getAvailable());
-			jsonProduct.add("bio", p.isChar("bio")); 
-			jsonProduct.add("glutenfree", p.isChar("gluten"));
-			jsonProduct.add("vegan", p.isChar("vegan")); 
-			jsonProduct.add("lactosefree", p.isChar("diary"));
-
-			productTmp.add(jsonProduct);
-
-			System.out.println("\n[?] " + productTmp);
-		}
-		newJson.add(Globals.bevande.getName(), productTmp);
-
-		productTmp = new JsonArray();
-
-		/*
-		 * CARNE
-		 */
-		for (Product p : Globals.carne.getProducts()) {
-
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("name", p.getName());
-			jsonProduct.add("barCode", p.getBarCode());
-			jsonProduct.add("imagePath", p.getImagePath());
-			jsonProduct.add("brand", p.getBrand());
-			jsonProduct.add("weight", p.getWeight());
-			jsonProduct.add("unit", p.getUnit());
-			jsonProduct.add("price", p.getPrice());
-			jsonProduct.add("weightPrice", p.getWeightPrice());
-			jsonProduct.add("available", p.getAvailable());
-			jsonProduct.add("bio", p.isChar("bio")); 
-			jsonProduct.add("glutenfree", p.isChar("gluten"));
-			jsonProduct.add("vegan", p.isChar("vegan")); 
-			jsonProduct.add("lactosefree", p.isChar("diary"));
-
-			productTmp.add(jsonProduct);
-
-			System.out.println("\n[?] " + productTmp);
-		}
-		newJson.add(Globals.carne.getName(), productTmp);
-
-		productTmp = new JsonArray();
-
-		/*
-		 * PESCE
-		 */
-		for (Product p : Globals.pesce.getProducts()) {
-
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("name", p.getName());
-			jsonProduct.add("barCode", p.getBarCode());
-			jsonProduct.add("imagePath", p.getImagePath());
-			jsonProduct.add("brand", p.getBrand());
-			jsonProduct.add("weight", p.getWeight());
-			jsonProduct.add("unit", p.getUnit());
-			jsonProduct.add("price", p.getPrice());
-			jsonProduct.add("weightPrice", p.getWeightPrice());
-			jsonProduct.add("available", p.getAvailable());
-			jsonProduct.add("bio", p.isChar("bio")); 
-			jsonProduct.add("glutenfree", p.isChar("gluten"));
-			jsonProduct.add("vegan", p.isChar("vegan")); 
-			jsonProduct.add("lactosefree", p.isChar("diary"));
-
-			productTmp.add(jsonProduct);
-
-			System.out.println("\n[?] " + productTmp);
-		}
-		newJson.add(Globals.pesce.getName(), productTmp);
-
-		productTmp = new JsonArray();
-
-		/*
-		 * FRUTTA E VERDURA
-		 */
-		for (Product p : Globals.vegetali.getProducts()) {
-
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("name", p.getName());
-			jsonProduct.add("barCode", p.getBarCode());
-			jsonProduct.add("imagePath", p.getImagePath());
-			jsonProduct.add("brand", p.getBrand());
-			jsonProduct.add("weight", p.getWeight());
-			jsonProduct.add("unit", p.getUnit());
-			jsonProduct.add("price", p.getPrice());
-			jsonProduct.add("weightPrice", p.getWeightPrice());
-			jsonProduct.add("available", p.getAvailable());
-			jsonProduct.add("bio", p.isChar("bio")); 
-			jsonProduct.add("glutenfree", p.isChar("gluten"));
-			jsonProduct.add("vegan", p.isChar("vegan")); 
-			jsonProduct.add("lactosefree", p.isChar("diary"));
-
-			productTmp.add(jsonProduct);
-
-			System.out.println("\n[?] " + productTmp);
-		}
-		newJson.add(Globals.vegetali.getName(), productTmp);
-
-		productTmp = new JsonArray();
-
-		/*
-		 * LATTICINI
-		 */
-		for (Product p : Globals.latticini.getProducts()) {
-
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("name", p.getName());
-			jsonProduct.add("barCode", p.getBarCode());
-			jsonProduct.add("imagePath", p.getImagePath());
-			jsonProduct.add("brand", p.getBrand());
-			jsonProduct.add("weight", p.getWeight());
-			jsonProduct.add("unit", p.getUnit());
-			jsonProduct.add("price", p.getPrice());
-			jsonProduct.add("weightPrice", p.getWeightPrice());
-			jsonProduct.add("available", p.getAvailable());
-			jsonProduct.add("bio", p.isChar("bio")); 
-			jsonProduct.add("glutenfree", p.isChar("gluten"));
-			jsonProduct.add("vegan", p.isChar("vegan")); 
-			jsonProduct.add("lactosefree", p.isChar("diary"));
-		 
-
-			productTmp.add(jsonProduct);
-
-			System.out.println("\n[?] " + productTmp);
-		}
-		newJson.add(Globals.latticini.getName(), productTmp);
-
 		
+		for(Section s : Globals.reparti) {
+			for (Product p : s.getProducts()) {
+				
+				JsonObject jsonProduct = new JsonObject();
+
+				jsonProduct.add("name", p.getName());
+				jsonProduct.add("barCode", p.getBarCode());
+				jsonProduct.add("imagePath", p.getImagePath());
+				jsonProduct.add("brand", p.getBrand());
+				jsonProduct.add("weight", p.getWeight());
+				jsonProduct.add("unit", p.getUnit());
+				jsonProduct.add("price", p.getPrice());
+				jsonProduct.add("weightPrice", p.getWeightPrice());
+				jsonProduct.add("available", p.getAvailable());
+				jsonProduct.add("bio", p.isChar("bio")); 
+				jsonProduct.add("glutenfree", p.isChar("gluten"));
+				jsonProduct.add("vegan", p.isChar("vegan")); 
+				jsonProduct.add("lactosefree", p.isChar("diary"));
+				productTmp.add(jsonProduct);
+
+				System.out.println("\n[?] " + productTmp);
+			}
+			newJson.add(s.getName(), productTmp);
+
+			productTmp = new JsonArray();
+		}
 		// System.out.println("\n[?] " + product);
 
 		/**

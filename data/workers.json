@@ -1,17 +1,6 @@
 {
   "workers": [
     {
-      "email": "q",
-      "password": "q",
-      "name": "Admin",
-      "familyname": "Debugging",
-      "address": "Via bestemmie, 666",
-      "city": "Quel Paese",
-      "CAP": "66420",
-      "mobilenumber": "4136181111",
-      "workerid": 0
-    },
-    {
       "email": "adminn",
       "password": "admin",
       "name": "Admin",
@@ -21,6 +10,17 @@
       "CAP": "66420",
       "mobilenumber": "4136181111",
       "workerid": 1
+    },
+    {
+      "email": "q",
+      "password": "q",
+      "name": "Admin",
+      "familyname": "Debugging",
+      "address": "Via bestemmie, 666",
+      "city": "Quel Paese",
+      "CAP": "66420",
+      "mobilenumber": "4136181111",
+      "workerid": 0
     }
   ]
 }

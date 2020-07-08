@@ -66,7 +66,9 @@ public class Globals {
 	public static Order currentOrder = null;
 	
 	public static HashMap<Integer,Product> computeTable() {
-		storico.add(new Order());
+		if(barCodeTable!=null)
+			barCodeTable.clear();
+		
 		HashMap<Integer,Product> result = new HashMap<Integer,Product>();
 		
 		for(Section s : reparti)

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
+import data.Cart;
 import data.Order;
 import data.Payment;
 import data.Product;
@@ -84,11 +85,7 @@ public class UserCartController extends Controller{
 	// Display prodotti
 		@FXML
 		private AnchorPane cartviewPane;
-	
-	
-		
-	//Date Picker
-	
+
 	
 	public void initialize() {
 		
@@ -98,7 +95,7 @@ public class UserCartController extends Controller{
 		lblItems.setText(""+Globals.cart.getNumberOfProd());
 		txtError.setVisible(false);
 		
-		ProductViewer viewer = new ProductViewer(cartviewPane,Globals.cart);
+		new ProductViewer(cartviewPane,Globals.cart);
 		
 		
 		final ToggleGroup group = new ToggleGroup();
@@ -159,17 +156,63 @@ public class UserCartController extends Controller{
 		launchUI("/application/UserDatePicker.fxml");
 	}
 	
-	//verifica se nel frattempo sono finiti alcuni prodotti. Torna vero se è tutto a posto, falso se ha dovuto rimuovere dei prodotti.
+	
+	
+	/***
+	 * verifica se nel frattempo sono finiti alcuni prodotti. Torna vero se è tutto a posto, falso se ha dovuto rimuovere dei prodotti.
+	 * @return
+	 */
 	private boolean checkIfEverythingAvailable() {
 		boolean isStillAvailable = true;
+
+		//debug
+		System.out.println("OLD: " + Globals.cart.getProducts());
 		
+		//Aggiorno elenco prodotti
 		JsonLoader.loadProducts();
-		for(Product p : Globals.cart.getProducts().keySet()) {
-			if(Globals.cart.getProducts().get(p) > p.getAvailable() + Globals.cart.getProducts().get(p)){
-				System.out.println("[x] "+p.getName()+" is not available anymore!! ");		
-				Globals.cart.removeProduct(p);
+		
+		//debug
+		for(Product p : Globals.cart.getProducts().keySet())
+			System.out.println("NEW: " +Globals.barCodeTable.get(p.getBarCode()));
+		
+		// ATTENZIONE!! 
+		// Dato che ho ricaricato i prodotti daccapo, adesso gli oggetti salvati nel carrello sono
+		// prodotti SEPARATI da quelli presenti nei reparti (oh noes!!)
+		// Mi riconduco ai prodotti nei reparti usando la mitica barCodeTable
+		
+		//Devo lavorare su una lista separata perché java è stupido e non ti fa eliminare le cose se usi iterator >:(
+		Cart tmpcart = new Cart();
+	
+		for(Product oldProduct : Globals.cart.getProducts().keySet()) {
+			
+			//E' la versione "aggiornata" del prodotto
+			Product newProduct = Globals.barCodeTable.get(oldProduct.getBarCode());
+			
+			//debug
+			System.out.println("cart="+ Globals.cart.getProducts().get(oldProduct) +" available="+newProduct.getAvailable());
+			
+			//Se il prodotto non è disponibile abbasso il flag
+			if(Globals.cart.getProducts().get(oldProduct) < newProduct.getAvailable()){
+				System.out.println("[x] "+oldProduct.getName()+" is not available anymore!! ");		
+				//Globals.cart.removeProduct(p);
 				isStillAvailable = false;
 			}
+			
+			// Se il prodotto è disponibile lo aggiungo alla versione "finale" del carrello. (dato che java è stupido e non lo posso togliere.)
+			// Inoltre, sottraggo la quantità richiesta dalla lista di product (datoc he come già detto in questo momento i product
+			// del carrello non coincidono con quelli dei reparti.
+			else {
+				tmpcart.addProduct(newProduct,Globals.cart.getProducts().get(oldProduct));
+				newProduct.setAvailable(newProduct.getAvailable() - Globals.cart.getProducts().get(oldProduct));
+			}
+		}
+		
+		System.out.println(tmpcart);
+		Globals.cart = tmpcart;
+		
+		//Avendoli ricaricati, devo anche riaggiornare i product available!!
+		for(Product p : Globals.cart.getProducts().keySet()) {
+			p.setAvailable(p.getAvailable()-Globals.cart.getProducts().get(p));
 		}
 		
 		return isStillAvailable;

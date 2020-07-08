@@ -13,7 +13,7 @@ public class Section {
 	}
 
 	public void addProduct(Product p) {
-		System.out.println("[✓] Loaded product " + p.getName());
+	//	System.out.println("[✓] Loaded product " + p.getName());
 		products.add(p);
 	}
 

@@ -2,13 +2,23 @@ package data;
 
 import java.util.HashMap;
 
+/**
+ * Contiene le info di un carrello.
+ * @author Fabiola
+ *
+ */
 public class Cart {
 	
 	HashMap<Product,Integer> products = new HashMap<Product,Integer>();
 	float total = 0;
 	int numberOfProd = 0;
 	
-	
+		
+	/**
+	 * Aggiunge un prodotto al carrello e aggiorna i campi necessari.
+	 * @param p prodott da aggiungere
+	 * @param qty quantità da aggiungere
+	 */
 	public void addProduct(Product p,int qty) {
 		if(products.containsKey(p)==false) {
 			products.put(p, qty);
@@ -26,6 +36,10 @@ public class Cart {
 		
 	}	
 	
+	/**
+	 * Rimuove un prodotto dal carrello e aggiorna i campi necessari.
+	 * @param p prodotto
+	 */
 	public void removeProduct(Product p) {
 		
 		if(!(products.containsKey(p)))
@@ -40,6 +54,9 @@ public class Cart {
 		}
 	}
 	
+	/**
+	 * Svuota il carrello.
+	 */
 	public void flushCart() {
 		products.clear();
 		total = 0;
@@ -47,7 +64,13 @@ public class Cart {
 	}
 	
 	
-	
+	public Cart copyCart() {
+		Cart res = new Cart();
+		res.setNumberOfProd(numberOfProd);
+		res.setTotal(total);
+		res.setProducts(new HashMap<Product,Integer>(products));
+		return res;
+	}
 	
 	
 	
@@ -77,12 +100,18 @@ public class Cart {
 	public void setNumberOfProd(int numberOfProd) {
 		this.numberOfProd = numberOfProd;
 	}
+	/**
+	 * 
+	 * @return the products set
+	 */
 	public  HashMap<Product, Integer> getProducts() {
 		return products;
 	}
 	
-	
-	
-	
-	
+	/** 
+	 * @param the product set
+	 */
+	public void setProducts(HashMap<Product, Integer> products) {
+		this.products=products;
+	}	
 }

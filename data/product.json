@@ -1,202 +1,192 @@
 {
-	"Frutta e Verdura": [
-		{
-			"name": "Albicocche",
-			"barCode": 1000001,
-			"imagePath": "file:images/Product_albicocche.png",
-			"brand": "Selex",
-			"weight": 0.5,
-			"unit": "KG",
-			"price": 1.95,
-			"weightPrice": "3.90€/KG",
-			"available": 5,
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-		{
-			"name": "Pesche Nettarine Gialle 5/6pz",
-			"barCode": 1000002,
-			"imagePath": "file:images/Product_pesche.jpg",
-			"brand": "Selex",
-			"weight": 0.5,
-			"unit":"KG",
-			"price": 1.45,
-			"weightPrice": "2.90€/KG",
-			"available": 50,
-			
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-		{
-			"name": "Ciliegie Regina confezionate",
-			"barCode": 1000003,
-			"imagePath": "file:images/Product_ciliegie.png",
-			"brand": "Selex",
-			"weight": 0.5,
-			"unit": "KG",
-			"price": 6.98,
-			"weightPrice": "13.96€/KG",
-			"available": 10,
-			
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-			{
-			"name": "Fichi Turchia confezionati",
-			"barCode": 1000004,
-			"imagePath": "",
-			"brand": "Selex",
-			"weight": 0.25,
-			"unit": "KG",
-			"price": 2.48,
-			"weightPrice": "9.92€/KG",
-			"available": 0,
-			
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-			{
-			"name": "Prezzemolo foglia confezionato",
-			"barCode": 1000005,
-			"imagePath": "file:images/Product_prezzemolo.png",
-			"brand": "Selex",
-			"weight": 0.04,
-			"unit": "KG",
-			"price": 1.10,
-			"weightPrice": "27.50€/KG",
-			"available": 10,
-			
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-		
-			{
-			"name": "Cipolle dorate bio",
-			"barCode": 1000006,
-			"imagePath": "file:images/Product_cipollebio.png",
-			"brand": "Esselunga",
-			"weight": 0.500,
-			"unit" : "KG",
-			"price": 1.48,
-			"weightPrice": "2.96€/KG",
-			"available": 10,
-			
-			"bio": true,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-		
-			{
-			"name": "Rucola biologica bio",
-			"barCode": 1000007,
-			"imagePath": "file:images/Product_rucolabio.png",
-			"brand": "Bonduelle",
-			"weight": 0.100,
-			"unit": "KG",
-			"price": 1.85,
-			"weightPrice": "12.90€/KG",
-			"available": 10,
-			
-			"bio": true,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		}
-		
-		],
-	
-	"Pesce": [
-		{
-			"name": "Filetti di sgombro al naturale",
-			"barCode": 2000001,
-			"imagePath": "",
-			"brand": "Esselunga",
-			"weight": 0.250,
-			"unit": "KG",
-			"price": 4.79,
-			"weightPrice": "28.18€/KG",
-			"available": 3,
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		},
-		{
-			"name": "Tonno all'olio d'oliva",
-			"barCode": 2000002,
-			"imagePath": "",
-			"brand": "Esselunga",
-			"weight": 0.48,
-			"unit" : "KG",
-			"price": 6.99,
-			"weightPrice": "19.42€/KG",
-			"available": 10,
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		}
-	],
-	"Carne": [
-		{
-			"name": "Alette di pollo allevato senza antibiotici",
-			"barCode": 3000001,
-			"imagePath": "file:images/Product_3000001.png",
-			"brand": "Naturama",
-			"weight": 0.7,
-			"unit":"KG",
-			"price": 2.79,
-			"weightPrice": "3.99€/KG",
-			"available": 0,
-			"bio": true,
-			"glutenfree":false,
-			"vegan":false,
-			"lactosefree":false
-		}
-	],
-	"Latte e Formaggi": [
-		{
-			"name": "Latte UHT parzialmente scremato",
-			"barCode": 4000001,
-			"imagePath": "file:images/Product_4000001.png",
-			"brand": "Parmalat",
-			"weight": 1,
-			"unit": "L",
-			"price": 1.53,
-			"weightPrice": "1.53€/L",
-			"available": 50,
-			"bio": false,
-			"glutenfree":false,
-			"vegan":false,
-			"lactosefree":false
-		}
-	],
-	"Bevande": [
-		{
-			"name": "Tea limone senza zuccheri",
-			"barCode": 5000001,
-			"imagePath": "file:images/Product_5000001.png",
-			"brand": "Selex",
-			"weight": 0.4,
-			"unit": "L",
-			"price":0.79,
-			"weightPrice": "1.98/L",
-			"available": 0,
-			"bio": false,
-			"glutenfree":true,
-			"vegan":true,
-			"lactosefree":true
-		}
-	]
+  "Frutta e Verdura": [
+    {
+      "name": "Albicocche",
+      "barCode": 1000001,
+      "imagePath": "file:images/Product_albicocche.png",
+      "brand": "Selex",
+      "weight": 0.5,
+      "unit": "KG",
+      "price": 1.95,
+      "weightPrice": "3,90 €/KG",
+      "available": 5,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Pesche Nettarine Gialle 5/6pz",
+      "barCode": 1000002,
+      "imagePath": "file:images/Product_pesche.jpg",
+      "brand": "Selex",
+      "weight": 0.5,
+      "unit": "KG",
+      "price": 1.45,
+      "weightPrice": "2,90 €/KG",
+      "available": 50,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Ciliegie Regina confezionate",
+      "barCode": 1000003,
+      "imagePath": "file:images/Product_ciliegie.png",
+      "brand": "Selex",
+      "weight": 0.5,
+      "unit": "KG",
+      "price": 6.98,
+      "weightPrice": "13,96 €/KG",
+      "available": 10,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Fichi Turchia confezionati",
+      "barCode": 1000004,
+      "imagePath": "file:images/Product_1000004.png",
+      "brand": "Selex",
+      "weight": 0.25,
+      "unit": "KG",
+      "price": 2.48,
+      "weightPrice": "9,92 €/KG",
+      "available": 0,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Prezzemolo foglia confezionato",
+      "barCode": 1000005,
+      "imagePath": "file:images/Product_prezzemolo.png",
+      "brand": "Selex",
+      "weight": 0.04,
+      "unit": "KG",
+      "price": 1.1,
+      "weightPrice": "27,50 €/KG",
+      "available": 10,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Cipolle dorate bio",
+      "barCode": 1000006,
+      "imagePath": "file:images/Product_cipollebio.png",
+      "brand": "Esselunga",
+      "weight": 0.5,
+      "unit": "KG",
+      "price": 1.48,
+      "weightPrice": "2,96 €/KG",
+      "available": 10,
+      "bio": true,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Rucola biologica bio",
+      "barCode": 1000007,
+      "imagePath": "file:images/Product_rucolabio.png",
+      "brand": "Bonduelle",
+      "weight": 0.1,
+      "unit": "KG",
+      "price": 1.85,
+      "weightPrice": "18,50 €/KG",
+      "available": 10,
+      "bio": true,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    }
+  ],
+  "Pesce": [
+    {
+      "name": "Filetti di sgombro al naturale",
+      "barCode": 2000001,
+      "imagePath": "file:images/Product_2000001.png",
+      "brand": "Esselunga",
+      "weight": 0.25,
+      "unit": "KG",
+      "price": 4.79,
+      "weightPrice": "19,16 €/KG",
+      "available": 3,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    },
+    {
+      "name": "Tonno all'olllllio d'oliva",
+      "barCode": 2000002,
+      "imagePath": "file:images/Product_2000002.png",
+      "brand": "Esselunga",
+      "weight": 0.48,
+      "unit": "KG",
+      "price": 6.99,
+      "weightPrice": "14,56 €/KG",
+      "available": 10,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    }
+  ],
+  "Carne": [
+    {
+      "name": "Alette di pollo allevato senza antibiotici",
+      "barCode": 3000001,
+      "imagePath": "file:images/Product_3000001.png",
+      "brand": "Naturama",
+      "weight": 0.7,
+      "unit": "KG",
+      "price": 2.79,
+      "weightPrice": "3,99 €/KG",
+      "available": 1,
+      "bio": true,
+      "glutenfree": false,
+      "vegan": false,
+      "lactosefree": false
+    }
+  ],
+  "Latte e Formaggi": [
+    {
+      "name": "Latte UHT parzialmente scremato",
+      "barCode": 4000001,
+      "imagePath": "file:images/Product_4000001.png",
+      "brand": "Parmalat",
+      "weight": 1,
+      "unit": "L",
+      "price": 1.53,
+      "weightPrice": "1,53 €/L",
+      "available": 50,
+      "bio": false,
+      "glutenfree": false,
+      "vegan": false,
+      "lactosefree": false
+    }
+  ],
+  "Bevande": [
+    {
+      "name": "Tea limone senza zuccheri",
+      "barCode": 5000001,
+      "imagePath": "file:images/Product_5000001.png",
+      "brand": "Selex",
+      "weight": 0.4,
+      "unit": "L",
+      "price": 0.79,
+      "weightPrice": "1,98 €/L",
+      "available": 0,
+      "bio": false,
+      "glutenfree": true,
+      "vegan": true,
+      "lactosefree": true
+    }
+  ]
 }

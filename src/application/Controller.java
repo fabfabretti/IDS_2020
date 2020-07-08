@@ -19,7 +19,6 @@ import javafx.stage.StageStyle;
 public class Controller {
 	
 	
-	public void Controller() {};
 	/***
 	 * Apre una nuova finestra in JavaFX (gestendo il try/catch e impostando un paio di cose utili, come il css o il not-resizable)
 	 * @param path path dell'fxml.
