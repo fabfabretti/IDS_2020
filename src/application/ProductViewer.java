@@ -17,8 +17,7 @@ import javafx.scene.layout.Pane;
  * Classe che gestisce la visualizzazione di un elenco di prodotti.
  *
  */
-public class ProductViewer {
-	
+public class ProductViewer {	
 
 	private Comparator <Product> currComparator = new Comparator<Product>() {
         @Override
