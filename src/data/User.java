@@ -14,9 +14,10 @@ public class User extends UserGeneral {
 	// TODO
 	// private String PreferedPaymentMethod;
 
-	public User(String email, String password,String name, String familyname, String address, String city, String cap, String mobilenumber, int userid) {
-		this.email=email;
-		this.password=password;
+	public User(String email, String password, String name, String familyname, String address, String city, String cap,
+			String mobilenumber, int userid) {
+		this.email = email;
+		this.password = password;
 		this.anagrafica = new PersonalInformation();
 		getAnagrafica().setName(name);
 		getAnagrafica().setFamilyName(familyname);
@@ -24,9 +25,8 @@ public class User extends UserGeneral {
 		getAnagrafica().setCity(city);
 		getAnagrafica().setCAP(cap);
 		getAnagrafica().setMobileNumber(mobilenumber);
-		userID=userid;
+		userID = userid;
 	}
-
 
 	/***
 	 * getter

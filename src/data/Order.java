@@ -15,75 +15,79 @@ considerata.
  * 
  * */
 public class Order {
-	
-	//Identificativo dell'ordine
-	private int orderid;
-	
-	//Data prevista consegna
-	private LocalDate date;
-	
-	//Orario previsto consegna
-	private OrderDeliveryTime time;
-	
-	//Stato consegna
-	private OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
-	
-	//Contiene il cart; la parte rilevante è l'elenco dei prodotti (Now comes in barcodes!! :D)
-	private Cart cart;
-	
-	//Me serve per tenere in memoria il costo al momento dell'acquisto.
-	private HashMap<Integer,Float> prices = new HashMap<Integer,Float>();
-	//User che ha effettuato l'ordine
-	private User user=(User) Globals.currentUser;
 
-	//Metodo di pagamento
+	// Identificativo dell'ordine
+	private int orderid;
+
+	// Data prevista consegna
+	private LocalDate date;
+
+	// Orario previsto consegna
+	private OrderDeliveryTime time;
+
+	// Stato consegna
+	private OrderDeliveryState state = OrderDeliveryState.CONFERMATA;
+
+	// Contiene il cart; la parte rilevante è l'elenco dei prodotti (Now comes in
+	// barcodes!! :D)
+	private Cart cart;
+
+	// Me serve per tenere in memoria il costo al momento dell'acquisto.
+	private HashMap<Integer, Float> prices = new HashMap<Integer, Float>();
+
+	// User che ha effettuato l'ordine
+	private User user = (User) Globals.currentUser;
+
+	// Metodo di pagamento
 	private Payment payment;
-	
-	//Ulteriori informazioni (es. carta di credito, paypal...)
+
+	// Ulteriori informazioni (es. carta di credito, paypal...)
 	private String paymentInfo;
-	
-	//Info consegna
+
+	// Info consegna
 	private String address;
-	
+
 	/**
 	 * Crea un ordine.
-	 * @param cart il cart
-	 * @param payment tipo di pagamento
-	 * @param paymentInfo info sul tipo di pagamento (es. paypal->credenziali,/carta->codice...)
-	 * @param address
+	 * 
+	 * @param cart        indica il carrello
+	 * @param payment     indica tipo di pagamento
+	 * @param paymentInfo info sul tipo di pagamento (es.
+	 *                    paypal->credenziali,/carta->codice...)
+	 * @param address     indica l'indirizzo utile alla consegna della spesa
 	 */
 	public Order(Cart cart, Payment payment, String paymentInfo, String address) {
 
-		//Inseriamo questo ordine nella lista di ordini esistenti.
-		Globals.storico.add(this);
-		
-		//Inseriamo i dati dell'ordine...
-		this.cart=cart.copyCart();
-		this.payment=payment;
-		this.paymentInfo=paymentInfo;
-		this.address=address;
-		orderid= Globals.storico.size();
-		
-		//Inseriamo i dati sul prezzo!
-		for(Integer i : cart.getProducts().keySet()) {
+		// Inseriamo questo ordine nella lista di ordini esistenti.
+		//??Globals.storico.add(this);
+
+		// Inseriamo i dati dell'ordine...
+		this.cart = cart.copyCart();
+		this.payment = payment;
+		this.paymentInfo = paymentInfo;
+		this.address = address;
+		orderid = Globals.storico.size();
+
+		// Inseriamo i dati sul prezzo!
+		for (Integer i : cart.getProducts().keySet()) {
 			float currentPrice = Globals.barCodeTable.get(i).getPrice();
 			prices.put(i, currentPrice);
 		}
-		
-		//debug
+
+		// debug
 		System.out.println("[✓] Ordine generato");
 	}
-	
+
 	/**
-	 * Aggiunge data e ora all'ordine
-	 * @param date la data
-	 * @param time la fascia oraria
+	 * Aggiunge data e ora per il nuovo ordine.
+	 * 
+	 * @param date la data inserita
+	 * @param time la fascia oraria scelta
 	 */
 	public void confirmOrder(LocalDate date, OrderDeliveryTime time) {
-		this.date=date;
-		this.time=time;
+		this.date = date;
+		this.time = time;
 	}
-
 
 	/**
 	 * @return the orderid
@@ -114,14 +118,14 @@ public class Order {
 	}
 
 	/**
-	 * @return the time
+	 * Ritorna la fascia oraria scelta dall'utente.
 	 */
 	public OrderDeliveryTime getTime() {
 		return time;
 	}
 
 	/**
-	 * @param time the time to set
+	 * imposta la fascia oraria scelta dall'utente.
 	 */
 	public void setTime(OrderDeliveryTime time) {
 		this.time = time;
@@ -142,7 +146,7 @@ public class Order {
 	}
 
 	/**
-	 * @return the cart
+	 * Ritorna il carrello dell'ordine.
 	 */
 	public Cart getCart() {
 		return cart;
@@ -181,8 +185,8 @@ public class Order {
 	 */
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
-	}	
-	
+	}
+
 	/**
 	 * @return the user
 	 */
@@ -196,9 +200,7 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
 
-	
 	/**
 	 * @return the address
 	 */
@@ -212,7 +214,6 @@ public class Order {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	/**
 	 * @return the prices

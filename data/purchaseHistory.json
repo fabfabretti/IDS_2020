@@ -1,0 +1,18 @@
+{
+  "storico ordini": [
+    {
+      "orderID": 1,
+      "userID": 0,
+      "stateOrdinal": 0,
+      "deliveryDate": "2029-11-11",
+      "deliveryTimeOrdinal": 0,
+      "totalAmount": 10.08,
+      "paymentInfo": "Nessuna informazione aggiuntiva",
+      "paymentOrdinal": 0,
+      "address": "q, q, q",
+      "products": [
+        
+      ]
+    }
+  ]
+}

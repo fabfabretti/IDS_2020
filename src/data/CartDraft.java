@@ -7,10 +7,14 @@ import application.Globals;
 
 public class CartDraft {
 
-	// Hashmap prodotti barcode->quantity
+	/*
+	 * Hashmap prodotti barcode->quantity
+	 */
 	HashMap<Integer, Integer> products = new HashMap<Integer, Integer>();
 
-	// ID dello user che ha effettuato la spesa attualmente in bozza
+	/*
+	 * ID dello user che ha effettuato la spesa attualmente in bozza
+	 */
 	int userID;
 
 	public HashMap<Integer, Integer> getProducts() {
@@ -33,24 +37,30 @@ public class CartDraft {
 		this.products.put(barCode, quantity);
 	}
 
+	/*
+	 * Imposta un draft come carrello nel caso in cui l'utente abbia il medesimo
+	 * userID di uno dei carrelli salvati in draft.
+	 */
 	public static void draftToCart() {
+
 		Cart newCart = new Cart();
-		
-		User tmp = (User) Globals.currentUser;
-		int indexForRemovingEntry = 0;
+
+		User tmpUser = (User) Globals.currentUser;
+
+		int indexForRemovingEntry = -1;
 
 		for (CartDraft d : Globals.drafts) {
 			// Si valuta se esiste un draft avente medesimo userID dell'utente attivo
-			if (d.getUserID() == tmp.getUserID()) {
+			if (d.getUserID() == tmpUser.getUserID()) {
 				indexForRemovingEntry = Globals.drafts.indexOf(d);
 
 				for (Entry<Integer, Integer> e : d.getProducts().entrySet())
 					newCart.addProduct(Globals.barCodeTable.get(e.getKey()), e.getValue());
 
+				Globals.drafts.remove(indexForRemovingEntry);
+				Globals.cart = newCart;
 			}
-			
-			Globals.drafts.remove(indexForRemovingEntry);
-			Globals.cart = newCart;
+
 		}
 	}
 }

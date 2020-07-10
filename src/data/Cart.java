@@ -10,18 +10,25 @@ import application.Globals;
  */
 public class Cart {
 	/*
-	 * Prodotti contenuti nel carrello:
-	 * barCode - quantità
+	 * Prodotti contenuti nel carrello: barCode - quantità
 	 */
 	HashMap<Integer, Integer> products = new HashMap<Integer, Integer>();
+
+	/*
+	 * Ammontare totale della spesa
+	 */
 	float total = 0;
+
+	/*
+	 * Numero totale di prodotti.
+	 */
 	int numberOfProd = 0;
 
 	/**
 	 * Aggiunge un prodotto al carrello e aggiorna i campi necessari.
 	 * 
-	 * @param p   prodott da aggiungere
-	 * @param qty quantità da aggiungere
+	 * @param p   prodotto da aggiungere
+	 * @param qty quantità del prodotto da aggiungere
 	 */
 	public void addProduct(Product p, int qty) {
 		if (products.containsKey(p.getBarCode()) == false) {
@@ -43,7 +50,7 @@ public class Cart {
 	/**
 	 * Rimuove un prodotto dal carrello e aggiorna i campi necessari.
 	 * 
-	 * @param p prodotto
+	 * @param p prodotto da rimuovere.
 	 */
 	public void removeProduct(Product p) {
 
@@ -82,43 +89,44 @@ public class Cart {
 	}
 
 	/**
-	 * @return the total
+	 * Ritorna il totale della spesa nel carrello.
 	 */
 	public float getTotal() {
 		return total;
 	}
 
 	/**
-	 * @param total the total to set
+	 * Imposta il totale della spesa nel carrello.
+	 * 
+	 * @param total il valore da impostare come total.
 	 */
 	public void setTotal(float total) {
 		this.total = total;
 	}
 
 	/**
-	 * @return the numberOfProd
+	 * Ritorna il numero totale di prodotti nel carrello.
 	 */
 	public int getNumberOfProd() {
 		return numberOfProd;
 	}
 
 	/**
-	 * @param numberOfProd the numberOfProd to set
+	 * Imposta il numero totale di prodotti nel carrello.
 	 */
 	public void setNumberOfProd(int numberOfProd) {
 		this.numberOfProd = numberOfProd;
 	}
 
 	/**
-	 * 
-	 * @return the products set
+	 * Ritorna un HashMap <barCode, quantità> dei prodotti nel carrello.
 	 */
 	public HashMap<Integer, Integer> getProducts() {
 		return products;
 	}
 
 	/**
-	 * @param the product set
+	 * Imposta un HashMap <barCode, quantità> come prodotti nel carrello.
 	 */
 	public void setProducts(HashMap<Integer, Integer> hashMap) {
 		this.products = hashMap;

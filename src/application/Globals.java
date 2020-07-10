@@ -36,8 +36,9 @@ public class Globals {
 
 	// Storico
 
-	public static ArrayList<Order> storico = new ArrayList<Order>();
-
+	//public static ArrayList<Order> storico = new ArrayList<Order>(); //TODO aggiungere JsonLoader.
+	public static ArrayList<Order> storico = JsonLoader.loadPurchaseHisotory();
+	
 	// Sections e prodotti
 
 	public static Section vegetali = new Section("Frutta e Verdura");

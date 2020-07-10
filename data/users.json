@@ -17,12 +17,24 @@
       "password": "a",
       "name": "User",
       "familyname": "Debugging",
-      "address": "Via bestemmie, 666",
+      "address": "Via rossi, 6",
       "city": "Quel Paese",
       "CAP": "66420",
       "mobilenumber": "4136181111",
       "fidelitycard": "",
       "userid": 0
+    },
+        {
+      "email": "z",
+      "password": "z",
+      "name": "Nuovo",
+      "familyname": "Utilitì",
+      "address": "Via mario, 66",
+      "city": "Quel Paese",
+      "CAP": "66420",
+      "mobilenumber": "4136181111",
+      "fidelitycard": "",
+      "userid": 2
     }
   ]
 }

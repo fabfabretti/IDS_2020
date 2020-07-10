@@ -1,5 +1,5 @@
 package data;
 
 public enum Payment {
-CONSEGNA,PAYPAL,CARTA
+	CONSEGNA, PAYPAL, CARTA
 }

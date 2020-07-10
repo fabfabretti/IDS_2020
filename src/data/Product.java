@@ -6,14 +6,14 @@ import application.Globals;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class Product implements Comparable<Product>{
-	
+public class Product implements Comparable<Product> {
+
 	//
 	//
 	// VARIABILI E FLAG DEI PRODOTTI
 	//
 	//
-	
+
 	private String name;
 
 	private int barCode;
@@ -21,113 +21,100 @@ public class Product implements Comparable<Product>{
 	private String imagePath = "";
 
 	private String brand;
-	
+
 	private String unit;
-	
+
 	private float weight;
-	
-	private float price;	
-	
+
+	private float price;
+
 	private String weightPrice;
-	
+
 	private int available;
-	
+
 	private Section section;
 
-	
 	/*
-	 * Array che indica quali caratteristiche possiede il prodotto
-	 * c[0] = biologico 
-	 * c[1] = celiachi
-	 * c[2] = vegano 
-	 * c[3] = no lattosio
+	 * Array che indica quali caratteristiche possiede il prodotto c[0] = biologico
+	 * c[1] = celiachi c[2] = vegano c[3] = no lattosio
 	 */
 	private boolean[] characteristics = new boolean[] { false, false, false, false };
 
-	
-	
-		//
-		//
-		//   COSTRUTTORE
-		//
-		//
-	
-		public Product(String name, int barCode, String imagePath, String brand, float weight, String unit, float price, int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree, Section section) {
-			this.name=name;
-			this.barCode=barCode;
-			this.imagePath=imagePath;
-			this.brand=brand;
-			this.weight=weight;
-			this.unit=unit;
-			this.price=price;
-			this.weightPrice= String.format("%.2f €/%s", (float)price / weight, unit);
-			this.available=available;
-			this.section=section;
-			
-			characteristics[0]=bio;	
-			characteristics[1]=glutenfree;	
-			characteristics[2]=vegan;	
-			characteristics[3]=lactosefree;
+	//
+	//
+	// COSTRUTTORE
+	//
+	//
 
-			section.addProduct(this);
-		}
-		
-		public Product() {
-			name="";
+	public Product(String name, int barCode, String imagePath, String brand, float weight, String unit, float price,
+			int available, boolean bio, boolean glutenfree, boolean vegan, boolean lactosefree, Section section) {
+		this.name = name;
+		this.barCode = barCode;
+		this.imagePath = imagePath;
+		this.brand = brand;
+		this.weight = weight;
+		this.unit = unit;
+		this.price = price;
+		this.weightPrice = String.format("%.2f €/%s", (float) price / weight, unit);
+		this.available = available;
+		this.section = section;
 
-			imagePath = "";
+		characteristics[0] = bio;
+		characteristics[1] = glutenfree;
+		characteristics[2] = vegan;
+		characteristics[3] = lactosefree;
 
-			brand="";
-			
-			unit="KG";
-			
-			weight=0;
-			
-			price=0;	
-			
-			weightPrice="";
-			
-			available=0;
-			
-			section=null;
-			
-			barCode=0 + Globals.reparti[0].getProducts().size();
+		section.addProduct(this);
+	}
 
-			
-			/*
-			 * Array che indica quali caratteristiche possiede il prodotto
-			 * c[0] = biologico 
-			 * c[1] = celiachi
-			 * c[2] = vegano 
-			 * c[3] = no lattosio
-			 */
-			characteristics = new boolean[] { false, false, false, false };
+	public Product() {
+		name = "";
 
-			
-			
-		};
-		
-		//
-		//
-		// Utility
-		//
-		//
-	
-		public boolean search(String keyword) {			
-			if(name.toLowerCase().contains(keyword.toLowerCase()) || brand.toLowerCase().contains(keyword.toLowerCase()))
-				return true;
-			return false;
-			
-		}
-	
-	
+		imagePath = "";
+
+		brand = "";
+
+		unit = "KG";
+
+		weight = 0;
+
+		price = 0;
+
+		weightPrice = "";
+
+		available = 0;
+
+		section = null;
+
+		barCode = 0 + Globals.reparti[0].getProducts().size();
+
+		/*
+		 * Array che indica quali caratteristiche possiede il prodotto c[0] = biologico
+		 * c[1] = celiachi c[2] = vegano c[3] = no lattosio
+		 */
+		characteristics = new boolean[] { false, false, false, false };
+
+	};
+
+	//
+	//
+	// Utility
+	//
+	//
+
+	public boolean search(String keyword) {
+		if (name.toLowerCase().contains(keyword.toLowerCase()) || brand.toLowerCase().contains(keyword.toLowerCase()))
+			return true;
+		return false;
+
+	}
+
 	//
 	//
 	// METODI JAVA FX
 	//
 	//
-	
-	
+
 	/**
 	 * Costruisce un pannello standard con i dati di questo prodotto
 	 * 
@@ -161,47 +148,29 @@ public class Product implements Comparable<Product>{
 
 	}
 
-	
 	//
 	// DEBUG METHODS
 	//
-	
+
 	public String toStringVerbose() {
-		String res="-----prodotto: " + name
-				+ "\n code: " + barCode 
-				+ "\t img: " + imagePath
-				+ "\t brand: " + brand
-				+ "\t weight: " + weight
-				+ "\t price: " + price
-				+ "\t priceWeight: " + weightPrice
-				+ "\t available: " + available
-				+ "\nchar:"+ characteristics[0] +
-							characteristics[1]+	
-							characteristics[2]+	
-							characteristics[3]
-				+"\n";
+		String res = "-----prodotto: " + name + "\n code: " + barCode + "\t img: " + imagePath + "\t brand: " + brand
+				+ "\t weight: " + weight + "\t price: " + price + "\t priceWeight: " + weightPrice + "\t available: "
+				+ available + "\nchar:" + characteristics[0] + characteristics[1] + characteristics[2]
+				+ characteristics[3] + "\n";
 		return res;
 	}
-	
+
 	public String toString() {
-		String res=" ["+ name
-				+ "|| code: " + barCode 
-				+ "|| brand: " + brand
-				+ "|| weight: " + weight
-				+ "|| price: " + price
-				+ "|| available: " + available + " ]";
+		String res = " [" + name + "|| code: " + barCode + "|| brand: " + brand + "|| weight: " + weight + "|| price: "
+				+ price + "|| available: " + available + " ]";
 		return res;
 	}
-	
-	
 
 	//
 	//
-	//  GET&SET
+	// GET&SET
 	//
 	//
-
-
 
 	/**
 	 * @return the name
@@ -271,7 +240,7 @@ public class Product implements Comparable<Product>{
 	 */
 	public void setWeight(float weight) {
 		this.weight = weight;
-		this.weightPrice=String.format("%.2f €/%s", (float)price / weight, unit);		
+		this.weightPrice = String.format("%.2f €/%s", (float) price / weight, unit);
 	}
 
 	/**
@@ -286,7 +255,7 @@ public class Product implements Comparable<Product>{
 	 */
 	public void setPrice(float price) {
 		this.price = price;
-		this.weightPrice=String.format("%.2f €/%s", (float)price / weight, unit);
+		this.weightPrice = String.format("%.2f €/%s", (float) price / weight, unit);
 	}
 
 	/**
@@ -330,33 +299,26 @@ public class Product implements Comparable<Product>{
 	public void setCharacteristics(boolean[] characteristics) {
 		this.characteristics = characteristics;
 	}
-	
+
 	/**
 	 * @param the section
 	 */
 	public Section getSection() {
 		return section;
 	}
-	
+
 	/**
 	 * @param characteristics the characteristics to set
 	 */
 	public void setSection(Section section) {
-		this.section=section;
+		this.section = section;
 	}
-	
-	
-	
-	
-	
 
 	@Override
-	public int compareTo(Product other) {	
-		
-		
-	 return barCode - other.barCode ;
-			
-	
+	public int compareTo(Product other) {
+
+		return barCode - other.barCode;
+
 	}
 
 	public String getUnit() {
@@ -366,27 +328,23 @@ public class Product implements Comparable<Product>{
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	
+
 	public boolean isChar(String chara) {
-		
+
 		/*
-		 * Array che indica quali caratteristiche possiede il prodotto
-		 * c[0] = biologico 
-		 * c[1] = celiachi
-		 * c[2] = vegano 
-		 * c[3] = no lattosio
+		 * Array che indica quali caratteristiche possiede il prodotto c[0] = biologico
+		 * c[1] = celiachi c[2] = vegano c[3] = no lattosio
 		 */
-		if(chara.toLowerCase().equals("bio"))
+		if (chara.toLowerCase().equals("bio"))
 			return characteristics[0];
-		if(chara.toLowerCase().equals("gluten"))
-			return characteristics[1];		
-		if(chara.toLowerCase().equals("vegan"))
-			return characteristics[2];	
-		if(chara.toLowerCase().equals("diary"))
+		if (chara.toLowerCase().equals("gluten"))
+			return characteristics[1];
+		if (chara.toLowerCase().equals("vegan"))
+			return characteristics[2];
+		if (chara.toLowerCase().equals("diary"))
 			return characteristics[3];
-	return false;
-	
+		return false;
+
 	}
-	
-	
+
 }

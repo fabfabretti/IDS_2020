@@ -3,10 +3,16 @@ package application;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import data.Cart;
 import data.CartDraft;
+import data.Order;
+import data.OrderDeliveryState;
+import data.OrderDeliveryTime;
+import data.Payment;
 import data.Product;
 import data.Section;
 import data.User;
@@ -18,7 +24,10 @@ import minimalJson.JsonObject.Member;
 import minimalJson.JsonValue;
 
 public class JsonLoader {
-
+	
+	/*
+	 * La funzione carica i prodotti in memoria (Globals -> product).
+	 */
 	static void loadProducts() {
 
 		// Se è un aggiornamento, devo prima svuotare il reparto.
@@ -95,6 +104,9 @@ public class JsonLoader {
 
 	}
 
+	/*
+	 * La funzione carica i profili degli user (Globals -> users)
+	 */
 	static HashSet<User> loadUsers() {
 
 		System.out.println("[...] Loading users...");
@@ -144,6 +156,9 @@ public class JsonLoader {
 		return users;
 	}
 
+	/*
+	 * La funzione carica i profili dei worker (Globals -> workers)
+	 */
 	static public HashSet<Worker> loadWorkers() {
 
 		System.out.println("[...] Loading workers...");
@@ -187,14 +202,17 @@ public class JsonLoader {
 			}
 
 		} catch (IOException e) {
-			System.out.println("[x] Errore I/O nel caricamento utenti");
+			System.out.println("[x] Errore I/O nel caricamento dei lavoratori");
 		}
 
 		return users;
 	}
 
 	/*
-	 * La funzione carica i draft dei carrelli non terminati (Globals -> drafts)
+	 * La funzione carica i draft dei carrelli non terminati (Globals -> drafts).
+	 * 
+	 * La funzione draftToCart (vedi CartDraft) carica un eventuale carrello
+	 * lasciato in sospeso all'utente di appartenenza
 	 */
 	static public ArrayList<CartDraft> loadDrafts() {
 
@@ -218,18 +236,74 @@ public class JsonLoader {
 					int quantity = p.asObject().getInt("quantity", 0);
 
 					tmp.addProduct(barCode, quantity);
-
-					System.out.println("\nTMP:" + tmp.toString() + "\bvarCode e quantiti: " + barCode + " " + quantity);
-
 				}
 				drafts.add(tmp);
 
 			}
 		} catch (IOException e) {
-			System.out.println("[x] Errore I/O nel caricamento utenti");
+			System.out.println("[x] Errore I/O nel caricamento dei carrelli in sospeso.");
 		}
 
 		return drafts;
 	}
 
+	/*
+	 * La funzione carica lo storico degli ordini eseguiti dal medesimo utente
+	 * (Globals->storico).
+	 */
+	static public ArrayList<Order> loadPurchaseHisotory() {
+
+		System.out.println("[...] Loading purchase history...");
+
+		ArrayList<Order> storico = new ArrayList<Order>();
+
+		try (Reader reader = new FileReader("./data/purchaseHistory.json")) {
+
+			JsonArray fileHistory = Json.parse(reader).asObject().get("storico ordini").asArray();
+
+			for (JsonValue d : fileHistory) {
+
+				int userID = d.asObject().getInt("userID", -1);
+
+				int orderID = d.asObject().getInt("orderID", -1);
+
+				int deliveryStateOrdinal = d.asObject().getInt("stateOrdinal", -1);
+				OrderDeliveryState deliveryState = OrderDeliveryState.values()[deliveryStateOrdinal];
+
+				String deliveryDateTmp = d.asObject().getString("deliveryDate", null);
+				LocalDate deliveryDate = LocalDate.parse(deliveryDateTmp);
+
+				int deliveryTimeOrdinal = d.asObject().getInt("deliveryTimeOrdinal", -1);
+				OrderDeliveryTime deliveryTime = OrderDeliveryTime.values()[deliveryTimeOrdinal];
+
+				float totalAmount = d.asObject().getFloat("totalAmount", 0);
+
+				String paymentInfo = d.asObject().getString("paymentInfo", null);
+
+				int paymentOrdinal = d.asObject().getInt("paymentOrdinal", -1);
+				Payment payment = Payment.values()[paymentOrdinal];
+
+				String address = d.asObject().getString("address", null);
+
+				Cart cartTmp = new Cart();
+
+				for (JsonValue p : d.asObject().get("products").asArray()) {
+
+					int barCode = p.asObject().getInt("barCode", -1);
+					int quantity = p.asObject().getInt("quantity", 0);
+
+					cartTmp.addProduct(Globals.barCodeTable.get(barCode), quantity);
+				}
+
+				Order singleOrder = new Order(cartTmp, payment, paymentInfo, address);
+
+				storico.add(singleOrder);
+			}
+
+		} catch (IOException e) {
+			System.out.println("[x] Errore I/O nel caricamento storico acquisti");
+		}
+
+		return storico;
+	}
 }
