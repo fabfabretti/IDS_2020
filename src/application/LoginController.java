@@ -1,5 +1,6 @@
 package application;
 
+import data.CartDraft;
 import data.User;
 import data.Worker;
 import javafx.event.ActionEvent;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
  * Gestisce la finestra di Login e tutti i suoi input.
  *
  */
-public class LoginController extends Controller{
+public class LoginController extends Controller {
 
 	// oggetti in FXML
 
@@ -27,7 +28,6 @@ public class LoginController extends Controller{
 
 	@FXML
 	private PasswordField pwdPassword;
-
 
 	// gestori eventi
 	/**
@@ -50,10 +50,8 @@ public class LoginController extends Controller{
 			tentativoAccesso();
 	}
 
-
-
 	// funzioni di supporto:
-	
+
 	/**
 	 * Data l'interazione col pulsante Accedi, verifica se username e password sono
 	 * corretti chiamando {@link data.User#checkLogin(String,String)} e modifica la
@@ -81,29 +79,31 @@ public class LoginController extends Controller{
 		// Carica gli utenti nel sistema
 		// Direi che questa funzione starà dentro Users (classe) ^-^ TODO
 
-
 		for (User u : Globals.users)
-			if(u.checkLogin(logEmail, logPassword)) {
-				System.out.println("[✓] Accesso user effettuato con successo con combo " + u.getEmail() + "/" + u.getPassword()+"\n"
-												+ "\t-> Loggato: " + u.getAnagrafica().getName() + " "+ u.getAnagrafica().getFamilyName() );
+			if (u.checkLogin(logEmail, logPassword)) {
+				System.out.println("[✓] Accesso user effettuato con successo con combo " + u.getEmail() + "/"
+						+ u.getPassword() + "\n" + "\t-> Loggato: " + u.getAnagrafica().getName() + " "
+						+ u.getAnagrafica().getFamilyName());
 				lblStatus.setVisible(false);
 				Globals.currentUser = u;
 				launchUI("/application/UserHome.fxml");
 				Stage loginStage = (Stage) lblStatus.getScene().getWindow();
+				CartDraft.draftToCart();
 				loginStage.close();
+
 				return;
 			}
 
-		for(Worker w : Globals.workers)
-			if (w.checkLogin(logEmail,logPassword)) {
-				System.out.println("[✓] Accesso worker effettuato con successo con combo " + w.getEmail() + "/" + w.getPassword()+"\n"
-					+ "\t-> Loggato: " + w.getAnagrafica().getName() + " "+ w.getAnagrafica().getFamilyName() );
+		for (Worker w : Globals.workers)
+			if (w.checkLogin(logEmail, logPassword)) {
+				System.out.println("[✓] Accesso worker effettuato con successo con combo " + w.getEmail() + "/"
+						+ w.getPassword() + "\n" + "\t-> Loggato: " + w.getAnagrafica().getName() + " "
+						+ w.getAnagrafica().getFamilyName());
 				lblStatus.setVisible(true);
-				Globals.currentUser=w;
+				Globals.currentUser = w;
 				launchUI("./WorkerHome.fxml");
 				return;
 			}
-
 
 		// caso rimanente: pwd errata
 
@@ -112,7 +112,5 @@ public class LoginController extends Controller{
 		lblStatus.setText("Username o password errata.");
 
 	}
-
-
 
 }

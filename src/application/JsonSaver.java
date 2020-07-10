@@ -3,7 +3,9 @@ package application;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Map.Entry;
 
+import data.CartDraft;
 import data.Product;
 import data.Section;
 import data.User;
@@ -23,7 +25,8 @@ import minimalJson.WriterConfig;
 public class JsonSaver {
 
 	/**
-	 * Salva tutti i dati di tutti gli utenti.
+	 * La funzione salva eventuali modifiche relative ai dati degli utenti se queste
+	 * modifiche vengono opportunamente confermate.
 	 */
 	public static void saveUser() {
 		JsonArray users = new JsonArray();
@@ -70,7 +73,8 @@ public class JsonSaver {
 	}
 
 	/**
-	 * Salva tutti i dati di tutti i worker.
+	 * La funzione salva eventuali modifiche relative ai dati dei dipendenti se
+	 * queste modifiche vengono opportunamente confermate.
 	 */
 	public static void saveWorker() {
 		JsonArray worker = new JsonArray();
@@ -112,17 +116,18 @@ public class JsonSaver {
 	}
 
 	/**
-	 * Salva tutti i dati di tutti i prodotti.
+	 * La funzione salva eventuali modifiche relative ai dati dei prodotti se queste
+	 * modifiche vengono opportunamente confermate.
 	 */
 	public static void saveProducts() {
 
-		JsonArray /*product = new JsonArray(),*/ productTmp = new JsonArray();
+		JsonArray /* product = new JsonArray(), */ productTmp = new JsonArray();
 
 		JsonObject newJson = new JsonObject();
-		
-		for(Section s : Globals.reparti) {
+
+		for (Section s : Globals.reparti) {
 			for (Product p : s.getProducts()) {
-				
+
 				JsonObject jsonProduct = new JsonObject();
 
 				jsonProduct.add("name", p.getName());
@@ -134,9 +139,9 @@ public class JsonSaver {
 				jsonProduct.add("price", p.getPrice());
 				jsonProduct.add("weightPrice", p.getWeightPrice());
 				jsonProduct.add("available", p.getAvailable());
-				jsonProduct.add("bio", p.isChar("bio")); 
+				jsonProduct.add("bio", p.isChar("bio"));
 				jsonProduct.add("glutenfree", p.isChar("gluten"));
-				jsonProduct.add("vegan", p.isChar("vegan")); 
+				jsonProduct.add("vegan", p.isChar("vegan"));
 				jsonProduct.add("lactosefree", p.isChar("diary"));
 				productTmp.add(jsonProduct);
 
@@ -160,47 +165,73 @@ public class JsonSaver {
 	}
 
 	/**
-	 * Salva tutte le bozze dei carrelli utente.
+	 * La funzione salva il carrello (se avente prodotti) quando viene terminata
+	 * l'applicazione (o si esegue un logout) senza aver concluso l'acquisto.
 	 */
 	public static void saveCart() {
 		/*
 		 * Array che conterrà l'intero Json dei carrelli in stato di bozza.
 		 */
 		JsonArray cartsJson = new JsonArray();
-		
+
 		/*
 		 * Singolo carrello temporaneo (usato per formare gli ordini in stallo).
 		 */
 		JsonObject singleCart = new JsonObject();
-		
+
 		/*
 		 * Array che conterrà varie instanze di oggetti (barCode - quantity).
 		 */
 		JsonArray products = new JsonArray();
-		
+
 		/*
 		 * Utile per ottenere informazioni sull'user
 		 */
 		User actualUser = (User) Globals.currentUser;
-		
-		
+
+		// (Eventuali) Carrelli delle sessioni precedenti.
+
+		for (CartDraft c : Globals.drafts) {
+			singleCart = new JsonObject();
+			products = new JsonArray();
+
+			singleCart.add("userID", c.getUserID());
+
+			for (Entry<Integer, Integer> p : c.getProducts().entrySet()) {
+				JsonObject jsonProduct = new JsonObject();
+
+				jsonProduct.add("barCode", p.getKey());
+				jsonProduct.add("quantity", p.getValue());
+
+				products.add(jsonProduct);
+			}
+
+			singleCart.add("products", products);
+
+			cartsJson.add(singleCart);
+		}
+
+		singleCart = new JsonObject();
+		products = new JsonArray();
+
+		// Carrello della sessione attuale
+
 		singleCart.add("userID", actualUser.getUserID());
-		
+
 		// Scorrimento prodotti del carrello e inserimento nell'arrai "products".
-		for(Entry<Product, Integer> p : Globals.cart.getProducts().entrySet()) {
+		for (Entry<Integer, Integer> p : Globals.cart.getProducts().entrySet()) {
 			JsonObject jsonProduct = new JsonObject();
-			
-			jsonProduct.add("barCode", p.getKey().getBarCode());
+
+			jsonProduct.add("barCode", p.getKey());
 			jsonProduct.add("quantity", p.getValue());
-			
+
 			products.add(jsonProduct);
 		}
-		
+
 		singleCart.add("products", products);
-		
-		
+
 		cartsJson.add(singleCart);
-		
+
 		JsonObject newJson = new JsonObject();
 
 		newJson.add("carrelli non confermati", cartsJson);
@@ -217,8 +248,5 @@ public class JsonSaver {
 		}
 
 	}
-	
-	
-	
-	
+
 }

@@ -3,8 +3,10 @@ package application;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashSet;
 
+import data.CartDraft;
 import data.Product;
 import data.Section;
 import data.User;
@@ -12,17 +14,17 @@ import data.Worker;
 import minimalJson.Json;
 import minimalJson.JsonArray;
 import minimalJson.JsonObject;
+import minimalJson.JsonObject.Member;
 import minimalJson.JsonValue;
 
 public class JsonLoader {
 
 	static void loadProducts() {
-		
-		//Se è un aggiornamento, devo prima svuotare il reparto.
-		for(Section s : Globals.reparti) 
-			if(!(s.getProducts().isEmpty()))
+
+		// Se è un aggiornamento, devo prima svuotare il reparto.
+		for (Section s : Globals.reparti)
+			if (!(s.getProducts().isEmpty()))
 				s.getProducts().clear();
-		
 
 		// (try/catch è necessario causa operazione input output)
 
@@ -31,11 +33,10 @@ public class JsonLoader {
 
 		try (Reader reader = new FileReader("./data/product.json")) {
 
+			JsonObject read = Json.parse(reader).asObject();
 
-				JsonObject read = Json.parse(reader).asObject();
-			
-				for (Section s : Globals.reparti) {
-			
+			for (Section s : Globals.reparti) {
+
 				s.getProducts().clear();
 				JsonArray sezione = read.get(s.getName()).asArray();
 
@@ -67,7 +68,7 @@ public class JsonLoader {
 					String brand = prodotto.asObject().getString("brand", "Unknown image");
 
 					float weight = prodotto.asObject().getFloat("weight", (float) -1.0);
-					
+
 					String unit = prodotto.asObject().getString("unit", "Unknown unit");
 
 					float price = prodotto.asObject().getFloat("price", (float) -1.0);
@@ -79,9 +80,8 @@ public class JsonLoader {
 					boolean vegan = prodotto.asObject().getBoolean("vegan", false);
 					boolean lactosefree = prodotto.asObject().getBoolean("lactosefree", false);
 
-					
-					new Product(name, barCode, imagePath, brand, weight, unit,price, available, bio,
-							glutenfree, vegan, lactosefree,s);
+					new Product(name, barCode, imagePath, brand, weight, unit, price, available, bio, glutenfree, vegan,
+							lactosefree, s);
 					Globals.computeTable();
 
 				}
@@ -132,8 +132,9 @@ public class JsonLoader {
 				users.add(u);
 
 				// System.out.println(user);
-			//	System.out.println(
-					//	"\n[✓] Loaded user " + u.getAnagrafica().getName() + " " + u.getAnagrafica().getFamilyName());
+				// System.out.println(
+				// "\n[✓] Loaded user " + u.getAnagrafica().getName() + " " +
+				// u.getAnagrafica().getFamilyName());
 			}
 
 		} catch (IOException e) {
@@ -180,8 +181,9 @@ public class JsonLoader {
 						workerid);
 				users.add(worker);
 
-			//	System.out.println("[✓] Loaded worker " + worker.getAnagrafica().getName() + " "
-					//+ worker.getAnagrafica().getFamilyName());
+				// System.out.println("[✓] Loaded worker " + worker.getAnagrafica().getName() +
+				// " "
+				// + worker.getAnagrafica().getFamilyName());
 			}
 
 		} catch (IOException e) {
@@ -189,6 +191,45 @@ public class JsonLoader {
 		}
 
 		return users;
+	}
+
+	/*
+	 * La funzione carica i draft dei carrelli non terminati (Globals -> drafts)
+	 */
+	static public ArrayList<CartDraft> loadDrafts() {
+
+		System.out.println("[...] Loading drafts...");
+
+		ArrayList<CartDraft> drafts = new ArrayList<CartDraft>();
+
+		try (Reader reader = new FileReader("./data/cartDrafts.json")) {
+
+			JsonArray fileDrafts = Json.parse(reader).asObject().get("carrelli non confermati").asArray();
+
+			for (JsonValue d : fileDrafts) {
+
+				CartDraft tmp = new CartDraft();
+
+				tmp.setUserID(d.asObject().getInt("userID", -1));
+
+				for (JsonValue p : d.asObject().get("products").asArray()) {
+					// int barCode = d.asObject().getInt("barCode", -1);
+					int barCode = p.asObject().getInt("barCode", -1);
+					int quantity = p.asObject().getInt("quantity", 0);
+
+					tmp.addProduct(barCode, quantity);
+
+					System.out.println("\nTMP:" + tmp.toString() + "\bvarCode e quantiti: " + barCode + " " + quantity);
+
+				}
+				drafts.add(tmp);
+
+			}
+		} catch (IOException e) {
+			System.out.println("[x] Errore I/O nel caricamento utenti");
+		}
+
+		return drafts;
 	}
 
 }

@@ -26,58 +26,51 @@ import data.Worker;
  *
  */
 public class Globals {
-	
-	
-	//Users
-	
+
+	// Users
+
 	static HashSet<User> users = JsonLoader.loadUsers();
 	static HashSet<Worker> workers = JsonLoader.loadWorkers();
-	
-	static ArrayList<CartDraft> drafts = new ArrayList<CartDraft>(); //TODO: qui ci andrà JsonLoader.loadDrafts()
-	
-	//Storico
-	
-	public static ArrayList<Order> storico= new ArrayList<Order>() ;
-	
-	
+
+	public static ArrayList<CartDraft> drafts = JsonLoader.loadDrafts();
+
+	// Storico
+
+	public static ArrayList<Order> storico = new ArrayList<Order>();
+
 	// Sections e prodotti
-	
+
 	public static Section vegetali = new Section("Frutta e Verdura");
 	public static Section pesce = new Section("Pesce");
 	public static Section carne = new Section("Carne");
 	public static Section latticini = new Section("Latte e Formaggi");
 	public static Section bevande = new Section("Bevande");
-	
-	public static Section reparti[] = {vegetali,pesce,carne,latticini,bevande};
-	
-	public static HashMap<Integer,Product> barCodeTable = computeTable();
 
+	public static Section reparti[] = { vegetali, pesce, carne, latticini, bevande };
 
-	
+	public static HashMap<Integer, Product> barCodeTable = computeTable();
 
-	
-	
-	//Current Session
+	// Current Session
 
-	public static UserGeneral currentUser = null;	
+	public static UserGeneral currentUser = null;
 	public static Cart cart = new Cart();
-	
+
 	public static ProductViewer currentView = null;
-	public static UserCartController cartController=null;
-	public static UserHomeController viewController=null;
-	public static WorkerProductManagerController editController=null;
+	public static UserCartController cartController = null;
+	public static UserHomeController viewController = null;
+	public static WorkerProductManagerController editController = null;
 	public static Order currentOrder = null;
-	
-	public static HashMap<Integer,Product> computeTable() {
-		if(barCodeTable!=null)
+
+	public static HashMap<Integer, Product> computeTable() {
+		if (barCodeTable != null)
 			barCodeTable.clear();
-		
-		HashMap<Integer,Product> result = new HashMap<Integer,Product>();
-		
-		for(Section s : reparti)
-			for(Product p : s.getProducts()) 
-				result.put(p.getBarCode(),p);
-			
+
+		HashMap<Integer, Product> result = new HashMap<Integer, Product>();
+
+		for (Section s : reparti)
+			for (Product p : s.getProducts())
+				result.put(p.getBarCode(), p);
+
 		barCodeTable = result;
 		return result;
 	}

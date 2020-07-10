@@ -5,26 +5,14 @@
       "products": [
         {
           "barCode": 2000001,
-          "quantity": 2
-        },
-        {
-          "barCode": 2000002,
-          "quantity": 2
+          "quantity": 12
         }
       ]
     },
-    
-        {
-      "userID": 1,
+    {
+      "userID": 0,
       "products": [
-        {
-          "barCode": 2000001,
-          "quantity": 2
-        },
-        {
-          "barCode": 2000002,
-          "quantity": 2
-        }
+        
       ]
     }
   ]

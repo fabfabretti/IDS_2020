@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="74.0" layoutY="27.0">
+         <image>
+            <Image url="@../../images/UI_logoBIG_b.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="43.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sembra che qui non ci sia nulla..." textAlignment="CENTER" wrappingWidth="261.03494262695307">
+         <font>
+            <Font name="HP Simplified Light" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="52.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puoi inserire nuovi prodotti con il tasto &quot;aggiungi nuovo prodotto&quot;." textAlignment="CENTER" wrappingWidth="244.23489379882807">
+         <font>
+            <Font name="HP Simplified Light" size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
