@@ -10,26 +10,38 @@
       "CAP": "35137",
       "mobilenumber": "0000000000",
       "fidelitycard": "",
-      "userid": 1
+      "userid": 30
     },
     {
       "email": "a",
       "password": "a",
       "name": "User",
       "familyname": "Debugging",
-      "address": "Via rossi, 6",
+      "address": "Via bestemmie, 666",
       "city": "Quel Paese",
       "CAP": "66420",
       "mobilenumber": "4136181111",
       "fidelitycard": "",
       "userid": 0
     },
-        {
-      "email": "z",
-      "password": "z",
-      "name": "Nuovo",
-      "familyname": "Utilitì",
-      "address": "Via mario, 66",
+    {
+      "email": "b",
+      "password": "b",
+      "name": "User",
+      "familyname": "Debugging",
+      "address": "Via bestemmie, 666",
+      "city": "Quel Paese",
+      "CAP": "66420",
+      "mobilenumber": "4136181111",
+      "fidelitycard": "",
+      "userid": 1
+    },
+    {
+      "email": "c",
+      "password": "c",
+      "name": "User",
+      "familyname": "Debugging",
+      "address": "Via bestemmie, 666",
       "city": "Quel Paese",
       "CAP": "66420",
       "mobilenumber": "4136181111",

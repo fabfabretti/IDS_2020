@@ -57,6 +57,8 @@ public class UserDatePickerController extends Controller{
 		Globals.cart.flushCart();
 		Globals.cartController.initialize();
 		Globals.cartController.orderConfirmed();
+		
+		JsonSaver.saveHistory();
 		closeUI(ae);
 	}
 

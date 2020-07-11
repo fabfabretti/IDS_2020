@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
 import data.Cart;
 import data.CartDraft;
@@ -20,11 +22,10 @@ import data.Worker;
 import minimalJson.Json;
 import minimalJson.JsonArray;
 import minimalJson.JsonObject;
-import minimalJson.JsonObject.Member;
 import minimalJson.JsonValue;
 
 public class JsonLoader {
-	
+
 	/*
 	 * La funzione carica i prodotti in memoria (Globals -> product).
 	 */
@@ -202,7 +203,7 @@ public class JsonLoader {
 			}
 
 		} catch (IOException e) {
-			System.out.println("[x] Errore I/O nel caricamento dei lavoratori");
+			System.out.println("[x] Errore I/O nel caricamento utenti");
 		}
 
 		return users;
@@ -230,18 +231,20 @@ public class JsonLoader {
 
 				tmp.setUserID(d.asObject().getInt("userID", -1));
 
+				int barCode;
+				int quantity;
+				
 				for (JsonValue p : d.asObject().get("products").asArray()) {
 					// int barCode = d.asObject().getInt("barCode", -1);
-					int barCode = p.asObject().getInt("barCode", -1);
-					int quantity = p.asObject().getInt("quantity", 0);
+					barCode = p.asObject().getInt("barCode", -1);
+					quantity = p.asObject().getInt("quantity", 0);
 
 					tmp.addProduct(barCode, quantity);
 				}
 				drafts.add(tmp);
-
 			}
 		} catch (IOException e) {
-			System.out.println("[x] Errore I/O nel caricamento dei carrelli in sospeso.");
+			System.out.println("[x] Errore I/O nel caricamento draft");
 		}
 
 		return drafts;
@@ -251,59 +254,92 @@ public class JsonLoader {
 	 * La funzione carica lo storico degli ordini eseguiti dal medesimo utente
 	 * (Globals->storico).
 	 */
-	static public ArrayList<Order> loadPurchaseHisotory() {
+	static public ArrayList<Order> loadHistory() {
+		Globals.computeTable();
 
 		System.out.println("[...] Loading purchase history...");
 
 		ArrayList<Order> storico = new ArrayList<Order>();
 
 		try (Reader reader = new FileReader("./data/purchaseHistory.json")) {
-
 			JsonArray fileHistory = Json.parse(reader).asObject().get("storico ordini").asArray();
+			
+			//Variabili necessarie:
+				int userID;
+				int orderID;
+				OrderDeliveryState deliveryState;
+				LocalDate deliveryDate;
+				OrderDeliveryTime deliveryTime;
+				float totalAmount ;
+				String paymentInfo;
+				Payment payment;
 
 			for (JsonValue d : fileHistory) {
+				
+				//IDs
+				userID = d.asObject().getInt("userID", -1);
+				User user= null;
+				
+				for(User u : Globals.users) {
+					if(u.getUserID()==userID)
+						user=u;
+				}
 
-				int userID = d.asObject().getInt("userID", -1);
+				orderID = d.asObject().getInt("orderID", -1);
 
-				int orderID = d.asObject().getInt("orderID", -1);
+				//State&Time
+				deliveryState = OrderDeliveryState.values()[d.asObject().getInt("stateOrdinal", -1)];
 
-				int deliveryStateOrdinal = d.asObject().getInt("stateOrdinal", -1);
-				OrderDeliveryState deliveryState = OrderDeliveryState.values()[deliveryStateOrdinal];
+				deliveryDate = LocalDate.parse(d.asObject().getString("deliveryDate", null));
 
-				String deliveryDateTmp = d.asObject().getString("deliveryDate", null);
-				LocalDate deliveryDate = LocalDate.parse(deliveryDateTmp);
+				deliveryTime = OrderDeliveryTime.values()[d.asObject().getInt("deliveryTimeOrdinal", -1)];
+				
+				//Total
+				totalAmount= d.asObject().getFloat("totalAmount", 0);
+				
+				//Payment
+				paymentInfo = d.asObject().getString("paymentInfo", null);
+				payment = Payment.values()[d.asObject().getInt("paymentOrdinal", -1)];
 
-				int deliveryTimeOrdinal = d.asObject().getInt("deliveryTimeOrdinal", -1);
-				OrderDeliveryTime deliveryTime = OrderDeliveryTime.values()[deliveryTimeOrdinal];
-
-				float totalAmount = d.asObject().getFloat("totalAmount", 0);
-
-				String paymentInfo = d.asObject().getString("paymentInfo", null);
-
-				int paymentOrdinal = d.asObject().getInt("paymentOrdinal", -1);
-				Payment payment = Payment.values()[paymentOrdinal];
-
+				//Address
 				String address = d.asObject().getString("address", null);
+				
+				//Points
+				int points = d.asObject().getInt("points", 0);
 
-				Cart cartTmp = new Cart();
+				Cart newCart = new Cart();
+
+				HashMap<Integer, Integer> tmpProductsSet = new HashMap<Integer, Integer>();
+				HashMap<Integer, Float> tmpPricesSet = new HashMap<Integer, Float>();
 
 				for (JsonValue p : d.asObject().get("products").asArray()) {
 
 					int barCode = p.asObject().getInt("barCode", -1);
 					int quantity = p.asObject().getInt("quantity", 0);
+					float price = p.asObject().getFloat("price", (float) 1.1);
+					
 
-					cartTmp.addProduct(Globals.barCodeTable.get(barCode), quantity);
+					tmpProductsSet.put(barCode, quantity);
+					tmpPricesSet.put(barCode, price);
 				}
 
-				Order singleOrder = new Order(cartTmp, payment, paymentInfo, address);
+				newCart.setProducts(tmpProductsSet);
 
+				float total=0;
+				for(Integer i : tmpProductsSet.keySet()) {
+					total+=tmpPricesSet.get(i)*tmpProductsSet.get(i);					
+				}
+
+				Order singleOrder = new Order(orderID,newCart, payment, paymentInfo, address,deliveryDate,deliveryTime,deliveryState,user,total,points,tmpPricesSet);
+				Globals.storico.add(singleOrder);
 				storico.add(singleOrder);
 			}
-
 		} catch (IOException e) {
 			System.out.println("[x] Errore I/O nel caricamento storico acquisti");
 		}
 
 		return storico;
+
 	}
+
 }

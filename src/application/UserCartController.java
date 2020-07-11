@@ -265,6 +265,5 @@ public class UserCartController extends Controller{
 		txtError.setVisible(true);
 		JsonSaver.saveProducts();
 		txtError.setText("L'ordine è stato confermato!");
-		JsonSaver.savePurchaseHistory();
 	}
 }

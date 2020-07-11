@@ -4,14 +4,38 @@
       "orderID": 1,
       "userID": 0,
       "stateOrdinal": 0,
-      "deliveryDate": "2029-11-11",
+      "deliveryDate": "2020-07-16",
       "deliveryTimeOrdinal": 0,
-      "totalAmount": 10.08,
+      "totalAmount": 2.9,
       "paymentInfo": "Nessuna informazione aggiuntiva",
       "paymentOrdinal": 0,
-      "address": "q, q, q",
+      "address": "a, a, a",
+      "points": 2,
       "products": [
-        
+        {
+          "barCode": 1000002,
+          "quantity": 2,
+          "price": 1.45
+        }
+      ]
+    },
+    {
+      "orderID": 2,
+      "userID": 0,
+      "stateOrdinal": 0,
+      "deliveryDate": "2020-07-17",
+      "deliveryTimeOrdinal": 0,
+      "totalAmount": 1.45,
+      "paymentInfo": "Nessuna informazione aggiuntiva",
+      "paymentOrdinal": 0,
+      "address": "a, a, a",
+      "points": 1,
+      "products": [
+        {
+          "barCode": 1000002,
+          "quantity": 1,
+          "price": 1.45
+        }
       ]
     }
   ]

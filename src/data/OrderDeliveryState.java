@@ -1,5 +1,5 @@
 package data;
 
 public enum OrderDeliveryState {
-	CONFERMATA, IN_PREPARAZIONE, CONSEGNATA
+CONFERMATA,IN_PREPARAZIONE,CONSEGNATA
 }

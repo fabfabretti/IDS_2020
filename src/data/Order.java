@@ -15,79 +15,105 @@ considerata.
  * 
  * */
 public class Order {
-
-	// Identificativo dell'ordine
+	
+	//Identificativo dell'ordine
 	private int orderid;
-
-	// Data prevista consegna
+	
+	//Data prevista consegna
 	private LocalDate date;
-
-	// Orario previsto consegna
+	
+	//Orario previsto consegna
 	private OrderDeliveryTime time;
-
-	// Stato consegna
-	private OrderDeliveryState state = OrderDeliveryState.CONFERMATA;
-
-	// Contiene il cart; la parte rilevante è l'elenco dei prodotti (Now comes in
-	// barcodes!! :D)
+	
+	//Stato consegna
+	private OrderDeliveryState state= OrderDeliveryState.CONFERMATA;
+	
+	//Contiene il cart; la parte rilevante è l'elenco dei prodotti (Now comes in barcodes!! :D)
 	private Cart cart;
+	
+	//Me serve per tenere in memoria il costo al momento dell'acquisto.
+	private HashMap<Integer,Float> prices = new HashMap<Integer,Float>();
+	
+	//User che ha effettuato l'ordine
+	private User user;
 
-	// Me serve per tenere in memoria il costo al momento dell'acquisto.
-	private HashMap<Integer, Float> prices = new HashMap<Integer, Float>();
-
-	// User che ha effettuato l'ordine
-	private User user = (User) Globals.currentUser;
-
-	// Metodo di pagamento
+	//Metodo di pagamento
 	private Payment payment;
-
-	// Ulteriori informazioni (es. carta di credito, paypal...)
+	
+	//Ulteriori informazioni (es. carta di credito, paypal...)
 	private String paymentInfo;
 
-	// Info consegna
+	//Info consegna
 	private String address;
-
+	
+	//Info punti
+	private int points;
+	
 	/**
 	 * Crea un ordine.
-	 * 
-	 * @param cart        indica il carrello
-	 * @param payment     indica tipo di pagamento
-	 * @param paymentInfo info sul tipo di pagamento (es.
-	 *                    paypal->credenziali,/carta->codice...)
-	 * @param address     indica l'indirizzo utile alla consegna della spesa
+	 * @param cart il cart
+	 * @param payment tipo di pagamento
+	 * @param paymentInfo info sul tipo di pagamento (es. paypal->credenziali,/carta->codice...)
+	 * @param address
 	 */
-	public Order(Cart cart, Payment payment, String paymentInfo, String address) {
+	
+	//Costruttore ordini
+	public Order( Cart cart, Payment payment, String paymentInfo, String address) {
 
-		// Inseriamo questo ordine nella lista di ordini esistenti.
-		//??Globals.storico.add(this);
-
-		// Inseriamo i dati dell'ordine...
-		this.cart = cart.copyCart();
-		this.payment = payment;
-		this.paymentInfo = paymentInfo;
-		this.address = address;
-		orderid = Globals.storico.size();
-
-		// Inseriamo i dati sul prezzo!
-		for (Integer i : cart.getProducts().keySet()) {
+		//Inseriamo questo ordine nella lista di ordini esistenti.
+		Globals.storico.add(this);
+		user=(User) Globals.currentUser;
+		//Inseriamo i dati dell'ordine...
+		this.cart=cart.copyCart();
+		points = (int) cart.getTotal();
+		
+		//TODO sommare ai punti della carta
+		
+		this.payment=payment;
+		this.paymentInfo=paymentInfo;
+		this.address=address;
+		orderid= Globals.storico.size();
+		
+		//Inseriamo i dati sul prezzo!
+		for(Integer i : cart.getProducts().keySet()) {
 			float currentPrice = Globals.barCodeTable.get(i).getPrice();
 			prices.put(i, currentPrice);
 		}
-
-		// debug
+		
+		//debug
 		System.out.println("[✓] Ordine generato");
 	}
+	
+	
+	
 
+	//Costruttore ordini per storico   orderID,newCart, payment, paymentInfo, address,deliveryDate,deliveryTime,deliveryState,user,points,tmpPricesSet
+	
+	public Order(int orderID,Cart cart, Payment payment, String paymentInfo, String address,LocalDate date, OrderDeliveryTime time, OrderDeliveryState deliveryState, User user,float total, int points, HashMap<Integer,Float> prices) {
+		this.orderid=orderID;
+		this.cart=cart;
+		this.payment=payment;
+		this.paymentInfo=paymentInfo;
+		this.address=address;
+		this.date=date;
+		this.time=time;
+		this.state=deliveryState;
+		this.user=user;
+		this.prices=prices;
+		this.points=points;
+		cart.setTotal(total);
+	}
+	
 	/**
-	 * Aggiunge data e ora per il nuovo ordine.
-	 * 
-	 * @param date la data inserita
-	 * @param time la fascia oraria scelta
+	 * Aggiunge data e ora all'ordine
+	 * @param date la data
+	 * @param time la fascia oraria
 	 */
 	public void confirmOrder(LocalDate date, OrderDeliveryTime time) {
-		this.date = date;
-		this.time = time;
+		this.date=date;
+		this.time=time;
 	}
+
 
 	/**
 	 * @return the orderid
@@ -118,14 +144,14 @@ public class Order {
 	}
 
 	/**
-	 * Ritorna la fascia oraria scelta dall'utente.
+	 * @return the time
 	 */
 	public OrderDeliveryTime getTime() {
 		return time;
 	}
 
 	/**
-	 * imposta la fascia oraria scelta dall'utente.
+	 * @param time the time to set
 	 */
 	public void setTime(OrderDeliveryTime time) {
 		this.time = time;
@@ -146,7 +172,7 @@ public class Order {
 	}
 
 	/**
-	 * Ritorna il carrello dell'ordine.
+	 * @return the cart
 	 */
 	public Cart getCart() {
 		return cart;
@@ -185,8 +211,8 @@ public class Order {
 	 */
 	public void setPaymentInfo(String paymentInfo) {
 		this.paymentInfo = paymentInfo;
-	}
-
+	}	
+	
 	/**
 	 * @return the user
 	 */
@@ -200,7 +226,9 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 
+	
 	/**
 	 * @return the address
 	 */
@@ -215,6 +243,7 @@ public class Order {
 		this.address = address;
 	}
 
+
 	/**
 	 * @return the prices
 	 */
@@ -227,6 +256,13 @@ public class Order {
 	 */
 	public void setPrices(HashMap<Integer, Float> prices) {
 		this.prices = prices;
+	}
+
+
+
+
+	public int getPoints() {
+		return points;
 	}
 
 }

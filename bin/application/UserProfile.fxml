@@ -120,7 +120,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="field" layoutX="6.0" layoutY="59.0" prefHeight="52.0" prefWidth="357.0">
+            <AnchorPane layoutX="6.0" layoutY="59.0" prefHeight="52.0" prefWidth="357.0">
                <children>
                   <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                      <font>
@@ -160,7 +160,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="fieldPayPalEmail" layoutY="61.0" prefHeight="52.0" prefWidth="346.0">
+                        <AnchorPane layoutY="61.0" prefHeight="52.0" prefWidth="346.0">
                            <children>
                               <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password di PayPal">
                                  <font>

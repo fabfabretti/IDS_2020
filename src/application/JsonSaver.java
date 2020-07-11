@@ -6,11 +6,11 @@ import java.io.Writer;
 import java.util.Map.Entry;
 
 import data.CartDraft;
+import data.Order;
 import data.Product;
 import data.Section;
 import data.User;
 import data.Worker;
-import data.Order;
 import minimalJson.JsonArray;
 import minimalJson.JsonObject;
 import minimalJson.WriterConfig;
@@ -160,7 +160,7 @@ public class JsonSaver {
 		try (Writer writer = new FileWriter("./data/product.json")) {
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
-			System.out.println("[x] Errore scrittura Json Product!!!");
+			System.out.println("[x] Errore scrittura Json Worker!!!");
 		}
 
 	}
@@ -169,7 +169,7 @@ public class JsonSaver {
 	 * La funzione salva il carrello (se avente prodotti) quando viene terminata
 	 * l'applicazione (o si esegue un logout) senza aver concluso l'acquisto.
 	 */
-	public static void saveCart() {
+	public static void saveDraft() {
 		/*
 		 * Array che conterrà l'intero Json dei carrelli in stato di bozza.
 		 */
@@ -188,11 +188,31 @@ public class JsonSaver {
 		/*
 		 * Utile per ottenere informazioni sull'user
 		 */
-		User actualUser = (User) Globals.currentUser;
+
+		
+		//Aggiungo il draft alla lista dei draft.
+			//Se c'è già lo aggiorno, altrimenti lo creo e lo aggiungo.
+		
+	
+		User currUser = (User) Globals.currentUser;
+		
+		boolean found=false;		
+		for(CartDraft d : Globals.drafts) {
+			if(d.getUserID()==currUser.getUserID()) {
+				found=true;
+				d.setProducts(Globals.cart.getProducts());
+			}
+		}
+		
+		if(found==false) {
+			CartDraft cd = new CartDraft();
+			cd.setProducts(Globals.cart.getProducts());
+			cd.setUserID(currUser.getUserID());
+			Globals.drafts.add(cd);
+		}
+		
 
 		// (Eventuali) Carrelli delle sessioni precedenti.
-
-		System.out.println("\nSto salvando eventuali carrelli in draft!\n");
 
 		for (CartDraft c : Globals.drafts) {
 			singleCart = new JsonObject();
@@ -213,30 +233,7 @@ public class JsonSaver {
 
 			cartsJson.add(singleCart);
 		}
-
-		singleCart = new JsonObject();
-		products = new JsonArray();
-
-		// Carrello della sessione attuale
-
-		System.out.println("\nSto salvando il carrello attuale in draft!\n");
-
-		singleCart.add("userID", actualUser.getUserID());
-
-		// Scorrimento prodotti del carrello e inserimento nell'arrai "products".
-		for (Entry<Integer, Integer> p : Globals.cart.getProducts().entrySet()) {
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("barCode", p.getKey());
-			jsonProduct.add("quantity", p.getValue());
-
-			products.add(jsonProduct);
-		}
-
-		singleCart.add("products", products);
-
-		cartsJson.add(singleCart);
-
+		
 		JsonObject newJson = new JsonObject();
 
 		newJson.add("carrelli non confermati", cartsJson);
@@ -249,7 +246,7 @@ public class JsonSaver {
 		try (Writer writer = new FileWriter("./data/cartDrafts.json")) {
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
-			System.out.println("[x] Errore scrittura Json Draft!!!");
+			System.out.println("[x] Errore scrittura Json Worker!!!");
 		}
 
 	}
@@ -258,7 +255,7 @@ public class JsonSaver {
 	 * La funzione salva l'ordine eseguito dall'utente aggiungendolo allo storico
 	 * degli ordini del medesimo utente (Gloabls->storico).
 	 */
-	public static void savePurchaseHistory() {
+	public static void saveHistory() {
 		/*
 		 * Array che conterrà l'intero Json degli ordini.
 		 */
@@ -274,15 +271,13 @@ public class JsonSaver {
 		 */
 		JsonArray products = new JsonArray();
 
-
 		// (Eventuali) Ordini delle sessioni precedenti.
-
-		for (Order o : Globals.storico) {
+		for(Order o : Globals.storico) {
 			singleOrder = new JsonObject();
 			products = new JsonArray();
-
-			// Salvataggio informazioni ordine
-
+			
+			//Salvataggio informazioni ordine
+			
 			singleOrder.add("orderID", o.getOrderid());
 			singleOrder.add("userID", o.getUser().getUserID());
 			singleOrder.add("stateOrdinal", o.getState().ordinal());
@@ -292,63 +287,38 @@ public class JsonSaver {
 			singleOrder.add("paymentInfo", o.getPaymentInfo());
 			singleOrder.add("paymentOrdinal", o.getPayment().ordinal());
 			singleOrder.add("address", o.getAddress());
-			// Salvataggio prodotti
-			for (Entry<Integer, Integer> p : o.getCart().getProducts().entrySet()) {
+			singleOrder.add("points", o.getPoints());
+			
+			//Salvataggio dei prodotti
+			for(Entry<Integer, Integer> p : o.getCart().getProducts().entrySet()) {
 				JsonObject jsonProduct = new JsonObject();
-
+				
 				jsonProduct.add("barCode", p.getKey());
 				jsonProduct.add("quantity", p.getValue());
+				jsonProduct.add("price", Globals.barCodeTable.get( p.getKey() ).getPrice()  );
+				
+				products.add(jsonProduct);
+			}
+			
+			singleOrder.add("products", products);
+			
+			historyJson.add(singleOrder);
+			
+			JsonObject newJson = new JsonObject();
 
+			newJson.add("storico ordini", historyJson);
+
+			System.out.println("\n[?] " + historyJson);
+
+			/**
+			 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
+			 */
+			try (Writer writer = new FileWriter("./data/purchaseHistory.json")) {
+				newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+			} catch (IOException e) {
+				System.out.println("[x] Errore scrittura Json History!!!");
 			}
 
-			singleOrder.add("products", products);
-
-			historyJson.add(singleOrder);
 		}
-/*
-		singleOrder = new JsonObject();
-		products = new JsonArray();
-
-		// Carrello della sessione attuale
-
-		singleOrder.add("userID", actualUser.getUserID());
-		singleOrder.add("orderID", Globals.currentOrder.getOrderid());
-		singleOrder.add("stateOrdinal", Globals.currentOrder.getState().ordinal());
-		singleOrder.add("deliveryDate", Globals.currentOrder.getDate().toString());
-		singleOrder.add("deliveryTimeOrdinal", Globals.currentOrder.getTime().ordinal());
-		singleOrder.add("totalAmount", Globals.currentOrder.getCart().getTotal());
-		singleOrder.add("paymentInfo", Globals.currentOrder.getPaymentInfo());
-		singleOrder.add("paymentOrdinal", Globals.currentOrder.getPayment().ordinal());
-
-		// Scorrimento prodotti del carrello e inserimento nell'arrai "products".
-		for (Entry<Integer, Integer> p : Globals.cart.getProducts().entrySet()) {
-			JsonObject jsonProduct = new JsonObject();
-
-			jsonProduct.add("barCode", p.getKey());
-			jsonProduct.add("quantity", p.getValue());
-
-			products.add(jsonProduct);
-		}
-
-		singleOrder.add("products", products);
-
-		historyJson.add(singleOrder);
-*/
-		JsonObject newJson = new JsonObject();
-
-		newJson.add("storico ordini", historyJson);
-
-		System.out.println("\n[?] " + historyJson);
-
-		/**
-		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
-		 */
-		try (Writer writer = new FileWriter("./data/purchaseHistory.json")) {
-			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
-		} catch (IOException e) {
-			System.out.println("[x] Errore scrittura Json History!!!");
-		}
-
 	}
-
 }
