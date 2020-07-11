@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FilterBarController">
+   <children>
+      <Text layoutX="381.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordina per:">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Text>
+      <ChoiceBox fx:id="chboxOrder" layoutX="463.0" layoutY="51.0" prefWidth="150.0" stylesheets="@application.css" />
+      <GridPane layoutX="14.0" layoutY="9.0" prefHeight="91.0" prefWidth="359.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.60001220703126" minWidth="10.0" prefWidth="171.99998779296874" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="188.00001220703126" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="63.799993896484374" minHeight="10.0" prefHeight="56.599981689453124" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.799993896484374" minHeight="10.0" prefHeight="50.200018310546874" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXToggleButton fx:id="toggleGluten" alignment="TOP_LEFT" onAction="#filter" prefHeight="58.0" prefWidth="171.0" text="Senza Glutine" GridPane.columnIndex="1" />
+            <JFXToggleButton fx:id="toggleDiary" alignment="TOP_LEFT" onAction="#filter" prefHeight="58.0" prefWidth="179.0" text="Senza Lattosio" GridPane.rowIndex="1" />
+            <JFXToggleButton fx:id="toggleBio" alignment="TOP_LEFT" onAction="#filter" prefHeight="58.0" prefWidth="172.0" text="Biologico" />
+            <JFXToggleButton fx:id="toggleVegan" alignment="TOP_LEFT" onAction="#filter" prefHeight="58.0" prefWidth="165.0" text="Vegano" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="344.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="351.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="76.0" layoutY="105.0">
+               <image>
+                  <Image url="@../../images/UI_logoBIG_b.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="58.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questo carrello è vuoto!" textAlignment="CENTER" wrappingWidth="235.43490600585932">
+               <font>
+                  <Font name="HP Simplified Light" size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="68.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puoi iniziare a riempirlo tornando alla schermata principale. " textAlignment="CENTER" wrappingWidth="215.43490600585932">
+               <font>
+                  <Font name="HP Simplified Light" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

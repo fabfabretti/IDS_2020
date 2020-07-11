@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="793.0" style="-fx-border-width: 3; -fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserCartController">
+   <children>
+      <AnchorPane layoutX="373.0" layoutY="152.0" prefHeight="314.0" prefWidth="414.0">
+         <children>
+            <Label layoutX="9.0" layoutY="14.0" text="Metodo di Pagamento">
+               <font>
+                  <Font name="HP Simplified" size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="13.0" layoutY="204.0" prefHeight="158.0" prefWidth="387.0">
+               <children>
+                  <AnchorPane layoutY="25.0" prefHeight="60.0" prefWidth="387.0">
+                     <children>
+                        <JFXTextField fx:id="fieldAddress" focusColor="#c72d1d" layoutX="15.0" layoutY="32.0" prefHeight="23.0" prefWidth="370.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indirizzo">
+                           <font>
+                              <Font name="HP Simplified Light" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="8.0" layoutY="85.0" prefHeight="52.0" prefWidth="138.0">
+                     <children>
+                        <JFXTextField fx:id="fieldCity" focusColor="#c72d1d" layoutX="7.0" layoutY="22.0" prefHeight="23.0" prefWidth="234.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Città">
+                           <font>
+                              <Font name="HP Simplified Light" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="250.0" layoutY="85.0" prefHeight="36.0" prefWidth="142.0">
+                     <children>
+                        <JFXTextField fx:id="fieldCAP" focusColor="#c72d1d" layoutX="14.0" layoutY="22.0" prefHeight="23.0" prefWidth="124.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="2.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CAP">
+                           <font>
+                              <Font name="HP Simplified Light" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutY="3.0" text="Indirizzo di consegna">
+                     <font>
+                        <Font name="HP Simplified" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="11.0" layoutY="36.0">
+               <children>
+                  <JFXRadioButton fx:id="radioCarta" layoutX="251.0" layoutY="12.0" onAction="#changePayment" text="Carta di Credito" />
+                  <JFXRadioButton fx:id="radioConsegna" layoutX="12.0" layoutY="12.0" onAction="#changePayment" text="Alla consegna" />
+                  <JFXRadioButton fx:id="radioPayPal" layoutX="153.0" layoutY="12.0" onAction="#changePayment" text="PayPal" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="panePayPal" layoutX="13.0" layoutY="73.0" prefHeight="138.0" prefWidth="306.0">
+               <children>
+                  <AnchorPane layoutY="7.0" prefHeight="53.0" prefWidth="387.0">
+                     <children>
+                        <JFXTextField fx:id="fieldPayPalEmail" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="363.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email di PayPal">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="61.0" prefHeight="53.0" prefWidth="387.0">
+                     <children>
+                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password di PayPal">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <JFXPasswordField fx:id="fieldPayPalPassword" layoutX="15.0" layoutY="18.0" prefHeight="26.0" prefWidth="363.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneCarta" layoutX="7.0" layoutY="73.0" prefHeight="122.0" prefWidth="370.0">
+               <children>
+                  <AnchorPane layoutY="61.0" prefHeight="54.0" prefWidth="363.0">
+                     <children>
+                        <JFXTextField fx:id="fieldCartaNumero" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="248.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero della carta">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane layoutX="263.0" prefHeight="54.0" prefWidth="66.0">
+                           <children>
+                              <JFXTextField fx:id="fieldCartaCVV" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="102.0" styleClass="txtField" stylesheets="@application.css">
+                                 <font>
+                                    <Font name="HP Simplified Light Italic" size="12.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVV">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="6.0" prefHeight="54.0" prefWidth="363.0">
+                     <children>
+                        <JFXTextField fx:id="fieldCartaNome" focusColor="#c72d1d" layoutX="15.0" layoutY="19.0" prefHeight="23.0" prefWidth="163.0" styleClass="txtField" stylesheets="@application.css">
+                           <font>
+                              <Font name="HP Simplified Light Italic" size="12.0" />
+                           </font>
+                        </JFXTextField>
+                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane layoutX="179.0" layoutY="-2.0" prefHeight="54.0" prefWidth="163.0">
+                           <children>
+                              <JFXTextField fx:id="fieldCartaCognome" focusColor="#c72d1d" layoutX="15.0" layoutY="21.0" prefHeight="23.0" prefWidth="192.0" styleClass="txtField" stylesheets="@application.css">
+                                 <font>
+                                    <Font name="HP Simplified Light Italic" size="12.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="paneConsegna" layoutX="14.0" layoutY="82.0" prefHeight="122.0" prefWidth="394.0">
+               <children>
+                  <Text layoutX="33.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TBA: IMMAGINE PUCCIOSA sul fatto che non devi fare nient'altro." wrappingWidth="346.40007324218743" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <JFXButton layoutX="463.0" layoutY="540.0" onAction="#makeOrder" prefHeight="62.0" prefWidth="234.0" text="Conferma" />
+      <JFXButton graphicTextGap="1.0" layoutX="741.0" layoutY="14.0" minWidth="10.0" onAction="#closeUI" prefHeight="33.0" prefWidth="37.0" textOverrun="CLIP">
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="21.0">
+               <image>
+                  <Image url="@../../images/UI_quit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <ScrollPane layoutX="12.0" layoutY="12.0" prefHeight="592.0" prefWidth="364.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="420.0" AnchorPane.topAnchor="1.0">
+         <content>
+            <AnchorPane fx:id="cartviewPane" prefHeight="603.0" prefWidth="366.0">
+               <children>
+                  <Text layoutX="60.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questo carrello è vuoto :(">
+                     <font>
+                        <Font name="HP Simplified Light" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="379.0" layoutY="59.0" prefHeight="93.0" prefWidth="403.0">
+         <children>
+            <Label layoutX="14.0" layoutY="15.0" text="Totale Spesa:">
+               <font>
+                  <Font name="HP Simplified" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotal" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="141.0" layoutY="15.0" text="€ 100,00">
+               <font>
+                  <Font name="HP Simplified" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="52.0" text="Articoli inseriti:">
+               <font>
+                  <Font name="HP Simplified" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblItems" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="141.0" layoutY="52.0" prefHeight="22.0" prefWidth="66.0" text="20">
+               <font>
+                  <Font name="HP Simplified" size="18.0" />
+               </font>
+            </Label>
+            <Text fx:id="txtPoints" layoutX="247.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questa spesa potrebbe valere XXX punti" textAlignment="CENTER" wrappingWidth="124.23590087890625">
+               <font>
+                  <Font name="HP Simplified Light" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Label layoutX="533.0" layoutY="23.0" text="Carrello">
+         <font>
+            <Font name="HP Simplified" size="29.0" />
+         </font>
+      </Label>
+      <Text fx:id="txtError" layoutX="398.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="363.1999999999998" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="466.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="-9.0" layoutY="59.0">
+               <image>
+                  <Image url="@../../images/UI_logoBIG_b.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="191.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sembra che qui non ci sia nulla..." textAlignment="CENTER" wrappingWidth="268.23489379882807">
+               <font>
+                  <Font name="HP Simplified Light" size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="214.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puoi provare a selezionare un reparto o effettuare una nuova ricerca." textAlignment="CENTER" wrappingWidth="244.23489379882807">
+               <font>
+                  <Font name="HP Simplified Light" size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

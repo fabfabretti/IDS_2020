@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkerProductManagerController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="497.59998779296876" minWidth="10.0" prefWidth="446.3999755859375" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="402.40002441406244" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="589.0" prefWidth="459.0" GridPane.columnIndex="1">
+         <children>
+            <AnchorPane fx:id="defaultPane" layoutX="100.0" layoutY="141.0" visible="false">
+               <children>
+                  <Text layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Per cominciare, seleziona il prodotto che vuoi modificare." textAlignment="CENTER" wrappingWidth="268.23489379882807">
+                     <font>
+                        <Font name="HP Simplified Light" size="18.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="32.0">
+                     <image>
+                        <Image url="@../../images/UI_logoBIG_b.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="mainEditor" layoutX="3.0" layoutY="16.0" prefHeight="562.0" prefWidth="438.0">
+               <children>
+                  <Text layoutX="150.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifica Prodotto">
+                     <font>
+                        <Font name="HP Simplified" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="txtCode" layoutX="90.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codice prodotto: ###" textAlignment="CENTER" wrappingWidth="275.26995849609375">
+                     <font>
+                        <Font name="HP Simplified Light" size="15.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutX="14.0" layoutY="83.0" prefHeight="326.0" prefWidth="434.0">
+                     <children>
+                        <AnchorPane prefHeight="59.0" prefWidth="207.0">
+                           <children>
+                              <JFXTextField fx:id="fieldName" layoutX="12.0" layoutY="22.0" prefHeight="27.0" prefWidth="194.0" />
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="217.0" prefHeight="59.0" prefWidth="206.0">
+                           <children>
+                              <JFXTextField fx:id="fieldBrand" layoutX="12.0" layoutY="22.0" prefHeight="27.0" prefWidth="194.0" />
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marca">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="67.0" prefHeight="59.0" prefWidth="206.0">
+                           <children>
+                              <JFXTextField fx:id="fieldWeight" layoutX="11.0" layoutY="27.0" prefHeight="27.0" prefWidth="90.0" />
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Peso">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <ChoiceBox fx:id="chboxUnit" layoutX="115.0" layoutY="25.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@application.css" />
+                              <Text layoutX="98.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unità di misura">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="217.0" layoutY="133.0" prefHeight="59.0" prefWidth="206.0">
+                           <children>
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In magazzino">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Spinner fx:id="spinnerQuantity" layoutX="14.0" layoutY="22.0" prefHeight="30.0" prefWidth="76.0" stylesheets="@application.css" />
+                              <Text layoutX="111.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prezzo/Unità">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="txtWeightPrice" layoutX="129.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="##.##/KG">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="17.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="-2.0" layoutY="133.0" prefHeight="59.0" prefWidth="194.0">
+                           <children>
+                              <JFXTextField fx:id="fieldPrice" layoutX="29.0" layoutY="22.0" prefHeight="27.0" prefWidth="170.0" />
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prezzo">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="210.0" prefHeight="115.0" prefWidth="269.0">
+                           <children>
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome file immagine">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="fieldImagePath" layoutX="12.0" layoutY="22.0" prefHeight="27.0" prefWidth="255.0" />
+                              <Text layoutX="12.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il file deve essere posizionato nella cartella &quot;images&quot;.  Utilizzate il pulsante &quot;check&quot; per verificare se il nome inserito è valido." wrappingWidth="268.2348937988279">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="217.0" layoutY="67.0" prefHeight="59.0" prefWidth="206.0">
+                           <children>
+                              <Text layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reparto">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="15.0" />
+                                 </font>
+                              </Text>
+                              <ChoiceBox fx:id="chboxSection" layoutX="13.0" layoutY="22.0" prefHeight="30.0" prefWidth="194.0" stylesheets="@application.css" />
+                           </children>
+                        </AnchorPane>
+                        <ImageView fx:id="imgImage" fitHeight="102.0" fitWidth="112.0" layoutX="303.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Product_placeholder.png" />
+                           </image>
+                        </ImageView>
+                        <JFXButton layoutX="320.0" layoutY="304.0" onAction="#refresh" prefHeight="30.0" prefWidth="67.0" stylesheets="@application.css" text="Check" />
+                     </children>
+                  </AnchorPane>
+                  <JFXButton layoutX="206.0" layoutY="455.0" onAction="#save" prefHeight="58.0" prefWidth="228.0" stylesheets="@application.css" text="Salva">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <Text fx:id="txtStatus" layoutX="192.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Errore: è necessario compilare tutti i campi.pappappero" textAlignment="CENTER" wrappingWidth="255.20000000000005" />
+                  <GridPane layoutX="14.0" layoutY="405.0" prefHeight="136.0" prefWidth="194.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="63.799993896484374" minHeight="10.0" prefHeight="56.599981689453124" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="55.799993896484374" minHeight="10.0" prefHeight="50.200018310546874" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="55.799993896484374" minHeight="10.0" prefHeight="50.200018310546874" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="55.799993896484374" minHeight="10.0" prefHeight="50.200018310546874" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXToggleButton fx:id="toggleGluten" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="150.0" text="Senza Glutine" />
+                        <JFXToggleButton fx:id="toggleDiary" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="150.0" text="Senza Lattosio" GridPane.rowIndex="2" />
+                        <JFXToggleButton fx:id="toggleBio" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="123.0" text="Biologico" GridPane.rowIndex="1" />
+                        <JFXToggleButton fx:id="toggleVegan" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="131.0" text="Vegano" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="286.4" minHeight="10.0" prefHeight="90.39999694824219" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="499.20000305175785" minHeight="10.0" prefHeight="499.20000305175785" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="130.0" prefWidth="498.0">
+               <children>
+                  <JFXButton layoutX="14.0" layoutY="26.0" onAction="#newProduct" prefHeight="58.0" prefWidth="480.0" stylesheets="@application.css" text="Aggiungi nuovo prodotto" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="viewScrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
