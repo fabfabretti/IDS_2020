@@ -1,6 +1,7 @@
 package application;
 
 
+import data.User;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -93,8 +94,9 @@ public class Controller {
 	 */
 	public void quit(ActionEvent ae) {
 
-		///SALVA LE COSE IN SOSPESO
-		JsonSaver.saveDraft();
+		///SALVA LE COSE IN SOSPESO.. ma solo se è in usermode!
+		if(Globals.currentUser instanceof User)
+			JsonSaver.saveDraft();
 		System.exit(0);	
 	}
 	

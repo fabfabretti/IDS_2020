@@ -1,6 +1,21 @@
 {
   "Frutta e Verdura": [
     {
+      "name": "a",
+      "barCode": 1000009,
+      "imagePath": "file:images/a",
+      "brand": "a",
+      "weight": 9,
+      "unit": "mL",
+      "price": 9,
+      "weightPrice": "1,00 €/mL",
+      "available": 2,
+      "bio": true,
+      "glutenfree": false,
+      "vegan": false,
+      "lactosefree": false
+    },
+    {
       "name": "Albicocche",
       "barCode": 1000001,
       "imagePath": "file:images/Product_albicocche.png",
@@ -104,6 +119,21 @@
       "glutenfree": true,
       "vegan": true,
       "lactosefree": true
+    },
+    {
+      "name": "a",
+      "barCode": 1000009,
+      "imagePath": "file:images/a",
+      "brand": "a",
+      "weight": 9,
+      "unit": "mL",
+      "price": 9,
+      "weightPrice": "1,00 €/mL",
+      "available": 2,
+      "bio": true,
+      "glutenfree": false,
+      "vegan": false,
+      "lactosefree": false
     }
   ],
   "Pesce": [
