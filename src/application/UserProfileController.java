@@ -15,15 +15,14 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-
 /**
  * gestise la schermata di modifica dati dell'user.
  *
  */
 public class UserProfileController extends Controller {
 
-	//FXML
-	
+	// FXML
+
 	@FXML
 	private JFXTextField fieldEmail;
 
@@ -50,49 +49,49 @@ public class UserProfileController extends Controller {
 
 	@FXML
 	private Label lblError;
-	
-	//Ordini	
+
+	// Ordini
 	@FXML
 	private ScrollPane scrollPaneOrders;
 
-	//Pagamento predefinito
+	// Pagamento predefinito
 	@FXML
 	private JFXRadioButton radioPayPal;
 	@FXML
 	private JFXRadioButton radioCarta;
 	@FXML
 	private JFXRadioButton radioConsegna;
-	
-		//Consegna
-			@FXML
-			private AnchorPane paneConsegna;
-			
-		// PayPal
-			@FXML
-			private AnchorPane panePayPal;
-			@FXML
-			private JFXTextField fieldPayPalEmail;
-			@FXML
-			private JFXPasswordField fieldPayPalPassword;
-			
-		//Carta
-			@FXML
-			private AnchorPane paneCarta;
-			@FXML
-			private JFXTextField fieldCardNumber;
-			@FXML
-			private JFXTextField fieldCartaCVV;
-			@FXML
-			private JFXTextField fieldCartaNome;
-			@FXML
-			private JFXTextField fieldCartaCognome;
+
+	// Consegna
+	@FXML
+	private AnchorPane paneConsegna;
+
+	// PayPal
+	@FXML
+	private AnchorPane panePayPal;
+	@FXML
+	private JFXTextField fieldPayPalEmail;
+	@FXML
+	private JFXPasswordField fieldPayPalPassword;
+
+	// Carta
+	@FXML
+	private AnchorPane paneCarta;
+	@FXML
+	private JFXTextField fieldCardNumber;
+	@FXML
+	private JFXTextField fieldCartaCVV;
+	@FXML
+	private JFXTextField fieldCartaNome;
+	@FXML
+	private JFXTextField fieldCartaCognome;
 
 	/***
 	 * Serve a mostrare i dati salvati dall'utente dentro i rispettivi campi
 	 */
 	public void initialize() {
-	
-	//Pagamento predefinito
+
+		// Pagamento predefinito
 		final ToggleGroup group = new ToggleGroup();
 		radioConsegna.setToggleGroup(group);
 		radioCarta.setToggleGroup(group);
@@ -101,8 +100,8 @@ public class UserProfileController extends Controller {
 		paneConsegna.setVisible(radioConsegna.isSelected());
 		paneCarta.setVisible(radioCarta.isSelected());
 		panePayPal.setVisible(radioPayPal.isSelected());
-		
-	//Informazioni generali
+
+		// Informazioni generali
 		fieldEmail.setText(Globals.currentUser.getEmail());
 		fieldPassword.setText(Globals.currentUser.getPassword());
 		fieldName.setText(Globals.currentUser.getAnagrafica().getName());
@@ -112,28 +111,29 @@ public class UserProfileController extends Controller {
 		fieldCity.setText((Globals.currentUser.getAnagrafica().getCity()));
 		fieldNumber.setText((Globals.currentUser.getAnagrafica().getMobileNumber()));
 
-	//Se questo è un user, allora dobbiamo mostrare anche lo storico e il metodo di pagamento.
-		if(Globals.currentUser instanceof User) {
+		// Se questo è un user, allora dobbiamo mostrare anche lo storico e il metodo di
+		// pagamento.
+		if (Globals.currentUser instanceof User) {
 			System.out.println(Globals.storico);
-			
-			//pannello degli ordini
+
+			// pannello degli ordini
 			FlowPane flower = new FlowPane();
-			AnchorPane pane=null;
-			if(Globals.storico.size()!=0) {
-				 new Controller();
-				for(Order o : Globals.storico) {
+			AnchorPane pane = null;
+			if (Globals.storico.size() != 0) {
+				new Controller();
+				for (Order o : Globals.storico) {
 					try {
-						if(o.getUser().getUserID() == ((User)Globals.currentUser).getUserID()) {
+						if (o.getUser().getUserID() == ((User) Globals.currentUser).getUserID()) {
 							CartReviewController.initializeOrder(o);
-							pane=(FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
-							//System.out.println(pane);
+							pane = (FXMLLoader.load(getClass().getResource("/application/CartReview.fxml")));
+							// System.out.println(pane);
+							if (pane != null)
+								flower.getChildren().add(pane);
 						}
 					} catch (Exception e) {
 						System.out.println("[x] Errore a caricare UI interna");
 					}
-					
-					if(pane!=null)
-						flower.getChildren().add(pane);
+
 				}
 
 				AnchorPane.setTopAnchor(flower, 0.0);
@@ -145,8 +145,7 @@ public class UserProfileController extends Controller {
 			}
 
 		}
-		
-		
+
 	}
 
 	/***
@@ -169,7 +168,7 @@ public class UserProfileController extends Controller {
 		 */
 		else {
 
-			//Salvataggio dati
+			// Salvataggio dati
 			Globals.currentUser.setEmail(fieldEmail.getText());
 			Globals.currentUser.setPassword(fieldPassword.getText());
 			Globals.currentUser.getAnagrafica().setName(fieldName.getText());
@@ -179,7 +178,7 @@ public class UserProfileController extends Controller {
 			Globals.currentUser.getAnagrafica().setCity(fieldCity.getText());
 			Globals.currentUser.getAnagrafica().setCAP(fieldCAP.getText());
 			Globals.currentUser.getAnagrafica().setMobileNumber(fieldNumber.getText());
-			
+
 			System.out.println("[✓] Nuovo nome salvato in memoria (ram)");
 
 			JsonSaver.saveUser();
@@ -189,8 +188,7 @@ public class UserProfileController extends Controller {
 		}
 
 	}
-	
-	
+
 	public void changePayment(ActionEvent ae) {
 		paneConsegna.setVisible(radioConsegna.isSelected());
 		paneCarta.setVisible(radioCarta.isSelected());

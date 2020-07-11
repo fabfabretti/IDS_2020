@@ -122,6 +122,9 @@ public class JsonLoader {
 			JsonArray fileUtenti = Json.parse(reader).asObject().get("users").asArray();
 
 			for (JsonValue user : fileUtenti) {
+
+				// USER INFO
+
 				// System.out.println(user);
 				String email = user.asObject().getString("email", "NoEmail");
 				// System.out.println("[?]" + email);
@@ -142,6 +145,40 @@ public class JsonLoader {
 				int userid = user.asObject().getInt("userid", -1);
 				// System.out.println("[?]" + userid);
 				User u = new User(email, password, name, familyname, address, city, cap, mobilenumber, userid);
+
+				// FIDELTY CARD INFO
+
+				int fideltyCardNumber = user.asObject().getInt("fideltyCardId", -1);
+				int actualPoints = user.asObject().getInt("fideltyCardPointsAmount", 0);
+				LocalDate emissionDate = LocalDate
+						.parse(user.asObject().getString("fideltyCardEmissionDate", "0001-01-01"));
+
+				u.setNumber(fideltyCardNumber);
+				u.setActualPoints(actualPoints);
+				u.setEmissionDate(emissionDate);
+
+				// PREFERED PAYMENT INFO
+
+				int paymentOrdinal = user.asObject().getInt("paymentOrdinal", -1);
+
+				int creditCardNumber = user.asObject().getInt("creditCardNumber", 0);
+				int creditCardCVV = user.asObject().getInt("creditCardCVV", 0);
+				String creditCardName = user.asObject().getString("creditCardName", "no Name");
+				String creditCardFamilyName = user.asObject().getString("creditCardFamilyName", "no Family Name ");
+
+				String payPalMail = user.asObject().getString("payPalMail", "no Mail ");
+				String payPalPassword = user.asObject().getString("payPalPassword", "no Password");
+
+				u.setPaymentOrdinal(paymentOrdinal);
+
+				u.setCreditCardNumber(creditCardNumber);
+				u.setCreditCardCVV(creditCardCVV);
+				u.setCreditCardName(creditCardName);
+				u.setCreditCardFamilyName(creditCardFamilyName);
+
+				u.setPayPalEmail(payPalMail);
+				u.setPayPalPassword(payPalPassword);
+
 				users.add(u);
 
 				// System.out.println(user);
@@ -233,7 +270,7 @@ public class JsonLoader {
 
 				int barCode;
 				int quantity;
-				
+
 				for (JsonValue p : d.asObject().get("products").asArray()) {
 					// int barCode = d.asObject().getInt("barCode", -1);
 					barCode = p.asObject().getInt("barCode", -1);
@@ -263,48 +300,48 @@ public class JsonLoader {
 
 		try (Reader reader = new FileReader("./data/purchaseHistory.json")) {
 			JsonArray fileHistory = Json.parse(reader).asObject().get("storico ordini").asArray();
-			
-			//Variabili necessarie:
-				int userID;
-				int orderID;
-				OrderDeliveryState deliveryState;
-				LocalDate deliveryDate;
-				OrderDeliveryTime deliveryTime;
-				float totalAmount ;
-				String paymentInfo;
-				Payment payment;
+
+			// Variabili necessarie:
+			int userID;
+			int orderID;
+			OrderDeliveryState deliveryState;
+			LocalDate deliveryDate;
+			OrderDeliveryTime deliveryTime;
+			float totalAmount;
+			String paymentInfo;
+			Payment payment;
 
 			for (JsonValue d : fileHistory) {
-				
-				//IDs
+
+				// IDs
 				userID = d.asObject().getInt("userID", -1);
-				User user= null;
-				
-				for(User u : Globals.users) {
-					if(u.getUserID()==userID)
-						user=u;
+				User user = null;
+
+				for (User u : Globals.users) {
+					if (u.getUserID() == userID)
+						user = u;
 				}
 
 				orderID = d.asObject().getInt("orderID", -1);
 
-				//State&Time
+				// State&Time
 				deliveryState = OrderDeliveryState.values()[d.asObject().getInt("stateOrdinal", -1)];
 
 				deliveryDate = LocalDate.parse(d.asObject().getString("deliveryDate", null));
 
 				deliveryTime = OrderDeliveryTime.values()[d.asObject().getInt("deliveryTimeOrdinal", -1)];
-				
-				//Total
-				totalAmount= d.asObject().getFloat("totalAmount", 0);
-				
-				//Payment
+
+				// Total
+				totalAmount = d.asObject().getFloat("totalAmount", 0);
+
+				// Payment
 				paymentInfo = d.asObject().getString("paymentInfo", null);
 				payment = Payment.values()[d.asObject().getInt("paymentOrdinal", -1)];
 
-				//Address
+				// Address
 				String address = d.asObject().getString("address", null);
-				
-				//Points
+
+				// Points
 				int points = d.asObject().getInt("points", 0);
 
 				Cart newCart = new Cart();
@@ -317,7 +354,6 @@ public class JsonLoader {
 					int barCode = p.asObject().getInt("barCode", -1);
 					int quantity = p.asObject().getInt("quantity", 0);
 					float price = p.asObject().getFloat("price", (float) 1.1);
-					
 
 					tmpProductsSet.put(barCode, quantity);
 					tmpPricesSet.put(barCode, price);
@@ -325,12 +361,13 @@ public class JsonLoader {
 
 				newCart.setProducts(tmpProductsSet);
 
-				float total=0;
-				for(Integer i : tmpProductsSet.keySet()) {
-					total+=tmpPricesSet.get(i)*tmpProductsSet.get(i);					
+				float total = 0;
+				for (Integer i : tmpProductsSet.keySet()) {
+					total += tmpPricesSet.get(i) * tmpProductsSet.get(i);
 				}
 
-				Order singleOrder = new Order(orderID,newCart, payment, paymentInfo, address,deliveryDate,deliveryTime,deliveryState,user,total,points,tmpPricesSet);
+				Order singleOrder = new Order(orderID, newCart, payment, paymentInfo, address, deliveryDate,
+						deliveryTime, deliveryState, user, total, points, tmpPricesSet);
 				Globals.storico.add(singleOrder);
 				storico.add(singleOrder);
 			}

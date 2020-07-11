@@ -6,33 +6,29 @@ import application.Globals;
 
 public class CartDraft {
 
-	//Hashmap prodotti  barcode->quantity
-	HashMap<Integer,Integer> products = new HashMap<Integer,Integer>();
+	// Hashmap prodotti barcode->quantity
+	HashMap<Integer, Integer> products = new HashMap<Integer, Integer>();
 	int userID;
-	
-	
+
 	public void addProduct(int barCode, int quantity) {
 		products.put(barCode, quantity);
-		
-	}
-	
 
-	public CartDraft() {};
-	
-	public CartDraft(Cart cart ) {
-		
+	}
+
+	public CartDraft() {
+	};
+
+	public CartDraft(Cart cart) {
+
 		System.out.println("Draft created");
-		for(Integer i : cart.getProducts().keySet()) {
+		for (Integer i : cart.getProducts().keySet()) {
 			products.put(i, cart.getProducts().get(i));
 		}
-		userID = ((User)Globals.currentUser).getUserID();
+		userID = ((User) Globals.currentUser).getUserID();
 
-		System.out.println("User   " + userID + "cart   " + products );		
-		
+		System.out.println("User   " + userID + "cart   " + products);
+
 	}
-	
-	
-
 
 	/**
 	 * @return the products
@@ -62,6 +58,4 @@ public class CartDraft {
 		this.userID = userID;
 	}
 
-
-		
 }

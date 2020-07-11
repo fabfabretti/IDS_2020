@@ -44,9 +44,27 @@ public class JsonSaver {
 			jsonUser.add("city", u.getAnagrafica().getCity());
 			jsonUser.add("CAP", u.getAnagrafica().getCAP());
 			jsonUser.add("mobilenumber", u.getAnagrafica().getMobileNumber());
-			jsonUser.add("fidelitycard", "");
 			jsonUser.add("userid", u.getUserID());
+			
+			// Fidelty card info
+			jsonUser.add("fideltyCardId", u.getNumber());
+			jsonUser.add("fideltyCardPointsAmount", u.getActualPoints());
+			jsonUser.add("fideltyCardEmissionDate", u.getEmissionDate().toString());
 
+			// Prefered payment info
+			
+			jsonUser.add("paymentOrdinal", u.getPaymentOrdinal());
+			
+			// credit card
+			jsonUser.add("creditCardNumber", u.getCreditCardNumber());
+			jsonUser.add("creditCardCVV", u.getCreditCardCVV());
+			jsonUser.add("creditCardName", u.getCreditCardName());
+			jsonUser.add("creditCardFamilyName", u.getCreditCardFamilyName());
+			
+			// paypall
+			jsonUser.add("payPalMail", u.getPayPalEmail());
+			jsonUser.add("payPalPassword", u.getPayPalPassword());
+			
 			users.add(jsonUser);
 
 			System.out.println(jsonUser);
