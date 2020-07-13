@@ -51,9 +51,10 @@ public class WorkerOrderManagerController extends Controller {
 	
 	
 	public void save (ActionEvent ae) {
-		System.out.println(Globals.storico);
 		JsonSaver.saveHistory();
+		Globals.workerController.loadHome(ae);
 		System.out.println(Globals.storico);
+		
 	}
 	
 	

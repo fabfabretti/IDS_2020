@@ -11,15 +11,15 @@
       "mobilenumber": "3423538651",
       "userid": 0,
       "fideltyCardId": 0,
-      "fideltyCardPointsAmount": 115,
+      "fideltyCardPointsAmount": 127,
       "fideltyCardEmissionDate": "2020-07-07",
-      "paymentOrdinal": 1,
-      "creditCardNumber": "",
-      "creditCardCVV": 0,
-      "creditCardName": "",
-      "creditCardFamilyName": "",
-      "payPalMail": "laraq@tiscali.it",
-      "payPalPassword": "ciao"
+      "paymentOrdinal": 2,
+      "creditCardNumber": "7",
+      "creditCardCVV": 1,
+      "creditCardName": "aa",
+      "creditCardFamilyName": "aa",
+      "payPalMail": "",
+      "payPalPassword": ""
     },
     {
       "email": "carlo.combi@univr.it",

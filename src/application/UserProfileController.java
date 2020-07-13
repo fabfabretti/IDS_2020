@@ -210,9 +210,21 @@ public class UserProfileController extends Controller {
 	 */
 	public void saveAndClose(ActionEvent ae) {
 		
+
+		
 		boolean valid=true;
 		lblError.setVisible(false);
-
+		
+		try {
+			Integer.parseInt(fieldCAP.getText());
+			System.out.println(fieldCAP.getText());
+			Long.parseLong(fieldNumber.getText());
+			System.out.println(fieldNumber.getText());
+		}catch(NumberFormatException e) {
+			lblError.setText("ATTENZIONE: dati non validi!");
+			lblError.setVisible(true);
+			return;
+		}
 		//Controllo 1: dati normali
 		if (fieldEmail.getText().isEmpty() || fieldPassword.getText().isEmpty() || fieldName.getText().isEmpty()
 				|| fieldSurname.getText().isEmpty() || fieldAddress.getText().isEmpty() || fieldCAP.getText().isEmpty()
@@ -241,9 +253,6 @@ public class UserProfileController extends Controller {
 
 			//Verifico i numeri
 			try {
-				Integer.parseInt(fieldCAP.getText());
-				Long.parseLong(fieldNumber.getText());
-				System.out.println(fieldNumber.getText());
 
 				//Carta if User
 				if(Globals.currentUser instanceof User) {

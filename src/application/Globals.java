@@ -70,6 +70,7 @@ public class Globals {
 	public static ProductViewer currentView = null;
 	public static UserCartController cartController=null;
 	public static UserHomeController viewController=null;
+	public static WorkerHomeController workerController=null;
 	public static WorkerProductManagerController editController=null;
 	public static Order currentOrder = null;
 	

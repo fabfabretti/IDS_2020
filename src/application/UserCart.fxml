@@ -188,7 +188,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="463.0" layoutY="540.0" onAction="#makeOrder" prefHeight="62.0" prefWidth="234.0" text="Conferma" />
+      <JFXButton layoutX="463.0" layoutY="540.0" onAction="#makeOrder" prefHeight="62.0" prefWidth="234.0" stylesheets="@application.css" text="Conferma" />
       <JFXButton graphicTextGap="1.0" layoutX="741.0" layoutY="14.0" minWidth="10.0" onAction="#closeUI" prefHeight="33.0" prefWidth="37.0" textOverrun="CLIP">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="21.0">
@@ -250,6 +250,25 @@
             <Font name="HP Simplified" size="29.0" />
          </font>
       </Label>
-      <Text fx:id="txtError" layoutX="398.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="363.1999999999998" />
+      <Text fx:id="txtError" layoutX="398.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Errore: Qualcosa è andato storto!" textAlignment="CENTER" wrappingWidth="363.1999999999998" />
+      <AnchorPane fx:id="successPane" layoutX="8.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="370.0" style="-fx-background-color: F4F4F4;" visible="false">
+         <children>
+            <Text fill="#2dba79" layoutX="50.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spesa effettuata con successo!" textAlignment="CENTER" wrappingWidth="235.43490600585932">
+               <font>
+                  <Font name="HP Simplified" size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="60.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non ti preoccupare, i nostri addetti sono già all'opera per portarti tutto quello che ti serve." textAlignment="CENTER" wrappingWidth="215.43490600585932">
+               <font>
+                  <Font name="HP Simplified Light" size="15.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="68.0" layoutY="172.0">
+               <image>
+                  <Image url="@../../images/UI_logoBIG_b.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

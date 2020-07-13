@@ -36,6 +36,7 @@ public class WorkerHomeController extends Controller{
 	 * Inizializza la scena (Es. scritta "hi admin")
 	 */
 	public void initialize() {
+		Globals.workerController=this;
 		txtWelcome.setText("Buongiorno, " + Globals.currentUser.getAnagrafica().getName() + " :D");
 		
 	}	

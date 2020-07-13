@@ -3,7 +3,18 @@
     {
       "userID": 0,
       "products": [
-        
+        {
+          "barCode": 1000006,
+          "quantity": 1
+        },
+        {
+          "barCode": 1000005,
+          "quantity": 2
+        },
+        {
+          "barCode": 1000002,
+          "quantity": 1
+        }
       ]
     }
   ]

@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXDatePicker;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.text.Text;
 
 public class UserDatePickerController extends Controller{
@@ -21,6 +20,7 @@ public class UserDatePickerController extends Controller{
 
 	public void initialize(){
 		
+		calendarDate.setEditable(false);
 		calendarDate.getEditor().setEditable(false);
 		
 		chboxTime.getItems().add("Mattina (08:00-11:00)");

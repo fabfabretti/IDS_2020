@@ -104,6 +104,54 @@
           "price": 1.95
         }
       ]
+    },
+    {
+      "orderID": 6,
+      "userID": 0,
+      "stateOrdinal": 1,
+      "deliveryDate": "2020-07-16",
+      "deliveryTimeOrdinal": 0,
+      "totalAmount": 4.59,
+      "paymentInfo": "Account: laraq@tiscali.it",
+      "paymentOrdinal": 1,
+      "address": "a, 2, a",
+      "points": 119,
+      "products": [
+        {
+          "barCode": 4000001,
+          "quantity": 3,
+          "price": 1.53
+        }
+      ]
+    },
+    {
+      "orderID": 7,
+      "userID": 0,
+      "stateOrdinal": 0,
+      "deliveryDate": "2020-07-23",
+      "deliveryTimeOrdinal": 0,
+      "totalAmount": 6.7,
+      "paymentInfo": "Carta: 7 (aa aa )",
+      "paymentOrdinal": 2,
+      "address": "a, 25030, aa",
+      "points": 127,
+      "products": [
+        {
+          "barCode": 1000005,
+          "quantity": 3,
+          "price": 1.1
+        },
+        {
+          "barCode": 1000002,
+          "quantity": 1,
+          "price": 1.45
+        },
+        {
+          "barCode": 1000001,
+          "quantity": 1,
+          "price": 1.95
+        }
+      ]
     }
   ]
 }

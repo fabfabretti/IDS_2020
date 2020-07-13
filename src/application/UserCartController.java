@@ -23,6 +23,9 @@ import javafx.scene.text.Text;
 public class UserCartController extends Controller {
 
 	// Parametri FXML
+	
+	@FXML
+	private AnchorPane successPane;
 
 	// Info carrello
 	@FXML
@@ -88,6 +91,8 @@ public class UserCartController extends Controller {
 
 	public void initialize() {
 
+		successPane.setVisible(false);
+		
 		Globals.cartController = this;
 
 		// Dati generali
@@ -301,7 +306,7 @@ public class UserCartController extends Controller {
 
 		} catch (NumberFormatException e) {
 			valid = false;
-			txtError.setText("ATTENZIONE: dati carta non validi!");
+			txtError.setText("ATTENZIONE: dati non validi!");
 			e.printStackTrace();
 			txtError.setVisible(true);
 			return valid;
@@ -323,5 +328,9 @@ public class UserCartController extends Controller {
 		txtError.setVisible(true);
 		JsonSaver.saveProducts();
 		txtError.setText("L'ordine è stato confermato!");
+	
+		
+		successPane.setVisible(true);
+
 	}
 }
