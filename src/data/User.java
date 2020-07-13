@@ -29,7 +29,7 @@ public class User extends UserGeneral {
 	private int paymentOrdinal = 0;
 
 	// Credit card data
-	private int creditCardNumber = 0;
+	private String creditCardNumber = "s";
 	private int creditCardCVV = 0;
 	private String creditCardName = "";
 	private String creditCardFamilyName = "";
@@ -97,11 +97,11 @@ public class User extends UserGeneral {
 		this.paymentOrdinal = paymentOrdinal;
 	}
 
-	public int getCreditCardNumber() {
+	public String getCreditCardNumber() {
 		return creditCardNumber;
 	}
 
-	public void setCreditCardNumber(int creditCardNumber) {
+	public void setCreditCardNumber(String creditCardNumber) {
 		this.creditCardNumber = creditCardNumber;
 	}
 

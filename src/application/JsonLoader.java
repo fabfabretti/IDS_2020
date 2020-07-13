@@ -163,13 +163,13 @@ public class JsonLoader {
 
 				int paymentOrdinal = user.asObject().getInt("paymentOrdinal", -1);
 
-				int creditCardNumber = user.asObject().getInt("creditCardNumber", 0);
+				String creditCardNumber = user.asObject().getString("creditCardNumber", "no Card Number");
 				int creditCardCVV = user.asObject().getInt("creditCardCVV", 0);
-				String creditCardName = user.asObject().getString("creditCardName", "no Name");
-				String creditCardFamilyName = user.asObject().getString("creditCardFamilyName", "no Family Name ");
+				String creditCardName = user.asObject().getString("creditCardName", "no Card Name");
+				String creditCardFamilyName = user.asObject().getString("creditCardFamilyName", "no Card Family Name ");
 
-				String payPalMail = user.asObject().getString("payPalMail", "no Mail ");
-				String payPalPassword = user.asObject().getString("payPalPassword", "no Password");
+				String payPalMail = user.asObject().getString("payPalMail", "no PayPal Mail ");
+				String payPalPassword = user.asObject().getString("payPalPassword", "no PayPal Password");
 
 				u.setPaymentOrdinal(paymentOrdinal);
 

@@ -131,6 +131,8 @@ public class UserCartController extends Controller{
 		if(checkIfEverythingAvailable()==false) {
 			System.out.println("WARNING: products removed");
 			txtError.setText("Alcuni dei prodotti del carrello sono terminati e sono stati rimossi. Puoi riprovare ad eseguire l'acquisto con il tasto \"conferma\".");
+			Globals.viewController.initialize();
+			Globals.cartController.initialize();
 			return;
 		}
 

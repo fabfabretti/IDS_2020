@@ -290,7 +290,7 @@ public class UserProfileController extends Controller {
 				currUser.setCreditCardCVV(0);
 				currUser.setCreditCardFamilyName("");
 				currUser.setCreditCardName("");
-				currUser.setCreditCardNumber(0);
+				currUser.setCreditCardNumber("");
 				currUser.setPayPalEmail("");
 				currUser.setPayPalPassword("");
 
@@ -307,7 +307,7 @@ public class UserProfileController extends Controller {
 				if(radioCarta.isSelected()) {
 					currUser.setPaymentOrdinal(2);
 					currUser.setCreditCardCVV(Integer.parseInt(fieldCartaCVV.getText()));
-					currUser.setCreditCardNumber(Integer.parseInt(fieldCartaNumero.getText()));
+					currUser.setCreditCardNumber(fieldCartaNumero.getText());
 					currUser.setCreditCardName(fieldCartaNome.getText());
 					currUser.setCreditCardFamilyName(fieldCartaCognome.getText());
 				}
