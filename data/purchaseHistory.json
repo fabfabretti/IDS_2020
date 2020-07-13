@@ -3,19 +3,34 @@
     {
       "orderID": 1,
       "userID": 0,
-      "stateOrdinal": 0,
-      "deliveryDate": "2020-07-16",
+      "stateOrdinal": 1,
+      "deliveryDate": "2020-07-14",
       "deliveryTimeOrdinal": 0,
-      "totalAmount": 2.9,
-      "paymentInfo": "Nessuna informazione aggiuntiva",
-      "paymentOrdinal": 0,
-      "address": "a, a, a",
-      "points": 2,
+      "totalAmount": 11.53,
+      "paymentInfo": "Carta: 1234567890 ( Fabretti )",
+      "paymentOrdinal": 2,
+      "address": "via Carlo Cattaneo, 09, 25030, castel Mella",
+      "points": 10012,
       "products": [
         {
-          "barCode": 1000002,
-          "quantity": 2,
-          "price": 1.45
+          "barCode": 1000011,
+          "quantity": 1,
+          "price": 3.16
+        },
+        {
+          "barCode": 3000001,
+          "quantity": 1,
+          "price": 2.79
+        },
+        {
+          "barCode": 5000001,
+          "quantity": 1,
+          "price": 0.79
+        },
+        {
+          "barCode": 2000001,
+          "quantity": 1,
+          "price": 4.79
         }
       ]
     },
@@ -23,18 +38,18 @@
       "orderID": 2,
       "userID": 0,
       "stateOrdinal": 0,
-      "deliveryDate": "2020-07-17",
+      "deliveryDate": "2020-07-15",
       "deliveryTimeOrdinal": 0,
-      "totalAmount": 1.45,
-      "paymentInfo": "Nessuna informazione aggiuntiva",
-      "paymentOrdinal": 0,
-      "address": "a, a, a",
-      "points": 1,
+      "totalAmount": 1.1,
+      "paymentInfo": "Carta: 1234567890 (a a )",
+      "paymentOrdinal": 2,
+      "address": "a, 5, a",
+      "points": 10018,
       "products": [
         {
-          "barCode": 1000002,
+          "barCode": 1000005,
           "quantity": 1,
-          "price": 1.45
+          "price": 1.1
         }
       ]
     }

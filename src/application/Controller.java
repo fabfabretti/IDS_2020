@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -51,12 +50,12 @@ public class Controller {
 		return;
 	}
 	
-	
+	/*
 	/**
 	 * Lancia una nuova parte di UI all'interno di una già presente; torna l'anchorpane che contiene la nuova finestra.
 	 * @param path
 	 * @return
-	 */
+	 *
 	public AnchorPane launchUIPanel(String path) {
 		AnchorPane res=null;
 		try {
@@ -67,6 +66,8 @@ public class Controller {
 		}
 		return res;
 	}
+	*/
+	
 	
 	/**
 	 * Apre la finestra di dialogo di conferma chiusura
@@ -95,8 +96,9 @@ public class Controller {
 	public void quit(ActionEvent ae) {
 
 		///SALVA LE COSE IN SOSPESO.. ma solo se è in usermode!
-		if(Globals.currentUser instanceof User)
+		if(Globals.currentUser instanceof User) 
 			JsonSaver.saveDraft();
+		
 		System.exit(0);	
 	}
 	
@@ -107,7 +109,7 @@ public class Controller {
 	public void quitNoSave(ActionEvent ae) {
 		System.exit(0);	
 	}
-	
+	/*
 	public AnchorPane loadInternalUI(String path) {
 		AnchorPane res=null;
 		try {
@@ -117,6 +119,6 @@ public class Controller {
 			System.out.println("[x] Errore a caricare UI interna");
 		}
 		return res;
-	}
+	}*/
 	
 }

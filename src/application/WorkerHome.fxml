@@ -65,7 +65,7 @@
                      </font>
                   </Text>
                   <JFXButton fx:id="btnProducts" layoutX="631.0" layoutY="208.0" onAction="#openProductManager" prefHeight="177.0" prefWidth="207.0" text="Aggiungi o rimuovi prodotti" />
-                  <JFXButton fx:id="btnOrders" layoutX="173.0" layoutY="208.0" prefHeight="177.0" prefWidth="207.0" text="Verifica stato ordini" />
+                  <JFXButton layoutX="173.0" layoutY="208.0" onAction="#openOrderManager" prefHeight="177.0" prefWidth="207.0" text="Verifica stato ordini" />
                </children>
             </AnchorPane>
          </children>

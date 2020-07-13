@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkerOrderManagerController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="892.2665954589844" minWidth="0.0" prefWidth="646.9333435058594" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="440.0" prefWidth="864.0">
+         <children>
+            <ScrollPane fx:id="scrollPaneOrders" layoutX="51.0" layoutY="65.0" prefHeight="396.0" prefWidth="878.0">
+               <content>
+                  <AnchorPane prefHeight="346.0" prefWidth="694.0">
+                     <children>
+                        <ImageView fitHeight="266.0" fitWidth="315.0" layoutX="23.0" layoutY="62.0">
+                           <image>
+                              <Image url="@../../images/UI_logoBIG_bConfused.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="347.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signor* Commess*,">
+                           <font>
+                              <Font name="HP Simplified Light" size="40.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="374.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dove sono finiti i nostri ordini?">
+                           <font>
+                              <Font name="HP Simplified Light" size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </content></ScrollPane>
+            <Text layoutX="51.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storico Ordini di tutti i clienti" wrappingWidth="328.0000518798828">
+               <font>
+                  <Font name="HP Simplified" size="27.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="403.0" layoutY="513.0" onAction="#save" prefHeight="50.0" prefWidth="162.0" text="Salva modifiche" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

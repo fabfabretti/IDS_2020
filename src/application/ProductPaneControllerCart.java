@@ -44,7 +44,8 @@ public class ProductPaneControllerCart extends ProductPaneController {
 		
 		System.out.println(product.getUnit());
 		productName.setText(product.getName() +" "+product.getBrand() + " " + product.getWeight() + " " + product.getUnit());
-		price.setText("€ "+product.getPrice());
+		String stringprice = String.format("€ %.2f", product.getPrice());
+		price.setText(stringprice);
 		weightPrice.setText(product.getWeightPrice());
 
 		

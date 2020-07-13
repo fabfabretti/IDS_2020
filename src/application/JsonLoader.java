@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
 
 import data.Cart;
 import data.CartDraft;
@@ -75,7 +74,10 @@ public class JsonLoader {
 
 					String imagePath = prodotto.asObject().getString("imagePath", "Unknown image");
 
-					String brand = prodotto.asObject().getString("brand", "Unknown image");
+					String brand = prodotto.asObject().getString("brand", "Unknown brand");
+					
+					if(!Globals.brand.contains(brand))
+						Globals.brand.add(brand);
 
 					float weight = prodotto.asObject().getFloat("weight", (float) -1.0);
 
@@ -153,7 +155,7 @@ public class JsonLoader {
 				LocalDate emissionDate = LocalDate
 						.parse(user.asObject().getString("fideltyCardEmissionDate", "0001-01-01"));
 
-				u.setNumber(fideltyCardNumber);
+				u.setFCardNumber(fideltyCardNumber);
 				u.setActualPoints(actualPoints);
 				u.setEmissionDate(emissionDate);
 
@@ -307,6 +309,7 @@ public class JsonLoader {
 			OrderDeliveryState deliveryState;
 			LocalDate deliveryDate;
 			OrderDeliveryTime deliveryTime;
+			@SuppressWarnings("unused")
 			float totalAmount;
 			String paymentInfo;
 			Payment payment;

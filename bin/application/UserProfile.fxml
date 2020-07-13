@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="573.0" prefWidth="684.0" style="-fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
+<AnchorPane prefHeight="633.0" prefWidth="684.0" style="-fx-border-color: #C72D1D;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserProfileController">
    <children>
-      <Text layoutX="26.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il Mio Profilo">
+      <Text layoutX="29.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Il Mio Profilo">
          <font>
             <Font name="HP Simplified" size="28.0" />
          </font>
       </Text>
-      <Pane layoutX="14.0" layoutY="60.0" prefHeight="453.0" prefWidth="374.0">
+      <Pane layoutX="12.0" layoutY="49.0" prefHeight="530.0" prefWidth="374.0">
          <children>
             <AnchorPane layoutX="6.0" layoutY="123.0" prefHeight="52.0" prefWidth="180.0">
                <children>
@@ -134,14 +134,13 @@
                   </JFXPasswordField>
                </children>
             </AnchorPane>
-            <Label fx:id="lblError" layoutX="40.0" layoutY="438.0" text="Eventuale testo di errore nella compilazione dei campi." visible="false" />
-            <AnchorPane layoutX="3.0" layoutY="279.0" prefHeight="167.0" prefWidth="337.0">
+            <AnchorPane layoutX="8.0" layoutY="353.0" prefHeight="167.0" prefWidth="337.0">
                <children>
                   <AnchorPane layoutY="23.0">
                      <children>
-                        <JFXRadioButton fx:id="radioCarta" layoutX="224.0" layoutY="12.0" onAction="#changePayment" text="Carta di Credito" />
+                        <JFXRadioButton fx:id="radioCarta" layoutX="209.0" layoutY="12.0" onAction="#changePayment" text="Carta di Credito" />
                         <JFXRadioButton fx:id="radioConsegna" layoutX="12.0" layoutY="12.0" onAction="#changePayment" text="Alla consegna" />
-                        <JFXRadioButton fx:id="radioPayPal" layoutX="137.0" layoutY="12.0" onAction="#changePayment" text="PayPal" />
+                        <JFXRadioButton fx:id="radioPayPal" layoutX="132.0" layoutY="12.0" onAction="#changePayment" text="PayPal" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="panePayPal" layoutY="53.0" prefHeight="114.0" prefWidth="336.0">
@@ -179,7 +178,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="paneCarta" layoutX="1.0" layoutY="333.0" prefHeight="122.0" prefWidth="346.0">
+            <AnchorPane fx:id="paneCarta" layoutX="6.0" layoutY="407.0" prefHeight="114.0" prefWidth="346.0">
                <children>
                   <AnchorPane layoutY="61.0" prefHeight="54.0" prefWidth="336.0">
                      <children>
@@ -239,42 +238,95 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-         </children>
-      </Pane>
-      <ScrollPane fx:id="scrollPaneOrders" layoutX="369.0" layoutY="60.0" prefHeight="443.0" prefWidth="306.0">
-         <content>
-            <AnchorPane prefHeight="416.0" prefWidth="297.0">
+            <AnchorPane fx:id="paneConsegna" layoutX="1.0" layoutY="409.0" prefHeight="114.0" prefWidth="357.0">
                <children>
-                  <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="49.0" layoutY="28.0">
-                     <image>
-                        <Image url="@../../images/UI_logoBIG_b.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="41.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E' la prima volta che compri da noi?" textAlignment="CENTER" wrappingWidth="214.63491821289057">
+                  <Text layoutX="179.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tutto pronto!" wrappingWidth="116.77499389648426">
                      <font>
-                        <Font name="HP Simplified Light" size="28.0" />
+                        <Font name="HP Simplified" size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="44.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I tuoi ordini appariranno qui!" textAlignment="CENTER" wrappingWidth="207.19999999999993">
+                  <Text layoutX="155.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ci vediamo direttamente alla consegna :)" textAlignment="CENTER" wrappingWidth="163.19999999999993">
                      <font>
                         <Font name="HP Simplified Light" size="15.0" />
                      </font>
                   </Text>
+                  <ImageView fitHeight="90.0" fitWidth="102.0" layoutX="34.0" layoutY="12.0">
+                     <image>
+                        <Image url="@../../images/UI_logoBIG_b.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="43.0" layoutY="281.0">
+               <children>
+                  <AnchorPane layoutX="92.0" layoutY="16.0" prefHeight="38.0" prefWidth="190.0">
+                     <children>
+                        <Text fx:id="txtFCardSaldo" layoutX="98.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo punti:" wrappingWidth="91.60501098632812">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fidelity card:">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="txtFCardNumber" layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="txtFCardPoints" layoutX="97.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#####">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="2.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#">
+                           <font>
+                              <Font name="HP Simplified Light" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <ImageView fitHeight="71.0" fitWidth="79.0">
+                     <image>
+                        <Image url="@../../images/UI_card.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+      <ScrollPane fx:id="scrollPaneOrders" layoutX="369.0" layoutY="60.0" prefHeight="487.0" prefWidth="306.0">
+         <content>
+            <AnchorPane prefHeight="383.0" prefWidth="266.0">
+               <children>
+                  <Text layoutX="42.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E' la prima volta che compri da noi?" textAlignment="CENTER" wrappingWidth="214.63491821289057">
+                     <font>
+                        <Font name="HP Simplified Light" size="28.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="45.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I tuoi ordini appariranno qui!" textAlignment="CENTER" wrappingWidth="207.19999999999993">
+                     <font>
+                        <Font name="HP Simplified Light" size="15.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="49.0" layoutY="68.0">
+                     <image>
+                        <Image url="@../../images/UI_logoBIG_bConfused.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Text layoutX="369.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storico Ordini" wrappingWidth="108.14501953125">
+      <Text layoutX="370.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Storico Ordini" wrappingWidth="108.14501953125">
          <font>
-            <Font name="HP Simplified Light" size="19.0" />
+            <Font name="HP Simplified" size="18.0" />
          </font>
       </Text>
-      <JFXButton layoutX="373.0" layoutY="520.0" onAction="#saveAndClose" prefHeight="38.0" prefWidth="79.0" text="Salva" />
-      <JFXButton graphicTextGap="1.0" layoutX="280.0" layoutY="521.0" minWidth="10.0" onAction="#closeUI" prefHeight="35.0" prefWidth="79.0" text="Esci" textOverrun="CLIP" />
-      <AnchorPane fx:id="paneConsegna" layoutX="12.0" layoutY="391.0" prefHeight="122.0" prefWidth="346.0">
-         <children>
-            <Text layoutX="33.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TBA: IMMAGINE PUCCIOSA sul fatto che non devi fare nient'altro." wrappingWidth="323.19999999999993" />
-         </children>
-      </AnchorPane>
+      <JFXButton layoutX="376.0" layoutY="581.0" onAction="#saveAndClose" prefHeight="38.0" prefWidth="79.0" text="Salva" />
+      <JFXButton graphicTextGap="1.0" layoutX="283.0" layoutY="582.0" minWidth="10.0" onAction="#closeUI" prefHeight="35.0" prefWidth="79.0" text="Esci" textOverrun="CLIP" />
+      <Label fx:id="lblError" layoutX="218.0" layoutY="556.0" text="Eventuale testo di errore nella compilazione dei campi." visible="false" />
    </children>
 </AnchorPane>

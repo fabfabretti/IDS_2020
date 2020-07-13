@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 import data.Cart;
 import data.CartDraft;
@@ -51,6 +52,8 @@ public class Globals {
 	public static Section bevande = new Section("Bevande");
 	
 	public static Section reparti[] = {vegetali,pesce,carne,latticini,bevande};
+	
+	public static TreeSet<String> brand = new TreeSet<String>();
 	
 	public static HashMap<Integer,Product> barCodeTable = computeTable();
 

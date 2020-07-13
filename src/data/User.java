@@ -14,7 +14,7 @@ public class User extends UserGeneral {
 	 * FIDELTY CARD˙
 	 */
 	// Unic number of the fidelty card.
-	private int number;
+	private int fCardNumber;
 
 	// Total amount of point earned by the user.
 	private int actualPoints;
@@ -25,18 +25,18 @@ public class User extends UserGeneral {
 	/*
 	 * PREFERED PAYMENT
 	 */
-	// Ordinal of preferd payment method
-	private int paymentOrdinal = -1;
+	// Ordinal of preferred payment method
+	private int paymentOrdinal = 0;
 
 	// Credit card data
 	private int creditCardNumber = 0;
 	private int creditCardCVV = 0;
-	private String creditCardName = null;
-	private String creditCardFamilyName = null;
+	private String creditCardName = "";
+	private String creditCardFamilyName = "";
 
 	// PayPal data
-	private String payPalEmail = null;
-	private String payPalPassword = null;
+	private String payPalEmail = "";
+	private String payPalPassword = "";
 
 	public User(String email, String password, String name, String familyname, String address, String city, String cap,
 			String mobilenumber, int userid) {
@@ -55,14 +55,6 @@ public class User extends UserGeneral {
 		userID = userid;
 	}
 
-	/*
-	 * GETTER AND SETTER
-	 */
-	public void initializeFideltyCard() {
-		this.emissionDate = LocalDate.now();
-		this.actualPoints = 0;
-		this.number = userID ^ this.emissionDate.hashCode();
-	}
 
 	public void updateTotalPointFideltyCard(float totalOrderAmount) {
 		int totalOrderPoint = (int) totalOrderAmount;
@@ -73,12 +65,12 @@ public class User extends UserGeneral {
 		return userID;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getFCardNumber() {
+		return fCardNumber;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setFCardNumber(int number) {
+		this.fCardNumber = number;
 	}
 
 	public int getActualPoints() {

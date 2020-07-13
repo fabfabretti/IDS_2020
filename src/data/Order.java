@@ -60,7 +60,7 @@ public class Order {
 	 * @param address
 	 */
 
-	// Costruttore ordini
+	// Costruttore ordini per user
 	public Order(Cart cart, Payment payment, String paymentInfo, String address) {
 
 		// Inseriamo questo ordine nella lista di ordini esistenti.
@@ -68,7 +68,9 @@ public class Order {
 		user = (User) Globals.currentUser;
 		// Inseriamo i dati dell'ordine...
 		this.cart = cart.copyCart();
-		points = (int) cart.getTotal();
+		System.out.println( "Order side: "+((User)Globals.currentUser).getActualPoints() +"");
+		points = user.getActualPoints();
+		System.out.println( "Order side: " +points);
 
 		// TODO sommare ai punti della carta
 

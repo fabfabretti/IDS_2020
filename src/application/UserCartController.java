@@ -8,6 +8,7 @@ import data.Cart;
 import data.Order;
 import data.Payment;
 import data.Product;
+import data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -90,22 +91,46 @@ public class UserCartController extends Controller{
 	public void initialize() {
 		
 		Globals.cartController=this;
+		
+		
+		
+		//Dati generali
 		lblTotal.setText("€ "+ String.format("%.2f", Globals.cart.getTotal()));
 		txtPoints.setText("Questa spesa vale " + (int)Globals.cart.getTotal() + " punti!");
 		lblItems.setText(""+Globals.cart.getNumberOfProd());
 		txtError.setVisible(false);
 		
 		new ProductViewer(cartviewPane,Globals.cart);
-		
-		
-		final ToggleGroup group = new ToggleGroup();
 
+		// Pagamento predefinito
+		final ToggleGroup group = new ToggleGroup();
 		radioConsegna.setToggleGroup(group);
 		radioCarta.setToggleGroup(group);
 		radioPayPal.setToggleGroup(group);
 		
-		radioConsegna.setSelected(true);
+		User currUser = (User)Globals.currentUser;
 		
+		//System.out.println(currUser.getPaymentOrdinal());
+		
+		int payment = (currUser.getPaymentOrdinal());
+		switch(payment) {
+		case 1:
+			radioPayPal.setSelected(true);
+			fieldPayPalEmail.setText(currUser.getPayPalEmail());
+			fieldPayPalPassword.setText(currUser.getPayPalPassword());
+			break;
+		case 2:
+			radioCarta.setSelected(true);
+			fieldCartaNome.setText(currUser.getCreditCardName());
+			fieldCartaCognome.setText(currUser.getCreditCardFamilyName());
+			fieldCartaNumero.setText(""+currUser.getCreditCardNumber());
+			fieldCartaCVV.setText(""+currUser.getCreditCardCVV());
+			break;
+		default:
+			radioConsegna.setSelected(true);		
+		}
+		
+
 		paneConsegna.setVisible(radioConsegna.isSelected());
 		paneCarta.setVisible(radioCarta.isSelected());
 		panePayPal.setVisible(radioPayPal.isSelected());
@@ -121,6 +146,8 @@ public class UserCartController extends Controller{
 
 	// Crea un ordine dal carrello corrente; ovviamente fa tutte le verifiche (validità dei campi E availability dei prodotti)
 	public void makeOrder(ActionEvent ae) {
+		
+		User currUser = (User) Globals.currentUser;
 		
 		//Step 0: carrello non vuoto e valori validi
 		if (checkParameters()==false) {
@@ -147,10 +174,23 @@ public class UserCartController extends Controller{
 			info="Carta: "+fieldCartaNumero.getText() + " (" + fieldCartaNome.getText() + " " + fieldCartaCognome.getText() +" )";
 			}
 		
+		
+		//Aggiorno i punti dell'user
+
+
+		
+		System.out.println( ((User)Globals.currentUser).getActualPoints() +"");
+		System.out.println( (int) Globals.cart.getTotal() +"");
+		
+		currUser.setActualPoints(((User)Globals.currentUser).getActualPoints() + (int) Globals.cart.getTotal());
+		System.out.println("-->" +  ((User)Globals.currentUser).getActualPoints() +"");
+		
 		Globals.currentOrder = new Order(Globals.cart, payment, info,fieldAddress.getText()+", "+fieldCAP.getText()+", "+fieldCity.getText());
 		
 		//Step 3: svuotiamo il carrello.
 		Globals.cart.flushCart();
+		
+		JsonSaver.saveUser();
 		
 		//Step4: selezione giorno e ora
 		launchUI("/application/UserDatePicker.fxml");
@@ -166,7 +206,7 @@ public class UserCartController extends Controller{
 		boolean isStillAvailable = true;
 
 		//debug
-		System.out.println("OLD: " + Globals.cart.getProducts());
+	//	System.out.println("OLD: " + Globals.cart.getProducts());
 		
 		//Aggiorno elenco prodotti
 		JsonLoader.loadProducts();
@@ -190,11 +230,11 @@ public class UserCartController extends Controller{
 			Product newProduct = Globals.barCodeTable.get(oldProduct);
 			
 			//debug
-			System.out.println("cart="+ Globals.cart.getProducts().get(oldProduct) +" available="+newProduct.getAvailable());
+			//System.out.println("cart="+ Globals.cart.getProducts().get(oldProduct) +" available="+newProduct.getAvailable());
 			
 			//Se il prodotto non è disponibile abbasso il flag
 			if(Globals.cart.getProducts().get(oldProduct) > newProduct.getAvailable()){
-				System.out.println("[x] "+ Globals.barCodeTable.get(oldProduct).getName()+" is not available anymore!! ");		
+			//	System.out.println("[x] "+ Globals.barCodeTable.get(oldProduct).getName()+" is not available anymore!! ");		
 				//Globals.cart.removeProduct(p);
 				isStillAvailable = false;
 			}
@@ -208,7 +248,7 @@ public class UserCartController extends Controller{
 			}
 		}
 		
-		System.out.println(tmpcart);
+		//System.out.println(tmpcart);
 		Globals.cart = tmpcart;
 		
 		
@@ -226,26 +266,44 @@ public class UserCartController extends Controller{
 			return false;
 			}
 		
-		// 2. Pagamento impostato (obv. controllo solo il pagamento selezionato!)
-		if(radioCarta.isSelected()) {
-			result &= !fieldCartaNome.getText().equals("");
-			result &= !fieldCartaCognome.getText().equals("");
-			result &= !fieldCartaCVV.getText().equals("");
-			result &= !fieldCartaNumero.getText().equals("");
-			if (result==false) {
-				txtError.setText("Errore: Il metodo di pagamento non è valido!");
-				txtError.setVisible(true);
-				return false;
-				}
-		}
-		if(radioPayPal.isSelected()) {
-			result &= !fieldPayPalEmail.getText().equals("");
-			result &= !fieldPayPalPassword.getText().equals("");
-			if (result==false){
-				txtError.setText("Errore: Il metodo di pagamento non è valido!");
-				txtError.setVisible(true);
-				return false;
-				}
+
+		//Controllo 2: pagamento
+		boolean valid=true;
+
+		//Paypal
+		if(radioPayPal.isSelected())
+			if(fieldPayPalEmail.getText().isEmpty() || fieldPayPalPassword.getText().isEmpty())
+				valid=false;
+		
+		//Carta
+		if(radioCarta.isSelected())
+			if(fieldCartaNumero.getText().isEmpty() || fieldCartaCVV.getText().isEmpty() 
+					|| fieldCartaNome.getText().isEmpty() || fieldCartaCognome.getText().isEmpty() ) 
+				valid=false;
+		
+		if (valid==false) {
+			txtError.setText("ATTENZIONE: è necessario compilare tutti i campi!");
+			txtError.setVisible(true);
+			return valid;
+			}
+		
+		//Verifico i numeri
+		try {
+			Integer.parseInt(fieldCAP.getText());
+			
+			//Carta
+			if(radioCarta.isSelected()) {
+				//System.out.println(radioCarta.isSelected());
+				Long.parseLong(fieldCartaNumero.getText());
+				Integer.parseInt(fieldCartaCVV.getText());
+			}
+			
+		}catch(NumberFormatException e){
+			valid=false;
+			txtError.setText("ATTENZIONE: dati carta non validi!");
+			e.printStackTrace();
+			txtError.setVisible(true);
+			return valid;
 		}
 		
 		

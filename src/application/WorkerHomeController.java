@@ -54,6 +54,21 @@ public class WorkerHomeController extends Controller{
 		}
 	}
 	
+	public void openOrderManager(ActionEvent e) {
+		try {
+			GridPane p = (GridPane)FXMLLoader.load(getClass().getResource("/application/WorkerOrderManager.fxml"));
+			basePane.getChildren().clear();
+			basePane.getChildren().addAll(p);
+			AnchorPane.setTopAnchor(p, 0.0);
+			AnchorPane.setBottomAnchor(p, 0.0);
+			AnchorPane.setLeftAnchor(p, 0.0);
+			AnchorPane.setRightAnchor(p, 0.0);
+		} catch (IOException e1) {
+		}
+	}
+	
+	
+	
 	
 	public void loadHome(ActionEvent e) {
 		basePane.getChildren().clear();

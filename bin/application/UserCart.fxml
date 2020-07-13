@@ -169,7 +169,21 @@
             </AnchorPane>
             <AnchorPane fx:id="paneConsegna" layoutX="14.0" layoutY="82.0" prefHeight="122.0" prefWidth="394.0">
                <children>
-                  <Text layoutX="33.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TBA: IMMAGINE PUCCIOSA sul fatto che non devi fare nient'altro." wrappingWidth="346.40007324218743" />
+                  <Text layoutX="188.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tutto pronto!" wrappingWidth="116.77499389648426">
+                     <font>
+                        <Font name="HP Simplified" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="164.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ci vediamo direttamente alla consegna :)" textAlignment="CENTER" wrappingWidth="163.19999999999993">
+                     <font>
+                        <Font name="HP Simplified Light" size="15.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="90.0" fitWidth="102.0" layoutX="43.0" layoutY="3.0">
+                     <image>
+                        <Image url="@../../images/UI_logoBIG_b.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
@@ -197,7 +211,7 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <AnchorPane layoutX="379.0" layoutY="59.0" prefHeight="93.0" prefWidth="403.0">
+      <AnchorPane layoutX="379.0" layoutY="59.0" prefHeight="103.0" prefWidth="403.0">
          <children>
             <Label layoutX="14.0" layoutY="15.0" text="Totale Spesa:">
                <font>
@@ -219,11 +233,16 @@
                   <Font name="HP Simplified" size="18.0" />
                </font>
             </Label>
-            <Text fx:id="txtPoints" layoutX="247.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questa spesa potrebbe valere XXX punti" textAlignment="CENTER" wrappingWidth="124.23590087890625">
+            <Text fx:id="txtPoints" layoutX="232.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questa spesa potrebbe valere XXX punti" textAlignment="CENTER" wrappingWidth="163.19999999999982">
                <font>
-                  <Font name="HP Simplified Light" size="18.0" />
+                  <Font name="HP Simplified Light" size="16.0" />
                </font>
             </Text>
+            <ImageView fitHeight="52.0" fitWidth="58.0" layoutX="285.0" layoutY="3.0">
+               <image>
+                  <Image url="@../../images/UI_card.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <Label layoutX="533.0" layoutY="23.0" text="Carrello">

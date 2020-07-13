@@ -297,7 +297,7 @@ public class ProductViewer {
 	 * Filtra i prodotti "visualizzabili", e mostra il risultato (che viene salvato in actuallydisplayed).
 	 * @param selectedCharas
 	 */
-	public void filterChara(boolean selectedCharas[]) {
+	public void filterChara(boolean selectedCharas[], String brand) {
 		
 		TreeSet<Product> newset = new TreeSet<Product>(currComparator);
 		boolean condition;
@@ -314,6 +314,9 @@ public class ProductViewer {
 			
 			//rispetta gluten?
 			condition&=((!selectedCharas[3] || selectedCharas[3] && p.isChar("gluten") ));
+			
+			//Il brand va bene?
+			condition&=brand.equals("Tutti") || (!brand.equals("Tutti") && p.getBrand().equals(brand));
 			
 			//Se le rispetta tutte, allora posso mostrare il prodotto.
 			if(condition == true) {
@@ -333,6 +336,7 @@ public class ProductViewer {
 		AnchorPane.setRightAnchor(newpane, 0.0);
 	}
 	
+
 	/**
 	 * 
 	 * @return the parent
@@ -369,6 +373,7 @@ public class ProductViewer {
 	public ScrollPane getScroller() {
 		return scroller;
 	}
+
 }
 
 

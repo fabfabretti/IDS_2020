@@ -9,9 +9,25 @@
     {
       "userID": 1,
       "products": [
+        
+      ]
+    },
+    {
+      "userID": 2,
+      "products": [
+        
+      ]
+    },
+    {
+      "userID": 13,
+      "products": [
         {
-          "barCode": 4000001,
-          "quantity": 2
+          "barCode": 1000011,
+          "quantity": 11
+        },
+        {
+          "barCode": 5000002,
+          "quantity": 1
         }
       ]
     }

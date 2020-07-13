@@ -47,7 +47,7 @@ public class JsonSaver {
 			jsonUser.add("userid", u.getUserID());
 			
 			// Fidelty card info
-			jsonUser.add("fideltyCardId", u.getNumber());
+			jsonUser.add("fideltyCardId", u.getFCardNumber());
 			jsonUser.add("fideltyCardPointsAmount", u.getActualPoints());
 			jsonUser.add("fideltyCardEmissionDate", u.getEmissionDate().toString());
 
@@ -67,7 +67,7 @@ public class JsonSaver {
 			
 			users.add(jsonUser);
 
-			System.out.println(jsonUser);
+			//System.out.println(jsonUser);
 
 		}
 
@@ -79,12 +79,13 @@ public class JsonSaver {
 
 		newJson.add("users", users);
 
-		System.out.println("\n[?] " + users);
+		//System.out.println("\n[?] " + users);
 
 		/**
 		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
 		 */
 		try (Writer writer = new FileWriter("./data/users.json")) {
+			System.out.println("[✓]  User salvati");
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json User!!!");
@@ -114,19 +115,20 @@ public class JsonSaver {
 
 			worker.add(jsonWorker);
 
-			System.out.println(jsonWorker);
+			//System.out.println(jsonWorker);
 		}
 
 		JsonObject newJson = new JsonObject();
 
 		newJson.add("workers", worker);
 
-		System.out.println("\n[?] " + worker);
+		//System.out.println("\n[?] " + worker);
 
 		/**
 		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
 		 */
 		try (Writer writer = new FileWriter("./data/workers.json")) {
+			System.out.println("[✓]  Workers salvati");
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json Worker!!!");
@@ -164,7 +166,7 @@ public class JsonSaver {
 				jsonProduct.add("lactosefree", p.isChar("diary"));
 				productTmp.add(jsonProduct);
 
-				System.out.println("\n[?] " + productTmp);
+				//System.out.println("\n[?] " + productTmp);
 			}
 			newJson.add(s.getName(), productTmp);
 
@@ -177,6 +179,7 @@ public class JsonSaver {
 		 */
 		try (Writer writer = new FileWriter("./data/product.json")) {
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+			System.out.println("[✓]  Products salvati");
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json Worker!!!");
 		}
@@ -256,13 +259,14 @@ public class JsonSaver {
 
 		newJson.add("carrelli non confermati", cartsJson);
 
-		System.out.println("\n[?] " + cartsJson);
+		//System.out.println("\n[?] " + cartsJson);
 
 		/**
 		 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
 		 */
 		try (Writer writer = new FileWriter("./data/cartDrafts.json")) {
 			newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+			System.out.println("[✓]  Cart salvato");
 		} catch (IOException e) {
 			System.out.println("[x] Errore scrittura Json Worker!!!");
 		}
@@ -326,13 +330,14 @@ public class JsonSaver {
 
 			newJson.add("storico ordini", historyJson);
 
-			System.out.println("\n[?] " + historyJson);
+		//	System.out.println("\n[?] " + historyJson);
 
 			/**
 			 * Trascrizione su file del nuovo JsonObj creato con relativo try/catch.
 			 */
 			try (Writer writer = new FileWriter("./data/purchaseHistory.json")) {
 				newJson.writeTo(writer, WriterConfig.PRETTY_PRINT);
+				System.out.print("[✓]  History salvata\t");
 			} catch (IOException e) {
 				System.out.println("[x] Errore scrittura Json History!!!");
 			}
